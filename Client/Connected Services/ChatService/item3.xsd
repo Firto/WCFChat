@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Server.Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Server.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="TypeGetUsers">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="OnlyInGroup" />
+      <xs:enumeration value="OnlyOutInGroup" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeGetUsers" nillable="true" type="tns:TypeGetUsers" />
+  <xs:simpleType name="TypeGetMessage">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Last" />
+      <xs:enumeration value="First" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeGetMessage" nillable="true" type="tns:TypeGetMessage" />
+</xs:schema>
