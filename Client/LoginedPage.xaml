@@ -35,19 +35,18 @@
         <Grid Grid.ColumnSpan="2">
             <StackPanel Background="#FF234F7C" Orientation="Horizontal" >
                 <Border Margin="10, 0, 0, 0" VerticalAlignment="Center" Background="#FF6EA5DE"  CornerRadius="10" Style="{StaticResource groupStyle}">
-                   
-                    <Label Foreground="White" FontSize="14" Padding="7, 1, 7, 1" VerticalContentAlignment="Center" >Create Group</Label>
+                    <Button Click="Create_Group" >
+                        <Label Foreground="White" FontSize="14" Padding="7, 1, 7, 1" VerticalContentAlignment="Center" >Create Group</Label>
+                    </Button>
                 </Border>
-                
+
             </StackPanel>
 
             <Border Margin="0, 0, 10, 0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="#FFDE6E6E" CornerRadius="10" Style="{StaticResource exitStyle}">
-                <ContentControl  MouseDoubleClick="ContentControl_MouseDoubleClick">
+                <Button Click="Button_Click" >
                     <Label Foreground="White" FontSize="14" Padding="7, 1, 7, 1" VerticalContentAlignment="Center">Exit</Label>
-                </ContentControl>
+                </Button>
             </Border>
-           
-
         </Grid>
         
     </Grid>

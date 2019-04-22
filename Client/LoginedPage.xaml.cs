@@ -40,9 +40,19 @@ namespace Client
             
         }
 
-        private void ContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             clin.Leave();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Create_Group(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
