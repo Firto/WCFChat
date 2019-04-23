@@ -47,9 +47,18 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,17 +68,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clases\Base\CGroup.cs" />
-    <Compile Include="Clases\Base\CGroupMessage.cs" />
-    <Compile Include="Clases\Base\CRole.cs" />
-    <Compile Include="Clases\Base\CUser.cs" />
-    <Compile Include="Clases\Base\CUserInGroup.cs" />
-    <Compile Include="Clases\CCommon.cs" />
-    <Compile Include="Clases\OnlineBase\COnlineGroup.cs" />
-    <Compile Include="Clases\OnlineBase\COnlineUser.cs" />
+    <Compile Include="Base\Tables\Groups.cs" />
+    <Compile Include="Base\Tables\GroupsMessages.cs" />
+    <Compile Include="Base\Context.cs" />
+    <Compile Include="Base\Tables\Roles.cs" />
+    <Compile Include="Base\Tables\Users.cs" />
+    <Compile Include="Base\Tables\UsersInGroups.cs" />
+    <Compile Include="CCommon.cs" />
+    <Compile Include="Migrations\201904232009118_First-Migrotion.cs" />
+    <Compile Include="Migrations\201904232009118_First-Migrotion.Designer.cs">
+      <DependentUpon>201904232009118_First-Migrotion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904232022315_2-Migrotion.cs" />
+    <Compile Include="Migrations\201904232022315_2-Migrotion.Designer.cs">
+      <DependentUpon>201904232022315_2-Migrotion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904232139033_3-Migrtiooon.cs" />
+    <Compile Include="Migrations\201904232139033_3-Migrtiooon.Designer.cs">
+      <DependentUpon>201904232139033_3-Migrtiooon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ChatService.cs" />
+    <Compile Include="Service\COnlineUser.cs" />
     <Compile Include="Service\ICallBack.cs" />
     <Compile Include="Service\IChatService.cs" />
   </ItemGroup>
@@ -81,7 +103,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Clases\Base\BaseQuery.sql">
+    <None Include="Base\BaseQuery.sql">
       <SubType>Designer</SubType>
       <LastGenOutput>BaseQuery.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -100,6 +122,20 @@
       <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904232009118_First-Migrotion.resx">
+      <DependentUpon>201904232009118_First-Migrotion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904232022315_2-Migrotion.resx">
+      <DependentUpon>201904232022315_2-Migrotion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904232139033_3-Migrtiooon.resx">
+      <DependentUpon>201904232139033_3-Migrtiooon.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

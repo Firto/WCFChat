@@ -29,20 +29,20 @@ namespace Client
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Dictionary<ChatService.Group, ChatService.UserInGroup> som;
-            if (clin.GetMyGroups(out som)) {
-                foreach (var item in som)
-                {
-                    ss.Children.Add(new GroupItem(item.Key, item.Value, clin));
-                }
+            //Dictionary<ChatService.Group, ChatService.UserInGroup> som;
+            //if (clin.GetMyGroups(out som)) {
+            //    foreach (var item in som)
+            //    {
+            //        ss.Children.Add(new GroupItem(item.Key, item.Value, clin));
+            //    }
 
-            }
+            //}
             
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            clin.Leave();
+            clin.Client.Leave();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

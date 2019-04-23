@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using Server.Clases.Base;
+using Server.Base.Tables;
 
 namespace Server.Service
 {
@@ -22,7 +22,7 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveLeave(); // Підтверджуєм що ми вийшли
         [OperationContract(IsOneWay = true)]
-        void ReciveLogin(User usr, string authKey); // Підтверження про вхід
+        void ReciveLogin(User usr); // Підтверження про вхід
         [OperationContract(IsOneWay = true)]
         void ReciveGetUsers(List<User> usr); // Відправляємо юзерів
         [OperationContract(IsOneWay = true)]

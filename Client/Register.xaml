@@ -13,14 +13,14 @@
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="500" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Background="Bisque" CornerRadius="0, 0, 2000, 0" ></Border>
         <Border Grid.Column="2" Background="Bisque" CornerRadius="2000, 0,0 , 0" ></Border>
         <Border Background="#FFFFBC6C" CornerRadius="0, 0, 2000, 0" Margin="0, 0, 10, 10" ></Border>
         <Border Grid.Column="2" Background="#FFFFBC6C" CornerRadius="2000, 0,0 , 0" Margin="10, 10, 0, 0" ></Border>
-        <Border Grid.Column="1" Width="400" Margin="10" Background="#FF71B871" CornerRadius="10">
+        <Border Grid.Column="1" HorizontalAlignment="Stretch" Margin="10" Background="#FF71B871" CornerRadius="10">
             <Grid>
             <StackPanel Margin="3">
                 <Label FontSize="30" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FFFFFFFF" >Register</Label>
@@ -33,10 +33,12 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                    </Grid.RowDefinitions>
+                        <RowDefinition/>
+                        </Grid.RowDefinitions>
                     <Label FontSize="25" FontWeight="Bold" Foreground="#FFFFFFFF" >Login</Label>
-                    <Label Grid.Row="1" FontSize="25" FontWeight="Bold" Foreground="#FFFFFFFF" >Password</Label>
-                    <StackPanel Grid.Row="2">
+                    <Label Grid.Row="1" FontSize="25" FontWeight="Bold" Foreground="#FFFFFFFF" >Email</Label>
+                    <Label Grid.Row="2" FontSize="25" FontWeight="Bold" Foreground="#FFFFFFFF" >Password</Label>
+                    <StackPanel Grid.Row="3">
                         <Label  FontSize="20" FontWeight="Bold" Foreground="#FFFFFFFF" >Repeat</Label>
                         <Label Margin="0, -5, 0, 9" FontSize="20" FontWeight="Bold" Foreground="#FFFFFFFF" >Password</Label>
                     </StackPanel>
@@ -57,6 +59,16 @@
                         Grid.Column="1"
                         Grid.Row="1"
                         VerticalAlignment="Center">
+                            <TextBox Margin="1"  Name="txtEmail" FontSize="25" Background="#FFE8D580" FontWeight="Bold" Foreground="#FF050074" BorderThickness="0"/>
+                     </Border>
+                     <Border Margin="10, 10, 10, 0" 
+                        BorderBrush="Black" 
+                        BorderThickness="2"
+                        CornerRadius="5"
+                        Background="#FFE8D580"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        VerticalAlignment="Center">
                             <PasswordBox Margin="1"  Name="txtPass" FontSize="25" Background="#FFE8D580" FontWeight="Bold" Foreground="#FF050074" BorderThickness="0"/>
                     </Border>
                     <Border Margin="10, 10, 10, 0" 
@@ -65,7 +77,7 @@
                         CornerRadius="5"
                         Background="#FFE8D580"
                         Grid.Column="1"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         VerticalAlignment="Center">
                             <PasswordBox Margin="1"  Name="txtPassR" FontSize="25" Background="#FFE8D580" FontWeight="Bold" Foreground="#FF050074" BorderThickness="0"/>
                     </Border>

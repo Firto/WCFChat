@@ -8,7 +8,6 @@ C:\Users\user.STEP.012\Desktop\WCFChat\Server\obj\Debug\Server.csproj.CoreCompil
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\obj\Debug\Server.csproj.CopyComplete
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\obj\Debug\Server.exe
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\obj\Debug\Server.pdb
-C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\Clases\Base\BaseQuery.sql
 C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\Server.exe.config
 C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\Server.exe
 C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\Server.pdb
@@ -66,3 +65,12 @@ C:\Users\user.STEP.012\Desktop\WCFChat\Server\bin\Debug\ru\Microsoft.Build.resou
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\bin\Debug\tr\Microsoft.Build.resources.dll
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\bin\Debug\zh-Hans\Microsoft.Build.resources.dll
 C:\Users\user.STEP.012\Desktop\WCFChat\Server\bin\Debug\zh-Hant\Microsoft.Build.resources.dll
+C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\EntityFramework.dll
+C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\EntityFramework.xml
+C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Firto\Desktop\WCFChat\Server\bin\Debug\Base\BaseQuery.sql
+C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.Migrations.FirstMigrotion.resources
+C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.csproj.GenerateResource.cache
+C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.Migrations._2Migrotion.resources
+C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.Migrations._3Migrtiooon.resources

@@ -29,11 +29,7 @@ namespace Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (txtLogin.Text.Length < 1 || txtPass.Password.Length < 1) {  MessageBox.Show("Input all boxes!", "Login", MessageBoxButton.OK, MessageBoxImage.Error); return; }
-
-            if (!Clin.Login(txtLogin.Text, txtPass.Password)) { MessageBox.Show("Incorrect pass or login!", "Login", MessageBoxButton.OK, MessageBoxImage.Error); return; }
-
-            Clin.SetPage(new LoginedPage(Clin));
+            Clin.Client.Login(txtLogin.Text, txtPass.Password);
         }
 
         private void Button_Register(object sender, RoutedEventArgs e)

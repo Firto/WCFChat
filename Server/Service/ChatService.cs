@@ -7,21 +7,21 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using Server.Clases;
-using Server.Clases.Base;
-using Server.Clases.OnlineBase;
+using Server.Base;
+using Server.Base.Tables;
 
 namespace Server.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)] // Створюється один клас ChatService для усіх юзерів
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false, ConcurrencyMode = ConcurrencyMode.Multiple)] // Створюється один клас ChatService для усіх юзерів
     public class ChatService : IChatService
     {
         IChatServiceCallBack Callback {
             get => OperationContext.Current.GetCallbackChannel<IChatServiceCallBack>();
         }
 
-        List<OnlineUser> users = new List<OnlineUser>();
-        List<OnlineGroup> groups = new List<OnlineGroup>();
+        Context mainbBase = new Context();
+
+        List<OnlineUser> onlineUsers = new List<OnlineUser>();
 
         //void Register(string Login, string Password) {
         //    //usr = null;
@@ -106,62 +106,93 @@ namespace Server.Service
         //    throw new NotImplementedException();
         //}
 
-        void IChatService.Register(string Login, string Password)
+        void IChatService.Register(string Login1, string Email, string Password, string repeatPassword)
         {
-            throw new NotImplementedException();
+            string errMsg;
+            if (Login1.Length < 1) { Callback.Error("Input login!"); return; }
+            if (mainbBase.Users.FirstOrDefault((x) => x.Login == Login1) != null) { Callback.Error("User with this login is already exists!"); return; }
+            if (Email.Length < 1) { Callback.Error("Input email!"); return; }
+            if (!Common.IsOkEmail(Email)) { Callback.Error("Incorrect email!"); return; }
+            if (mainbBase.Users.FirstOrDefault((x) => x.Email == Email) != null) { Callback.Error("User with this email is already exists!"); return; }
+            if (!Common.IsOkPassword(Password, out errMsg)) { Callback.Error(errMsg); return; }
+            if (repeatPassword != Password) { Callback.Error("Input correct repeat password!"); return; }
+
+            string hasedPassword = Common.GetMD5(Password);
+
+            lock (onlineUsers)
+            {
+                User usr = mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
+                mainbBase.SaveChanges();
+                onlineUsers.Add(new OnlineUser(usr, mainbBase, onlineUsers, Callback));
+            }
         }
 
         void IChatService.Login(string Login, string Password)
         {
-            throw new NotImplementedException();
+            if (Login.Length < 1) { Callback.Error("Input login!"); return; }
+            if (Password.Length < 1) { Callback.Error("Input password!"); return; }
+            string hasedPassword = Common.GetMD5(Password);
+            User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
+
+            if (usr != null)
+                lock (onlineUsers)
+                    onlineUsers.Add(new OnlineUser(usr, mainbBase, onlineUsers, Callback));
+            else Callback.Error("Incorrect password or login!");
         }
 
-        void IChatService.Leave(string AuthKey)
+        void IChatService.Leave()
+        {
+            OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
+
+            if (usr != null)
+            {
+                Callback.ReciveLeave();
+                lock (onlineUsers)
+                    onlineUsers.Remove(usr);
+            }
+        }
+
+        void IChatService.SendMessage(int groupID, string message)
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.SendMessage(string AuthKey, int groupID, string message)
+        int IChatService.GetCountUsers()
         {
             throw new NotImplementedException();
         }
 
-        int IChatService.GetCountUsers(string AuthKey)
+        int IChatService.GetCountMessages(int groupID)
         {
             throw new NotImplementedException();
         }
 
-        int IChatService.GetCountMessages(string AuthKey, int groupID)
+        void IChatService.GetMyGroups()
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.GetMyGroups(string AuthKey)
+        void IChatService.CreateGroup(string Name)
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.CreateGroup(string AuthKey, string Name)
+        void IChatService.RemoveGroup(int ID)
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.RemoveGroup(string AuthKey, int ID)
+        void IChatService.AddUsersToGroup(int ID, List<int> IDs)
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.AddUsersToGroup(string AuthKey, int ID, List<int> IDs)
+        void IChatService.GetUsers(TypeGetUsers tps, int count, int offset, int GroupID)
         {
             throw new NotImplementedException();
         }
 
-        void IChatService.GetUsers(string AuthKey, TypeGetUsers tps, int count, int offset, int GroupID)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IChatService.GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, int offset)
+        void IChatService.GetMessages(int groupID, TypeGetMessage tgm, int count, int offset)
         {
             throw new NotImplementedException();
         }

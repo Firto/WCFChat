@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Server.Clases.Base" />
+  <xs:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Service" />
-  <xs:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RegisterResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterResult" type="xs:boolean" />
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server.Clases.Base" minOccurs="0" name="usr" nillable="true" type="q1:User" />
+        <xs:element minOccurs="0" name="repeatPassword" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -27,138 +21,89 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="LoginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="LoginResult" type="xs:boolean" />
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Clases.Base" minOccurs="0" name="usr" nillable="true" type="q2:User" />
-        <xs:element minOccurs="0" name="authKey" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="Leave">
     <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendMessage">
+    <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="LeaveResponse">
+  <xs:element name="GetCountUsers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCountUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="LeaveResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetCountUsersResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUsers">
+  <xs:element name="GetCountMessages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Service" minOccurs="0" name="tps" type="q3:TypeGetUsers" />
-        <xs:element minOccurs="0" name="GroupID" type="xs:int" />
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUsersResponse">
+  <xs:element name="GetCountMessagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetUsersResult" type="xs:boolean" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Clases.Base" minOccurs="0" name="usr" nillable="true" type="q4:ArrayOfUser" />
+        <xs:element minOccurs="0" name="GetCountMessagesResult" type="xs:int" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyGroups">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateGroupResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="CreateGroupResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveGroupResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RemoveGroupResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddUsersToGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q5:ArrayOfint" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q1:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddUsersToGroupResponse">
+  <xs:element name="GetUsers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddUsersToGroupResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMyGroups">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMyGroupsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetMyGroupsResult" type="xs:boolean" />
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="group" nillable="true" type="q6:ArrayOfKeyValueOfGroupUserInGrouppseSlHfP" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Service" minOccurs="0" name="tps" type="q2:TypeGetUsers" />
+        <xs:element minOccurs="0" name="count" type="xs:int" />
+        <xs:element minOccurs="0" name="offset" type="xs:int" />
+        <xs:element minOccurs="0" name="GroupID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetMessages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="groupID" type="xs:int" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Service" minOccurs="0" name="tgm" type="q7:TypeGetMessage" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Service" minOccurs="0" name="tgm" type="q3:TypeGetMessage" />
         <xs:element minOccurs="0" name="count" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMessagesResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetMessagesResult" type="xs:boolean" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Clases.Base" minOccurs="0" name="grMsg" nillable="true" type="q8:ArrayOfGroupMessage" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SendMessage">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="AuthKey" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="groupID" type="xs:int" />
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SendMessageResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SendMessageResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="offset" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,6 +111,70 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveMyGroups">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="group" nillable="true" type="q4:ArrayOfKeyValueOfGroupUserInGroupE2YmOpiZ" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveLeave">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q5:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveGetUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q6:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveNewGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q7:Group" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveRemoveGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q8:Group" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveAddedUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q9:Group" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="users" nillable="true" type="q10:ArrayOfKeyValueOfUserUserInGroupE2YmOpiZ" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveNewMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:Group" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q12:User" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q13:GroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

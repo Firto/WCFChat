@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
-using Server.Clases.Base;
 
 namespace Server.Service
 {
@@ -25,36 +24,36 @@ namespace Server.Service
     {
         // Головні
         [OperationContract(IsOneWay = true)]
-        void Register(string Login, string Password); // Регістрація
+        void Register(string Login, string Email, string Password, string repeatPassword); // Регістрація
         [OperationContract(IsOneWay = true)]
         void Login(string Login, string Password); // Вхід
         [OperationContract(IsOneWay = true)]
-        void Leave(string AuthKey); // виходимо
+        void Leave(); // виходимо
 
         [OperationContract(IsOneWay = true)]
-        void SendMessage(string AuthKey, int groupID, string message); // відправляємо повідомлення
+        void SendMessage(int groupID, string message); // відправляємо повідомлення
 
         // Кількість
         [OperationContract]
-        int GetCountUsers(string AuthKey); // беремо кількість юзерів
+        int GetCountUsers(); // беремо кількість юзерів
         [OperationContract]
-        int GetCountMessages(string AuthKey, int groupID); // беремо кількість повідомлень
+        int GetCountMessages(int groupID); // беремо кількість повідомлень
 
         // Групи
         [OperationContract(IsOneWay = true)]
-        void GetMyGroups(string AuthKey); // беремо групи
+        void GetMyGroups(); // беремо групи
         [OperationContract(IsOneWay = true)]
-        void CreateGroup(string AuthKey, string Name); // Створюємо группу
+        void CreateGroup(string Name); // Створюємо группу
         [OperationContract(IsOneWay = true)]
-        void RemoveGroup(string AuthKey, int ID); // Видаляємо группу
+        void RemoveGroup(int ID); // Видаляємо группу
         [OperationContract(IsOneWay = true)]
-        void AddUsersToGroup(string AuthKey, int ID, List<int> IDs); // Добавляємо користувачів в групу
+        void AddUsersToGroup(int ID, List<int> IDs); // Добавляємо користувачів в групу
 
         // Навантажені
         [OperationContract(IsOneWay = true)]
-        void GetUsers(string AuthKey, TypeGetUsers tps, int count, int offset, int GroupID = 0); // беремо юзерів
+        void GetUsers(TypeGetUsers tps, int count, int offset, int GroupID = 0); // беремо юзерів
         [OperationContract(IsOneWay = true)]
-        void GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, int offset); // беремо повідомлення
+        void GetMessages(int groupID, TypeGetMessage tgm, int count, int offset); // беремо повідомлення
     }
    
 
