@@ -9,128 +9,161 @@ using System.Threading.Tasks;
 using Dapper;
 using Server.Clases;
 using Server.Clases.Base;
+using Server.Clases.OnlineBase;
 
 namespace Server.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)] // Створюється один клас ChatService для усіх юзерів
     public class ChatService : IChatService
     {
+        IChatServiceCallBack Callback {
+            get => OperationContext.Current.GetCallbackChannel<IChatServiceCallBack>();
+        }
+
         List<OnlineUser> users = new List<OnlineUser>();
+        List<OnlineGroup> groups = new List<OnlineGroup>();
 
-        ICallBack Callback
-        {
-            get
-            {
-                return OperationContext.Current.GetCallbackChannel<ICallBack>();
-            }
-        }
+        //void Register(string Login, string Password) {
+        //    //usr = null;
+        //    //try
+        //    //{
+        //    //    using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
+        //    //    {
+        //    //        if (cnn.Query<User>($"SELECT TOP(1) ID FROM Users WHERE Login = '{Login}';").Count() == 0)
+        //    //        {
+        //    //            cnn.Query($"INSERT INTO Users VALUES ('{Login}', '{Password.GetHashCode().ToString()}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0 );");
+        //    //            usr = cnn.Query<User>($"SELECT * FROM Users WHERE Login = '{Login}' AND PasswordHash = '{Password.GetHashCode().ToString()}';").ToList().First();
+        //    //            return true;
+        //    //        }
+        //    //        else Callback.Error("User with Login = " + Login + " is already registered;");
+        //    //    }
+        //    //    return false;
+        //    //}
+        //    //catch (Exception)
+        //    //{
+        //    //    return false;
+        //    //}
+        //}
 
-        public bool AddUsersToGroup(string AuthKey, int ID, List<int> IDs)
-        {
-            
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.AddUsersToGroup(ID, IDs);
-            return false;
-        }
+        //void Login(string Login, string Password) {
+        //    //usr = null;
+        //    //authKey = null;
+        //    //try
+        //    //{
+        //    //    using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
+        //    //    {
+        //    //        usr = cnn.Query<User>($"SELECT * FROM Users WHERE Login = '{Login}' AND PasswordHash = '{Password.GetHashCode().ToString()}';").FirstOrDefault();
+        //    //        OnlineUser ss = new OnlineUser(Callback);
+        //    //        users.Add(ss);
+        //    //        authKey = ss.AuthKey;
+        //    //        return usr != null;
+        //    //    }
+        //    //}
+        //    //catch (Exception)
+        //    //{
+        //    //    return false;
+        //    //}
+        //}
 
-        public bool CreateGroup(string AuthKey, string Name)
-        {
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.CreateGroup(Name);
-            return false;
-        }
+        //void Leave(string AuthKey) {
+        //    throw new NotImplementedException();
+        //}
 
-        public bool GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, out List<GroupMessage> grMsg)
-        {
-            grMsg = null;
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.GetMessages(groupID, tgm, count, out grMsg);
-            return false;
-        }
+        //void SendMessage(string AuthKey, int groupID, string message) {
+        //    throw new NotImplementedException();
+        //}
 
-        public bool GetMyGroups(string AuthKey, out Dictionary<Group, UserInGroup> group)
-        {
-            group = null;
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.GetMyGroups(out group);
-            return false;
-        }
+        //void AddUsersToGroup(string AuthKey, int ID, List<int> IDs)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool GetUsers(string AuthKey, TypeGetUsers tps, out List<User> usmr, int GroupID = 0)
-        {
-            usmr = null;
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.GetUsers(tps,out usmr, GroupID);
-            return false;
-        }
+        //void CreateGroup(string AuthKey, string Name) {
+        //    throw new NotImplementedException();
+        //}
 
-        public bool Leave(string AuthKey)
-        {
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null) 
-                return users.Remove(usr);
-            return false;
-        }
+        //void GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, int offcet){
+        //    throw new NotImplementedException();
+        //}
 
-        public bool Login(string Login, string Password, out User usr, out string authKey)
-        {
-            usr = null;
-            authKey = null;
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
-                {
-                    usr = cnn.Query<User>($"SELECT * FROM Users WHERE Login = '{Login}' AND PasswordHash = '{Password.GetHashCode().ToString()}';").FirstOrDefault();
-                    OnlineUser ss = new OnlineUser(Callback);
-                    users.Add(ss);
-                    authKey = ss.AuthKey;
-                    return usr != null;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //void GetMyGroups(string AuthKey){
+        //    throw new NotImplementedException();
+        //}
 
-        public bool Register(string Login, string Password, out User usr)
-        {
-            usr = null;
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
-                {
-                    if (cnn.Query<User>($"SELECT TOP(1) ID FROM Users WHERE Login = '{Login}';").Count() == 0)
-                    {
-                        cnn.Query($"INSERT INTO Users VALUES ('{Login}', '{Password.GetHashCode().ToString()}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0 );");
-                        usr = cnn.Query<User>($"SELECT * FROM Users WHERE Login = '{Login}' AND PasswordHash = '{Password.GetHashCode().ToString()}';").ToList().First();
-                        return true;
-                    }
-                    else Callback.Error("User with Login = " + Login + " is already registered;");
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //void GetUsers(string AuthKey, TypeGetUsers tps, int count, int offcet, int GroupID = 0){
+        //    throw new NotImplementedException();
+        //}
 
-        public bool RemoveGroup(string AuthKey, int ID)
+        //int GetCountUsers(string AuthKey) {
+        //    throw new NotImplementedException();
+        //}
+
+        //int GetCountMessages(string AuthKey, int groupID) {
+        //    throw new NotImplementedException();
+        //}
+
+        //void RemoveGroup(string AuthKey, int ID) {
+        //    throw new NotImplementedException();
+        //}
+
+        void IChatService.Register(string Login, string Password)
         {
             throw new NotImplementedException();
         }
 
-        public bool SendMessage(string AuthKey, int groupID, string message) {
-            OnlineUser usr = users.FirstOrDefault((x) => x.AuthKey == AuthKey);
-            if (usr != null)
-                return usr.SendMessage(groupID, message);
-            return false;
+        void IChatService.Login(string Login, string Password)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.Leave(string AuthKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.SendMessage(string AuthKey, int groupID, string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IChatService.GetCountUsers(string AuthKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IChatService.GetCountMessages(string AuthKey, int groupID)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.GetMyGroups(string AuthKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.CreateGroup(string AuthKey, string Name)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.RemoveGroup(string AuthKey, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.AddUsersToGroup(string AuthKey, int ID, List<int> IDs)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.GetUsers(string AuthKey, TypeGetUsers tps, int count, int offset, int GroupID)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IChatService.GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, int offset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

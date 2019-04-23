@@ -9,15 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 
-namespace Server.Clases
+namespace Server.Clases.OnlineBase
 {
     class OnlineUser : User
     {
         static int uID { get; set; } = 0;
         public string AuthKey { get; private set; }
-        public ICallBack SOM { get; private set; }
 
-        public OnlineUser(ICallBack SOM) {
+        public IChatServiceCallBack SOM { get; private set; }
+        ChatService serv = null;
+
+        public OnlineUser(IChatServiceCallBack SOM) {
             AuthKey = Common.get_unique_string(30).Insert(15, ID.ToString());
             ID++;
             this.SOM = SOM;
@@ -115,45 +117,45 @@ namespace Server.Clases
             }
         }
 
-        public bool GetMessages(int groupID, TypeGetMessage tgm, int count, out List<GroupMessage> grMsg) {
-            grMsg = null;
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
-                {
-                    if (cnn.Query<UserInGroup>($"SELECT TOP(1) ID FROM Users WHERE ID in (SELECT UserID FROM UsersInGroups WHERE GroupID = {groupID});").Count() > 0) {
-                        grMsg = cnn.Query<GroupMessage>($"SELECT " + (tgm != TypeGetMessage.All ? $"TOP({count}" : String.Empty) + " * FROM GroupsMessages WHERE GroupID = ID ORDER BY ID" + (TypeGetMessage.Last == tgm ? "DESC;" : ";")).ToList();
-                        return true;
-                    }
+        //public bool GetMessages(int groupID, TypeGetMessage tgm, int count, out List<GroupMessage> grMsg) {
+        //    grMsg = null;
+        //    try
+        //    {
+        //        using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
+        //        {
+        //            if (cnn.Query<UserInGroup>($"SELECT TOP(1) ID FROM Users WHERE ID in (SELECT UserID FROM UsersInGroups WHERE GroupID = {groupID});").Count() > 0) {
+        //                grMsg = cnn.Query<GroupMessage>($"SELECT " + (tgm != TypeGetMessage.All ? $"TOP({count}" : String.Empty) + " * FROM GroupsMessages WHERE GroupID = ID ORDER BY ID" + (TypeGetMessage.Last == tgm ? "DESC;" : ";")).ToList();
+        //                return true;
+        //            }
                     
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //        }
+        //        return false;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        public bool SendMessage (int groupID, string message)
-        {
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
-                {
-                    if (cnn.Query<UserInGroup>($"SELECT TOP(1) GroupID FROM UsersInGroups WHERE UserID = {ID} AND GroupID = {groupID};").Count() > 0)
-                    {
-                        cnn.Query($"INSERT INTO GroupsMessages VALUES ({ID}, {groupID}, '{message}', 0);");
-                        return true;
-                    }
+        //public bool SendMessage (int groupID, string message)
+        //{
+        //    try
+        //    {
+        //        using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChatBase"].ConnectionString))
+        //        {
+        //            if (cnn.Query<UserInGroup>($"SELECT TOP(1) GroupID FROM UsersInGroups WHERE UserID = {ID} AND GroupID = {groupID};").Count() > 0)
+        //            {
+        //                cnn.Query($"INSERT INTO GroupsMessages VALUES ({ID}, {groupID}, '{message}', 0);");
+        //                return true;
+        //            }
 
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //        }
+        //        return false;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

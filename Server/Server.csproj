@@ -65,7 +65,8 @@
     <Compile Include="Clases\Base\CUser.cs" />
     <Compile Include="Clases\Base\CUserInGroup.cs" />
     <Compile Include="Clases\CCommon.cs" />
-    <Compile Include="Clases\COnlineUser.cs" />
+    <Compile Include="Clases\OnlineBase\COnlineGroup.cs" />
+    <Compile Include="Clases\OnlineBase\COnlineUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ChatService.cs" />

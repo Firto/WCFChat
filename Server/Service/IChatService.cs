@@ -8,41 +8,53 @@ using Server.Clases.Base;
 
 namespace Server.Service
 {
-    public enum TypeGetUsers {
-        All = 0,
-        OnlyInGroup,
-        OnlyOutInGroup,
+    public enum TypeGetUsers { // типи доставання изерів з бази
+        All = 0, // усіх єзерів
+        OnlyInGroup, // тілкі ті що в групі
+        OnlyOutInGroup, // тількі ті що не в групі
     }
 
-    public enum TypeGetMessage {
+    public enum TypeGetMessage { // типи доставання повідомлень з бази
         All = 0,
-        Last,
-        First
+        Last, //  З кінця
+        First // З початку
     }
 
-    [ServiceContract (CallbackContract = typeof(ICallBack))]
+    [ServiceContract (CallbackContract = typeof(IChatServiceCallBack))]
     public interface IChatService
     {
+        // Головні
+        [OperationContract(IsOneWay = true)]
+        void Register(string Login, string Password); // Регістрація
+        [OperationContract(IsOneWay = true)]
+        void Login(string Login, string Password); // Вхід
+        [OperationContract(IsOneWay = true)]
+        void Leave(string AuthKey); // виходимо
+
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(string AuthKey, int groupID, string message); // відправляємо повідомлення
+
+        // Кількість
         [OperationContract]
-        bool Register(string Login, string Password, out User usr);
+        int GetCountUsers(string AuthKey); // беремо кількість юзерів
         [OperationContract]
-        bool Login(string Login, string Password, out User usr, out string authKey);
-        [OperationContract]
-        bool Leave(string AuthKey);
-        [OperationContract]
-        bool GetUsers(string AuthKey, TypeGetUsers tps, out List<User> usr, int GroupID = 0);
-        [OperationContract]
-        bool CreateGroup(string AuthKey, string Name);
-        [OperationContract]
-        bool RemoveGroup(string AuthKey, int ID);
-        [OperationContract]
-        bool AddUsersToGroup(string AuthKey, int ID, List<int> IDs);
-        [OperationContract]
-        bool GetMyGroups(string AuthKey, out Dictionary<Group, UserInGroup> group);
-        [OperationContract]
-        bool GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, out List<GroupMessage> grMsg);
-        [OperationContract]
-        bool SendMessage(string AuthKey, int groupID, string message);
+        int GetCountMessages(string AuthKey, int groupID); // беремо кількість повідомлень
+
+        // Групи
+        [OperationContract(IsOneWay = true)]
+        void GetMyGroups(string AuthKey); // беремо групи
+        [OperationContract(IsOneWay = true)]
+        void CreateGroup(string AuthKey, string Name); // Створюємо группу
+        [OperationContract(IsOneWay = true)]
+        void RemoveGroup(string AuthKey, int ID); // Видаляємо группу
+        [OperationContract(IsOneWay = true)]
+        void AddUsersToGroup(string AuthKey, int ID, List<int> IDs); // Добавляємо користувачів в групу
+
+        // Навантажені
+        [OperationContract(IsOneWay = true)]
+        void GetUsers(string AuthKey, TypeGetUsers tps, int count, int offset, int GroupID = 0); // беремо юзерів
+        [OperationContract(IsOneWay = true)]
+        void GetMessages(string AuthKey, int groupID, TypeGetMessage tgm, int count, int offset); // беремо повідомлення
     }
    
 
