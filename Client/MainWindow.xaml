@@ -11,6 +11,9 @@
         <Frame Name="mainFrm" NavigationUIVisibility="Hidden">
              
         </Frame>
+        <Frame Name="showFrm" NavigationUIVisibility="Hidden">
+
+        </Frame>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>

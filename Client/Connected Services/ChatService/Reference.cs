@@ -43,9 +43,9 @@ namespace Client.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Group", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RGroup", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
     [System.SerializableAttribute()]
-    public partial class Group : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class RGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -54,16 +54,10 @@ namespace Client.ChatService {
         private bool DeletedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.GroupMessage[] GroupsMessagesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.UserInGroup[] UsersInGroupsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -84,19 +78,6 @@ namespace Client.ChatService {
                 if ((this.DeletedField.Equals(value) != true)) {
                     this.DeletedField = value;
                     this.RaisePropertyChanged("Deleted");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.GroupMessage[] GroupsMessages {
-            get {
-                return this.GroupsMessagesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GroupsMessagesField, value) != true)) {
-                    this.GroupsMessagesField = value;
-                    this.RaisePropertyChanged("GroupsMessages");
                 }
             }
         }
@@ -127,19 +108,6 @@ namespace Client.ChatService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.UserInGroup[] UsersInGroups {
-            get {
-                return this.UsersInGroupsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsersInGroupsField, value) != true)) {
-                    this.UsersInGroupsField = value;
-                    this.RaisePropertyChanged("UsersInGroups");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -152,15 +120,12 @@ namespace Client.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserInGroup", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RUserInGroup", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
     [System.SerializableAttribute()]
-    public partial class UserInGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class RUserInGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.Group GroupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GroupIDField;
@@ -169,13 +134,7 @@ namespace Client.ChatService {
         private bool MutedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.Role RoleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RoleIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.User UserField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIDField;
@@ -187,19 +146,6 @@ namespace Client.ChatService {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.Group Group {
-            get {
-                return this.GroupField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GroupField, value) != true)) {
-                    this.GroupField = value;
-                    this.RaisePropertyChanged("Group");
-                }
             }
         }
         
@@ -230,19 +176,6 @@ namespace Client.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.Role Role {
-            get {
-                return this.RoleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RoleField, value) != true)) {
-                    this.RoleField = value;
-                    this.RaisePropertyChanged("Role");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int RoleID {
             get {
                 return this.RoleIDField;
@@ -251,19 +184,6 @@ namespace Client.ChatService {
                 if ((this.RoleIDField.Equals(value) != true)) {
                     this.RoleIDField = value;
                     this.RaisePropertyChanged("RoleID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -293,9 +213,9 @@ namespace Client.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RUser", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
     [System.SerializableAttribute()]
-    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class RUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -310,9 +230,6 @@ namespace Client.ChatService {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.GroupMessage[] GroupsMessagesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -323,9 +240,6 @@ namespace Client.ChatService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.UserInGroup[] UsersInGroupsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -372,19 +286,6 @@ namespace Client.ChatService {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.GroupMessage[] GroupsMessages {
-            get {
-                return this.GroupsMessagesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GroupsMessagesField, value) != true)) {
-                    this.GroupsMessagesField = value;
-                    this.RaisePropertyChanged("GroupsMessages");
                 }
             }
         }
@@ -441,19 +342,6 @@ namespace Client.ChatService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.UserInGroup[] UsersInGroups {
-            get {
-                return this.UsersInGroupsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsersInGroupsField, value) != true)) {
-                    this.UsersInGroupsField = value;
-                    this.RaisePropertyChanged("UsersInGroups");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -466,18 +354,15 @@ namespace Client.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GroupMessage", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RGroupMessage", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
     [System.SerializableAttribute()]
-    public partial class GroupMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class RGroupMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool DeletedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.Group GroupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GroupIDField;
@@ -487,9 +372,6 @@ namespace Client.ChatService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageSourceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.User UserField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIDField;
@@ -513,19 +395,6 @@ namespace Client.ChatService {
                 if ((this.DeletedField.Equals(value) != true)) {
                     this.DeletedField = value;
                     this.RaisePropertyChanged("Deleted");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.Group Group {
-            get {
-                return this.GroupField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GroupField, value) != true)) {
-                    this.GroupField = value;
-                    this.RaisePropertyChanged("Group");
                 }
             }
         }
@@ -570,19 +439,6 @@ namespace Client.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int UserID {
             get {
                 return this.UserIDField;
@@ -591,83 +447,6 @@ namespace Client.ChatService {
                 if ((this.UserIDField.Equals(value) != true)) {
                     this.UserIDField = value;
                     this.RaisePropertyChanged("UserID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
-    [System.SerializableAttribute()]
-    public partial class Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ChatService.UserInGroup[] UsersInGroupsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ChatService.UserInGroup[] UsersInGroups {
-            get {
-                return this.UsersInGroupsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsersInGroupsField, value) != true)) {
-                    this.UsersInGroupsField = value;
-                    this.RaisePropertyChanged("UsersInGroups");
                 }
             }
         }
@@ -769,28 +548,28 @@ namespace Client.ChatService {
         void Message([System.ServiceModel.MessageParameterAttribute(Name="message")] string message1);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveMyGroups")]
-        void ReciveMyGroups(System.Collections.Generic.Dictionary<Client.ChatService.Group, Client.ChatService.UserInGroup> group);
+        void ReciveMyGroups(System.Collections.Generic.Dictionary<Client.ChatService.RGroup, Client.ChatService.RUserInGroup> group);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeave")]
         void ReciveLeave();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLogin")]
-        void ReciveLogin(Client.ChatService.User usr);
+        void ReciveLogin(Client.ChatService.RUser usr);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveGetUsers")]
-        void ReciveGetUsers(Client.ChatService.User[] usr);
+        void ReciveGetUsers(Client.ChatService.RUser[] usr);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewGroup")]
-        void ReciveNewGroup(Client.ChatService.Group group);
+        void ReciveNewGroup(Client.ChatService.RGroup group);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveRemoveGroup")]
-        void ReciveRemoveGroup(Client.ChatService.Group group);
+        void ReciveRemoveGroup(Client.ChatService.RGroup group);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveAddedUsers")]
-        void ReciveAddedUsers(Client.ChatService.Group group, System.Collections.Generic.Dictionary<Client.ChatService.User, Client.ChatService.UserInGroup> users);
+        void ReciveAddedUsers(Client.ChatService.RGroup group, System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RUserInGroup> users);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewMessage")]
-        void ReciveNewMessage(Client.ChatService.Group group, Client.ChatService.User user, Client.ChatService.GroupMessage msg);
+        void ReciveNewMessage(Client.ChatService.RGroup group, Client.ChatService.RUser user, Client.ChatService.RGroupMessage msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

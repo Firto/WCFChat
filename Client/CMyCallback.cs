@@ -6,18 +6,19 @@ using Client.ChatService;
 
 namespace Client
 {
-    public delegate void LogIn(User usr);
+    public delegate void LogIn(RUser usr);
     public delegate void Do();
-
+    public delegate void MyGroups(Dictionary<RGroup, RUserInGroup> grps);
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class MyCallback : ChatService.IChatServiceCallback
     {
         public event LogIn OnLogin;
         public event Do OnLeave;
+        public event MyGroups OnReciveGroups;
 
         public void Error(string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void Message([MessageParameter(Name = "message")] string message1)
@@ -25,12 +26,12 @@ namespace Client
             throw new System.NotImplementedException();
         }
 
-        public void ReciveAddedUsers(Group group, Dictionary<User, UserInGroup> users)
+        public void ReciveAddedUsers(RGroup group, Dictionary<RUser, RUserInGroup> users)
         {
             throw new System.NotImplementedException();
         }
 
-        public void ReciveGetUsers(User[] usr)
+        public void ReciveGetUsers(RUser[] usr)
         {
             throw new System.NotImplementedException();
         }
@@ -40,27 +41,27 @@ namespace Client
             OnLeave?.Invoke();
         }
 
-        public void ReciveLogin(User usr)
+        public void ReciveLogin(RUser usr)
         {
             OnLogin?.Invoke(usr);
         }
 
-        public void ReciveMyGroups(Dictionary<Group, UserInGroup> group)
+        public void ReciveMyGroups(Dictionary<RGroup, RUserInGroup> group)
+        {
+            OnReciveGroups?.Invoke(group);
+        }
+
+        public void ReciveNewGroup(RGroup group)
         {
             throw new System.NotImplementedException();
         }
 
-        public void ReciveNewGroup(Group group)
+        public void ReciveNewMessage(RGroup group, RUser user, RGroupMessage msg)
         {
             throw new System.NotImplementedException();
         }
 
-        public void ReciveNewMessage(Group group, User user, GroupMessage msg)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ReciveRemoveGroup(Group group)
+        public void ReciveRemoveGroup(RGroup group)
         {
             throw new System.NotImplementedException();
         }

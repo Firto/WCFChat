@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Server.Base.Tables
 {
@@ -24,5 +25,28 @@ namespace Server.Base.Tables
         public virtual Group Group { get; set; }
 
         public virtual User User { get; set; }
+    }
+
+    [DataContract]
+    public class RGroupMessage
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public int UserID { get; set; }
+        [DataMember]
+        public int GroupID { get; set; }
+        [DataMember]
+        public string MessageSource { get; set; }
+        [DataMember]
+        public bool Deleted { get; set; }
+
+        public RGroupMessage(GroupMessage grpMsg) {
+            ID = grpMsg.ID;
+            UserID = grpMsg.UserID;
+            GroupID = grpMsg.GroupID;
+            MessageSource = grpMsg.MessageSource;
+            Deleted = grpMsg.Deleted;
+        }
     }
 }

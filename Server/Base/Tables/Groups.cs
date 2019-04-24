@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Server.Base.Tables
 {
@@ -17,5 +18,22 @@ namespace Server.Base.Tables
 
         public virtual ICollection<GroupMessage> GroupsMessages { get; set; }
         public virtual ICollection<UserInGroup> UsersInGroups { get; set; }
+    }
+
+    [DataContract]
+    public class RGroup
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public bool Deleted { get; set; }
+
+        public RGroup(Group grp) {
+            ID = grp.ID;
+            Name = grp.Name;
+            Deleted = grp.Deleted;
+        }
     }
 }

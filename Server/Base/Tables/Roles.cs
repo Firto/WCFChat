@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Server.Base.Tables
 {
@@ -13,5 +14,19 @@ namespace Server.Base.Tables
         public string Name { get; set; }
 
         public virtual ICollection<UserInGroup> UsersInGroups { get; set; }
+    }
+
+    [DataContract]
+    public class RRole
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+
+        public RRole(Role rl) {
+            ID = rl.ID;
+            Name = rl.Name;
+        }
     }
 }

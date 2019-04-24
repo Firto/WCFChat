@@ -7,40 +7,40 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
-  <xs:complexType name="ArrayOfKeyValueOfGroupUserInGroupE2YmOpiZ">
+  <xs:complexType name="ArrayOfKeyValueOfRGroupRUserInGroupE2YmOpiZ">
     <xs:annotation>
       <xs:appinfo>
         <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfGroupUserInGroupE2YmOpiZ">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfRGroupRUserInGroupE2YmOpiZ">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Key" nillable="true" type="q1:Group" />
-            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Value" nillable="true" type="q2:UserInGroup" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Key" nillable="true" type="q1:RGroup" />
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Value" nillable="true" type="q2:RUserInGroup" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfKeyValueOfGroupUserInGroupE2YmOpiZ" nillable="true" type="tns:ArrayOfKeyValueOfGroupUserInGroupE2YmOpiZ" />
-  <xs:complexType name="ArrayOfKeyValueOfUserUserInGroupE2YmOpiZ">
+  <xs:element name="ArrayOfKeyValueOfRGroupRUserInGroupE2YmOpiZ" nillable="true" type="tns:ArrayOfKeyValueOfRGroupRUserInGroupE2YmOpiZ" />
+  <xs:complexType name="ArrayOfKeyValueOfRUserRUserInGroupE2YmOpiZ">
     <xs:annotation>
       <xs:appinfo>
         <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfUserUserInGroupE2YmOpiZ">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfRUserRUserInGroupE2YmOpiZ">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Key" nillable="true" type="q3:User" />
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Value" nillable="true" type="q4:UserInGroup" />
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Key" nillable="true" type="q3:RUser" />
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Base.Tables" name="Value" nillable="true" type="q4:RUserInGroup" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfKeyValueOfUserUserInGroupE2YmOpiZ" nillable="true" type="tns:ArrayOfKeyValueOfUserUserInGroupE2YmOpiZ" />
+  <xs:element name="ArrayOfKeyValueOfRUserRUserInGroupE2YmOpiZ" nillable="true" type="tns:ArrayOfKeyValueOfRUserRUserInGroupE2YmOpiZ" />
 </xs:schema>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ChatService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,24 +26,53 @@ namespace Client
         {
             InitializeComponent();
             this.clin = clin;
+            clin.Events.OnReciveGroups += OnReciveGroups;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //Dictionary<ChatService.Group, ChatService.UserInGroup> som;
-            //if (clin.GetMyGroups(out som)) {
-            //    foreach (var item in som)
-            //    {
-            //        ss.Children.Add(new GroupItem(item.Key, item.Value, clin));
-            //    }
+            try
+            {
+                clin.Client.GetMyGroups();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
-            //}
-            
+        private List<UIElement> UIElementCollectionToList(UIElementCollection collection) {
+            List<UIElement> elmnts = new List<UIElement>();
+            foreach (UIElement item in collection)
+                elmnts.Add(item);
+            return elmnts;
+        }
+
+        private void OnReciveGroups(Dictionary<RGroup, RUserInGroup> grps) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                List<UIElement> elmnts = UIElementCollectionToList(ss.Children);
+                GroupItem itmn = null;
+                foreach (var item in grps)
+                {
+                    itmn = (GroupItem)elmnts.FirstOrDefault((x) => ((GroupItem)x).BaseGroup.ID == item.Key.ID);
+                    if (itmn == null) ss.Children.Add(new GroupItem(item.Key, item.Value, clin));
+                    else
+                    {
+                        itmn.BaseGroup = item.Key;
+                        itmn.BaseUserInGroup = item.Value;
+                    }
+                }
+            });
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            clin.Client.Leave();
+            try
+            {
+                clin.Client.Leave();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -52,6 +82,13 @@ namespace Client
 
         private void Create_Group(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                clin.Client.CreateGroup("Soewrmatic");
+            }
+            catch (Exception)
+            {
+            }
             
         }
     }

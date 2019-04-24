@@ -124,6 +124,7 @@ namespace Server.Service
                 User usr = mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
                 mainbBase.SaveChanges();
                 onlineUsers.Add(new OnlineUser(usr, mainbBase, onlineUsers, Callback));
+                Console.WriteLine("Register: " + Login1);
             }
         }
 
@@ -132,23 +133,32 @@ namespace Server.Service
             if (Login.Length < 1) { Callback.Error("Input login!"); return; }
             if (Password.Length < 1) { Callback.Error("Input password!"); return; }
             string hasedPassword = Common.GetMD5(Password);
-            User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
 
-            if (usr != null)
-                lock (onlineUsers)
+            lock (onlineUsers)
+            {
+                User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
+
+                if (usr != null)
+                {
                     onlineUsers.Add(new OnlineUser(usr, mainbBase, onlineUsers, Callback));
-            else Callback.Error("Incorrect password or login!");
+                    Console.WriteLine("Login: " + usr.Login);
+                }
+                else Callback.Error("Incorrect password or login!");
+            }
         }
 
         void IChatService.Leave()
         {
-            OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
-
-            if (usr != null)
+            lock (onlineUsers)
             {
-                Callback.ReciveLeave();
-                lock (onlineUsers)
+                OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
+
+                if (usr != null)
+                {
+                    usr.CallBack.ReciveLeave();
+                    Console.WriteLine("Leave: " + usr.BaseUser.Login);
                     onlineUsers.Remove(usr);
+                }
             }
         }
 
@@ -169,12 +179,44 @@ namespace Server.Service
 
         void IChatService.GetMyGroups()
         {
-            throw new NotImplementedException();
+            lock (onlineUsers)
+            {
+                OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
+
+                if (usr != null)
+                {
+                    Dictionary<RGroup, RUserInGroup> usersInGroups = new Dictionary<RGroup, RUserInGroup>();
+                    foreach (var item in usr.BaseUser.UsersInGroups)
+                        usersInGroups.Add(new RGroup(item.Group), new RUserInGroup(item));
+                    usr.CallBack.ReciveMyGroups(usersInGroups);
+                }
+                else Callback.ReciveLeave();
+            }
         }
 
         void IChatService.CreateGroup(string Name)
         {
-            throw new NotImplementedException();
+            lock (onlineUsers)
+            {
+                OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
+
+                if (usr != null)
+                {
+                    if (mainbBase.Groups.FirstOrDefault((x) => x.Name == Name) == null)
+                    {
+                        mainbBase.UsersInGroups.Add(new UserInGroup { GroupID = mainbBase.Groups.Add(new Group { Name = Name, Deleted = false }).ID, UserID = usr.BaseUser.ID, RoleID = 1, Muted = false});
+                        mainbBase.SaveChanges();
+
+                        Dictionary<RGroup, RUserInGroup> usersInGroups = new Dictionary<RGroup, RUserInGroup>();
+                        foreach (var item in usr.BaseUser.UsersInGroups)
+                            usersInGroups.Add(new RGroup(item.Group), new RUserInGroup(item));
+                        usr.CallBack.ReciveMyGroups(usersInGroups);
+
+                    }
+                    else usr.CallBack.Error("Group with this name is already registered!");
+                }
+                else Callback.ReciveLeave();
+            }
         }
 
         void IChatService.RemoveGroup(int ID)

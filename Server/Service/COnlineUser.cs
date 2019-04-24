@@ -21,7 +21,7 @@ namespace Server.Service
             OnlineUsers = onlineUsers;
             CallBack = callback;
 
-            callback.ReciveLogin(baseUser);
+            callback.ReciveLogin(new RUser(baseUser));
         }
     }
 }

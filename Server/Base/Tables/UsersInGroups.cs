@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Server.Base.Tables
 {
@@ -26,5 +27,25 @@ namespace Server.Base.Tables
         public virtual Role Role { get; set; }
 
         public virtual User User { get; set; }
+    }
+
+    [DataContract]
+    public class RUserInGroup
+    {
+        [DataMember]
+        public int UserID { get; set; }
+        [DataMember]
+        public int GroupID { get; set; }
+        [DataMember]
+        public int RoleID { get; set; }
+        [DataMember]
+        public bool Muted { get; set; }
+
+        public RUserInGroup(UserInGroup usrInGrp) {
+            UserID = usrInGrp.UserID;
+            GroupID = usrInGrp.GroupID;
+            RoleID = usrInGrp.RoleID;
+            Muted = usrInGrp.Muted;
+        }
     }
 }

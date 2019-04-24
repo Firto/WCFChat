@@ -17,7 +17,7 @@ namespace Client
         public MyCallback Events { get; private set; } 
         public ChatService.ChatServiceClient Client { get; private set; }
 
-        public ChatService.User usr;
+        public ChatService.RUser usr;
 
         List<Page> pages = new List<Page>();
 
@@ -26,16 +26,22 @@ namespace Client
         public ChatClient() {
             Events = new MyCallback();
             Events.OnLogin += Login;
+            Events.OnLeave += Leave;
             Client = new ChatService.ChatServiceClient(new InstanceContext(Events));
         }
 
-        private void Login(User usr) {
-            SetPage(new LoginedPage(this));
+        private void Login(RUser usr) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                SetPage(new LoginedPage(this));
+            });
+            
         }
 
-        private void Leave(User usr)
+        private void Leave()
         {
-            SetPage(new Login(this));
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                SetPage(new Login(this));
+            });
         }
 
         public void SetPage(Page pg) {

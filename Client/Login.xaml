@@ -19,12 +19,12 @@
         <Grid.Background>
             <SolidColorBrush Color="#FFB9D1EA"/>
         </Grid.Background>
-        <Border Width="300" Grid.Row="1" Height="Auto" CornerRadius="10" BorderBrush="Black" BorderThickness="2" Background="#FF75A4D4">
+        <Border MaxWidth="300" Grid.Row="1" Background="#FF75A4D4">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" Direction="-45" RenderingBias="Quality" ShadowDepth="15" Opacity="0.6"/>
             </Border.Effect>
             <StackPanel Background="#FF75A4D4" Margin="5" >
-                <Border Height="3" Margin="10, 0, 10, 0" Background="#FFFF7253" CornerRadius="2" />
+                <Border Height="10" Margin="-5, -15, -5, 0" CornerRadius="100, 100, 0, 0"  Background="#FFFF7253" />
                 <Label FontSize="30" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FFFF2E00" >Login</Label>
                 <Border Height="3" Margin="10, 0, 10, 0" Background="#FFFF7253" CornerRadius="2" />
                 <Border Margin="10, 10, 10, 0" 
@@ -51,7 +51,7 @@
                         Register</Button>
                 </Grid>
                 
-                <Border Height="3" Margin="10, 0, 10, 0" Background="#FFFF7253" CornerRadius="2" />
+                <Border Height="10" Margin="-5, 0, -5, -5" CornerRadius="5, 5, 0, 0"  Background="#FFFF7253" />
             </StackPanel>
         </Border>
     </Grid>

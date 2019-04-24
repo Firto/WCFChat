@@ -17,7 +17,6 @@ namespace Server
                 Console.WriteLine("WCFChat server is running");
                 while (true)
                 {
-                    Console.Write(".");
                     Thread.Sleep(1000);
                 }
             }

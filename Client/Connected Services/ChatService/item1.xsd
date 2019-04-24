@@ -124,7 +124,7 @@
   <xs:element name="ReciveMyGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="group" nillable="true" type="q4:ArrayOfKeyValueOfGroupUserInGroupE2YmOpiZ" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="group" nillable="true" type="q4:ArrayOfKeyValueOfRGroupRUserInGroupE2YmOpiZ" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -136,45 +136,45 @@
   <xs:element name="ReciveLogin">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q5:User" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q5:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveGetUsers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q6:ArrayOfUser" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q6:ArrayOfRUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveNewGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q7:Group" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q7:RGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveRemoveGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q8:Group" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q8:RGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveAddedUsers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q9:Group" />
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="users" nillable="true" type="q10:ArrayOfKeyValueOfUserUserInGroupE2YmOpiZ" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q9:RGroup" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="users" nillable="true" type="q10:ArrayOfKeyValueOfRUserRUserInGroupE2YmOpiZ" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveNewMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:Group" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q12:User" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q13:GroupMessage" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:RGroup" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q12:RUser" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q13:RGroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
