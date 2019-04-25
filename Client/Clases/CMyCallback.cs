@@ -8,6 +8,7 @@ namespace Client
 {
     public delegate void LogIn(RUser usr);
     public delegate void GroupEV(RGroup grp);
+    public delegate void GroupEVT(RGroup group, RUserInGroup usrInGrp);
     public delegate void Do();
     public delegate void MyGroups(Dictionary<RGroup, RUserInGroup> grps);
     [CallbackBehavior(UseSynchronizationContext = false)]
@@ -17,6 +18,7 @@ namespace Client
         public event Do OnLeave;
         public event MyGroups OnReciveGroups;
         public event GroupEV OnReciveLeaveGroup;
+        public event GroupEVT OnReciveNewGroup;
 
         public void Error(string message)
         {
@@ -53,9 +55,9 @@ namespace Client
             OnReciveGroups?.Invoke(group);
         }
 
-        public void ReciveNewGroup(RGroup group)
+        public void ReciveNewGroup(RGroup group, RUserInGroup usrInGrp)
         {
-            throw new System.NotImplementedException();
+            OnReciveNewGroup?.Invoke(group, usrInGrp);
         }
 
         public void ReciveNewMessage(RGroup group, RUser user, RGroupMessage msg)

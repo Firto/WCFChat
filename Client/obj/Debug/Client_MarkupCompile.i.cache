@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\WCFChat\Client\obj\Debug\
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-D:\WCFChat\Client\App.xaml
-61769136129
+C:\Users\Firto\Desktop\WCFChat\Client\App.xaml
+71499018576
 
-16399552010
+17184343824
 15833945659
-GroupItem.xaml;Login.xaml;LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Register.xaml;
+Controls\GroupItem.xaml;Pages\CreateGroup.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
 
 False
 

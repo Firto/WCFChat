@@ -28,10 +28,12 @@ namespace Client
             this.clin = clin;
             clin.Events.OnReciveGroups += OnReciveGroups;
             clin.Events.OnReciveLeaveGroup += OnLeaveGroup;
+            clin.Events.OnReciveNewGroup += OnNewGroup;
         }
 
         private void OnLeaveGroup(RGroup rgp) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
+                ss.Children.Clear();
                 foreach (GroupItem item in ss.Children)
                 {
                     if (item.BaseGroup.ID == rgp.ID) {
@@ -39,6 +41,12 @@ namespace Client
                         break;
                     }
                 }
+            });
+        }
+
+        public void OnNewGroup(RGroup rgp, RUserInGroup usrInGrp) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                ss.Children.Add(new GroupItem(rgp, usrInGrp, clin));
             });
         }
 

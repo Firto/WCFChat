@@ -26,7 +26,7 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveGetUsers(List<RUser> usr); // Відправляємо юзерів
         [OperationContract(IsOneWay = true)]
-        void ReciveNewGroup(RGroup group); // Відправляємо нову группу
+        void ReciveNewGroup(RGroup group, RUserInGroup usrInGrp); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
         void ReciveLeaveGroup(RGroup group); // Відправляємо що група видалена
         [OperationContract(IsOneWay = true)]

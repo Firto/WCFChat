@@ -93,5 +93,10 @@ namespace Client
         {
 
         }
+
+        private void OnClising(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            clnt.Client.Leave();
+        }
     }
 }

@@ -560,7 +560,7 @@ namespace Client.ChatService {
         void ReciveGetUsers(Client.ChatService.RUser[] usr);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewGroup")]
-        void ReciveNewGroup(Client.ChatService.RGroup group);
+        void ReciveNewGroup(Client.ChatService.RGroup group, Client.ChatService.RUserInGroup usrInGrp);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeaveGroup")]
         void ReciveLeaveGroup(Client.ChatService.RGroup group);

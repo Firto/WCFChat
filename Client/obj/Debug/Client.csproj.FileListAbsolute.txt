@@ -18,12 +18,10 @@ C:\Users\Firto\Desktop\WCFChat\Client\bin\Debug\Client.exe.config
 C:\Users\Firto\Desktop\WCFChat\Client\bin\Debug\Client.exe
 C:\Users\Firto\Desktop\WCFChat\Client\bin\Debug\Client.pdb
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.csprojAssemblyReference.cache
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Login.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\MainWindow.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\App.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client_MarkupCompile.cache
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client_MarkupCompile.lref
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Login.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\MainWindow.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.g.resources
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.Properties.Resources.resources
@@ -31,8 +29,6 @@ C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.csproj.GenerateResource.c
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.exe
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Client.pdb
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Register.g.cs
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Register.baml
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\Register.g.cs
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\Register.baml
@@ -45,10 +41,6 @@ C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\LoginedPage.g.cs
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\GroupItem.baml
 C:\Users\user.STEP.012\Desktop\WCFChat\Client\obj\Debug\LoginedPage.baml
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\GroupItem.g.cs
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\LoginedPage.g.cs
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\GroupItem.baml
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\LoginedPage.baml
 D:\WCFChat\Client\bin\Debug\Client.exe.config
 D:\WCFChat\Client\bin\Debug\Client.exe
 D:\WCFChat\Client\bin\Debug\Client.pdb
@@ -74,3 +66,13 @@ D:\WCFChat\Client\obj\Debug\Client.csproj.GenerateResource.cache
 D:\WCFChat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 D:\WCFChat\Client\obj\Debug\Client.exe
 D:\WCFChat\Client\obj\Debug\Client.pdb
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupItem.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\CreateGroup.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Login.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\LoginedPage.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Register.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupItem.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\CreateGroup.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Login.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\LoginedPage.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Register.baml
