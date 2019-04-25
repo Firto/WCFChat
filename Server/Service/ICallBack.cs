@@ -28,7 +28,7 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveNewGroup(RGroup group); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
-        void ReciveRemoveGroup(RGroup group); // Відправляємо що група видалена
+        void ReciveLeaveGroup(RGroup group); // Відправляємо що група видалена
         [OperationContract(IsOneWay = true)]
         void ReciveAddedUsers(RGroup group, Dictionary<RUser, RUserInGroup> users); // Відправляємо що додано нових юзерів
         [OperationContract(IsOneWay = true)]

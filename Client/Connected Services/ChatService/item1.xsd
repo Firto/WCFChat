@@ -72,7 +72,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RemoveGroup">
+  <xs:element name="LeaveGroup">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ID" type="xs:int" />
@@ -154,7 +154,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReciveRemoveGroup">
+  <xs:element name="ReciveLeaveGroup">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q8:RGroup" />

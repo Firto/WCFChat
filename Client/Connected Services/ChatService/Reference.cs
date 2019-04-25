@@ -513,11 +513,11 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/CreateGroup")]
         System.Threading.Tasks.Task CreateGroupAsync(string Name);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RemoveGroup")]
-        void RemoveGroup(int ID);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/LeaveGroup")]
+        void LeaveGroup(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RemoveGroup")]
-        System.Threading.Tasks.Task RemoveGroupAsync(int ID);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/LeaveGroup")]
+        System.Threading.Tasks.Task LeaveGroupAsync(int ID);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/AddUsersToGroup")]
         void AddUsersToGroup(int ID, int[] IDs);
@@ -562,8 +562,8 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewGroup")]
         void ReciveNewGroup(Client.ChatService.RGroup group);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveRemoveGroup")]
-        void ReciveRemoveGroup(Client.ChatService.RGroup group);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeaveGroup")]
+        void ReciveLeaveGroup(Client.ChatService.RGroup group);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveAddedUsers")]
         void ReciveAddedUsers(Client.ChatService.RGroup group, System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RUserInGroup> users);
@@ -664,12 +664,12 @@ namespace Client.ChatService {
             return base.Channel.CreateGroupAsync(Name);
         }
         
-        public void RemoveGroup(int ID) {
-            base.Channel.RemoveGroup(ID);
+        public void LeaveGroup(int ID) {
+            base.Channel.LeaveGroup(ID);
         }
         
-        public System.Threading.Tasks.Task RemoveGroupAsync(int ID) {
-            return base.Channel.RemoveGroupAsync(ID);
+        public System.Threading.Tasks.Task LeaveGroupAsync(int ID) {
+            return base.Channel.LeaveGroupAsync(ID);
         }
         
         public void AddUsersToGroup(int ID, int[] IDs) {

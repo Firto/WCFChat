@@ -27,6 +27,19 @@ namespace Client
             InitializeComponent();
             this.clin = clin;
             clin.Events.OnReciveGroups += OnReciveGroups;
+            clin.Events.OnReciveLeaveGroup += OnLeaveGroup;
+        }
+
+        private void OnLeaveGroup(RGroup rgp) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                foreach (GroupItem item in ss.Children)
+                {
+                    if (item.BaseGroup.ID == rgp.ID) {
+                        ss.Children.Remove(item);
+                        break;
+                    }
+                }
+            });
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

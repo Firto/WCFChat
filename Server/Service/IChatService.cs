@@ -45,7 +45,7 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void CreateGroup(string Name); // Створюємо группу
         [OperationContract(IsOneWay = true)]
-        void RemoveGroup(int ID); // Видаляємо группу
+        void LeaveGroup(int ID); // Видаляємо группу
         [OperationContract(IsOneWay = true)]
         void AddUsersToGroup(int ID, List<int> IDs); // Добавляємо користувачів в групу
 

@@ -45,5 +45,23 @@ namespace Client
 
         }
 
+        private void ExitFromGroup(object sender, RoutedEventArgs e)
+        {
+            if (baseUserInGroup.RoleID == 1)
+            {
+                if (MessageBox.Show("Are you sure delete group", "Question", MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.Cancel) == MessageBoxResult.Cancel) return;
+            }else if (MessageBox.Show("Are you sure leave group", "Question", MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.Cancel) == MessageBoxResult.Cancel) return;
+
+            try
+            {
+                client.Client.LeaveGroup(baseGroup.ID);
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            
+        }
     }
 }

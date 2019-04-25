@@ -68,8 +68,8 @@
   <wsdl:message name="IChatService_CreateGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGroup" />
   </wsdl:message>
-  <wsdl:message name="IChatService_RemoveGroup_InputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveGroup" />
+  <wsdl:message name="IChatService_LeaveGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGroup" />
   </wsdl:message>
   <wsdl:message name="IChatService_AddUsersToGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUsersToGroup" />
@@ -101,8 +101,8 @@
   <wsdl:message name="IChatService_ReciveNewGroup_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveNewGroup" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveRemoveGroup_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveRemoveGroup" />
+  <wsdl:message name="IChatService_ReciveLeaveGroup_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveLeaveGroup" />
   </wsdl:message>
   <wsdl:message name="IChatService_ReciveAddedUsers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveAddedUsers" />
@@ -137,8 +137,8 @@
     <wsdl:operation name="CreateGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/CreateGroup" message="tns:IChatService_CreateGroup_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RemoveGroup">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/RemoveGroup" message="tns:IChatService_RemoveGroup_InputMessage" />
+    <wsdl:operation name="LeaveGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/LeaveGroup" message="tns:IChatService_LeaveGroup_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddUsersToGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/AddUsersToGroup" message="tns:IChatService_AddUsersToGroup_InputMessage" />
@@ -170,8 +170,8 @@
     <wsdl:operation name="ReciveNewGroup">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewGroup" message="tns:IChatService_ReciveNewGroup_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveRemoveGroup">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveRemoveGroup" message="tns:IChatService_ReciveRemoveGroup_OutputCallbackMessage" />
+    <wsdl:operation name="ReciveLeaveGroup">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLeaveGroup" message="tns:IChatService_ReciveLeaveGroup_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReciveAddedUsers">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveAddedUsers" message="tns:IChatService_ReciveAddedUsers_OutputCallbackMessage" />
@@ -237,8 +237,8 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="RemoveGroup">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/RemoveGroup" style="document" />
+    <wsdl:operation name="LeaveGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/LeaveGroup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -303,8 +303,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveRemoveGroup">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveRemoveGroup" style="document" />
+    <wsdl:operation name="ReciveLeaveGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveLeaveGroup" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -328,7 +328,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8098/bind</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-6DLJVFP\Firto</Upn>
+          <Upn>STEP\maks</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

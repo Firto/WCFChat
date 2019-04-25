@@ -7,6 +7,7 @@ using Client.ChatService;
 namespace Client
 {
     public delegate void LogIn(RUser usr);
+    public delegate void GroupEV(RGroup grp);
     public delegate void Do();
     public delegate void MyGroups(Dictionary<RGroup, RUserInGroup> grps);
     [CallbackBehavior(UseSynchronizationContext = false)]
@@ -15,6 +16,7 @@ namespace Client
         public event LogIn OnLogin;
         public event Do OnLeave;
         public event MyGroups OnReciveGroups;
+        public event GroupEV OnReciveLeaveGroup;
 
         public void Error(string message)
         {
@@ -61,9 +63,9 @@ namespace Client
             throw new System.NotImplementedException();
         }
 
-        public void ReciveRemoveGroup(RGroup group)
+        public void ReciveLeaveGroup(RGroup group)
         {
-            throw new System.NotImplementedException();
+            OnReciveLeaveGroup?.Invoke(group);
         }
     }
 }

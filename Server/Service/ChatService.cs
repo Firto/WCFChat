@@ -202,7 +202,7 @@ namespace Server.Service
 
                 if (usr != null)
                 {
-                    if (mainbBase.Groups.FirstOrDefault((x) => x.Name == Name) == null)
+                    if (mainbBase.Groups.FirstOrDefault((x) => x.Name == Name && x.Deleted == false) == null)
                     {
                         mainbBase.UsersInGroups.Add(new UserInGroup { GroupID = mainbBase.Groups.Add(new Group { Name = Name, Deleted = false }).ID, UserID = usr.BaseUser.ID, RoleID = 1, Muted = false});
                         mainbBase.SaveChanges();
@@ -219,9 +219,13 @@ namespace Server.Service
             }
         }
 
-        void IChatService.RemoveGroup(int ID)
+        void IChatService.LeaveGroup(int ID)
         {
-            throw new NotImplementedException();
+            lock (onlineUsers)
+            {
+                OnlineUser usr = onlineUsers.FirstOrDefault((x) => x.CallBack == Callback);
+                if (usr != null) usr.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID)?.Group.Leave(usr);
+            }
         }
 
         void IChatService.AddUsersToGroup(int ID, List<int> IDs)
