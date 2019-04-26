@@ -13,16 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.Pages
+namespace Client.Controls
 {
     /// <summary>
-    /// Interaction logic for CreateGroup.xaml
+    /// Interaction logic for GroupCreateItem.xaml
     /// </summary>
-    public partial class CreateGroup : Page
+    public partial class GroupCreateItem : UserControl
     {
-        public CreateGroup()
+        public GroupCreateItem()
         {
             InitializeComponent();
+        }
+
+        public event Do OnOk;
+        public event Do OnCancel;
+
+        private void CancelCreate(object sender, RoutedEventArgs e)
+        {
+            OnCancel?.Invoke();
+        }
+
+        private void OkCreate(object sender, RoutedEventArgs e)
+        {
+            OnOk?.Invoke();
         }
     }
 }

@@ -18,11 +18,26 @@ namespace Client
     /// <summary>
     /// Interaction logic for GroupItem.xaml
     /// </summary>
+    
     public partial class GroupItem : UserControl
     {
         ChatClient client;
         ChatService.RGroup baseGroup;
         ChatService.RUserInGroup baseUserInGroup;
+
+        bool selected = false;
+
+        public bool Selected {
+            get => selected;
+            set {
+                if (value) this.Background = new SolidColorBrush(Color.FromArgb(255, 179, 188, 243));
+                else this.Background = new SolidColorBrush(Color.FromArgb(255, 179, 211, 243));
+                OnChangeSelecte?.Invoke(selected, null);
+                selected = value;
+            }
+        }
+
+        public event EventHandler OnChangeSelecte;
 
         public ChatService.RGroup BaseGroup { get => baseGroup; set {
                 baseGroup = value;
@@ -33,12 +48,13 @@ namespace Client
                 baseUserInGroup = value;
             } }
 
-        public GroupItem(ChatService.RGroup grp, ChatService.RUserInGroup usr, ChatClient cl)
+        public GroupItem(ChatService.RGroup grp, ChatService.RUserInGroup usr, ChatClient cl, EventHandler evnt)
         {
             InitializeComponent();
             client = cl;
             BaseGroup = grp;
             BaseUserInGroup = usr;
+            OnChangeSelecte += evnt;
         }
 
         public void SendMessage() {
@@ -62,6 +78,11 @@ namespace Client
                
             }
             
+        }
+
+        private void OnClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!Selected) Selected = true;
         }
     }
 }

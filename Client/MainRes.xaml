@@ -75,4 +75,29 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="confirmStyle" TargetType="{x:Type Border}">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0:0:0.3"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="#FF429AD6">
+                        </ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0:0:0.3"
+                                            Storyboard.TargetProperty="Background.Color"
+                                            To="#FF47A4E4">
+                        </ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

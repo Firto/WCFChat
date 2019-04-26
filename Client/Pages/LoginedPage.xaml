@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginedPage"
-      
       Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary Source="../MainRes.xaml" />
@@ -20,20 +19,21 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition/>
+            <ColumnDefinition Width="0" Name="clmn"/>
         </Grid.ColumnDefinitions>
-        
-        <StackPanel Name="ss" Background="#FF6EA5DE" Grid.Row="1" >
-            <StackPanel.Effect>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF6EA5DE" Grid.Row="1">
+            <ScrollViewer.Effect>
                 <DropShadowEffect BlurRadius="30" Direction="0" RenderingBias="Quality" ShadowDepth="15" Opacity="0.6"/>
-            </StackPanel.Effect>
-            
-            <!--<ControlTemplate TargetType="GroupItem">
+            </ScrollViewer.Effect>
+            <StackPanel Name="ss" >
+                <!--<ControlTemplate TargetType="GroupItem">
                 <ContentPresenter
                     ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                     Content="{TemplateBinding ContentControl.Content} " />
             </ControlTemplate>-->
-        </StackPanel>
-        <Grid Grid.ColumnSpan="2">
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.ColumnSpan="3">
             <StackPanel Background="#FF234F7C" Orientation="Horizontal" >
                 <Border Margin="10, 0, 0, 0" VerticalAlignment="Center" Background="#FF6EA5DE"  CornerRadius="10" Style="{StaticResource groupStyle}">
                     <Button Click="Create_Group" >
@@ -49,6 +49,12 @@
                 </Button>
             </Border>
         </Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF6EA5DE" Grid.Row="1" Grid.Column="2">
+            <ScrollViewer.Effect>
+                <DropShadowEffect BlurRadius="30" Direction="0" RenderingBias="Quality" ShadowDepth="15" Opacity="0.6"/>
+            </ScrollViewer.Effect>
+            <StackPanel Name="users" >
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

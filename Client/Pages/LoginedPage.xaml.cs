@@ -1,4 +1,5 @@
 ﻿using Client.ChatService;
+using Client.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace Client
 
         private void OnLeaveGroup(RGroup rgp) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                ss.Children.Clear();
-                foreach (GroupItem item in ss.Children)
+                
+                foreach (UIElement item in ss.Children)
                 {
-                    if (item.BaseGroup.ID == rgp.ID) {
+                    if (item is GroupItem && ((GroupItem)item).BaseGroup.ID == rgp.ID) {
+  
                         ss.Children.Remove(item);
                         break;
                     }
@@ -46,7 +48,8 @@ namespace Client
 
         public void OnNewGroup(RGroup rgp, RUserInGroup usrInGrp) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                ss.Children.Add(new GroupItem(rgp, usrInGrp, clin));
+                ss.Children.Add(new GroupItem(rgp, usrInGrp, clin, OnChangeSelectedGroup));
+                OnCancelCreateGroup();
             });
         }
 
@@ -70,18 +73,9 @@ namespace Client
 
         private void OnReciveGroups(Dictionary<RGroup, RUserInGroup> grps) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                List<UIElement> elmnts = UIElementCollectionToList(ss.Children);
-                GroupItem itmn = null;
+                ss.Children.Clear();
                 foreach (var item in grps)
-                {
-                    itmn = (GroupItem)elmnts.FirstOrDefault((x) => ((GroupItem)x).BaseGroup.ID == item.Key.ID);
-                    if (itmn == null) ss.Children.Add(new GroupItem(item.Key, item.Value, clin));
-                    else
-                    {
-                        itmn.BaseGroup = item.Key;
-                        itmn.BaseUserInGroup = item.Value;
-                    }
-                }
+                    ss.Children.Add(new GroupItem(item.Key, item.Value, clin, OnChangeSelectedGroup));
             });
         }
 
@@ -101,16 +95,51 @@ namespace Client
 
         }
 
+        private void OnCreateGroup() {
+            GroupCreateItem som = (GroupCreateItem)UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem);
+            if (som != null)
+            {
+                try
+                {
+                    clin.Client.CreateGroup(som.groupName.Text);
+                }
+                catch (Exception) {
+
+                }
+            }
+        }
+
+        private void OnCancelCreateGroup() {
+            GroupCreateItem som = (GroupCreateItem)UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem);
+            if (som != null) ss.Children.Remove(som);
+        }
+
         private void Create_Group(object sender, RoutedEventArgs e)
         {
-            try
+            if (UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) == null)
             {
-                clin.Client.CreateGroup("Soewrmatic");
+                GroupCreateItem som = new GroupCreateItem();
+                som.OnOk += OnCreateGroup;
+                som.OnCancel += OnCancelCreateGroup;
+                ss.Children.Insert(0, som);
             }
-            catch (Exception)
-            {
+            else OnCancelCreateGroup();
+        }
+
+        public void OnChangeSelectedGroup(object obj, EventArgs e) {
+            if (((bool)obj)) {
+                foreach (var item in ss.Children)
+                {
+                    if (item is GroupItem) {
+                        GroupItem gss = (GroupItem)item;
+                        if (gss.Selected)
+                        {
+                            gss.Selected = false;
+                            break;
+                        }
+                    }
+                }
             }
-            
         }
     }
 }

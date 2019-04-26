@@ -67,12 +67,12 @@ D:\WCFChat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 D:\WCFChat\Client\obj\Debug\Client.exe
 D:\WCFChat\Client\obj\Debug\Client.pdb
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupItem.g.cs
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\CreateGroup.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Login.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\LoginedPage.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Register.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupItem.baml
-C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\CreateGroup.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Login.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\LoginedPage.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Register.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupCreateItem.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupCreateItem.baml

@@ -63,11 +63,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupCreateItem.xaml.cs">
+      <DependentUpon>GroupCreateItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GroupItem.xaml.cs">
       <DependentUpon>GroupItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\CreateGroup.xaml.cs">
-      <DependentUpon>CreateGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginedPage.xaml.cs">
       <DependentUpon>LoginedPage.xaml</DependentUpon>
@@ -75,11 +75,11 @@
     <Compile Include="Pages\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\GroupItem.xaml">
+    <Page Include="Controls\GroupCreateItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CreateGroup.xaml">
+    <Page Include="Controls\GroupItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
