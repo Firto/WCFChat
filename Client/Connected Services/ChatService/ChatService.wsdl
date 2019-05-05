@@ -13,8 +13,8 @@
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Service" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
+      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
+      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server.Service" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IChatService_Register_InputMessage">
@@ -28,18 +28,6 @@
   </wsdl:message>
   <wsdl:message name="IChatService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
-  </wsdl:message>
-  <wsdl:message name="IChatService_GetCountUsers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountUsers" />
-  </wsdl:message>
-  <wsdl:message name="IChatService_GetCountUsers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountUsersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IChatService_GetCountMessages_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountMessages" />
-  </wsdl:message>
-  <wsdl:message name="IChatService_GetCountMessages_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountMessagesResponse" />
   </wsdl:message>
   <wsdl:message name="IChatService_GetMyGroups_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMyGroups" />
@@ -56,8 +44,29 @@
   <wsdl:message name="IChatService_GetUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUsers" />
   </wsdl:message>
+  <wsdl:message name="IChatService_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
   <wsdl:message name="IChatService_GetMessages_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountUsers" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountUsersInGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountUsersInGroup" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountUsersInGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountUsersInGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountMessages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountMessages" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetCountMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountMessagesResponse" />
   </wsdl:message>
   <wsdl:message name="IChatService_Error_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Error" />
@@ -74,14 +83,17 @@
   <wsdl:message name="IChatService_ReciveLogin_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveLogin" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveGetUsers_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveGetUsers" />
-  </wsdl:message>
   <wsdl:message name="IChatService_ReciveNewGroup_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveNewGroup" />
   </wsdl:message>
   <wsdl:message name="IChatService_ReciveLeaveGroup_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveLeaveGroup" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_ReciveChangeOnline_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveChangeOnline" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_ReciveNewUser_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveNewUser" />
   </wsdl:message>
   <wsdl:message name="IChatService_ReciveAddedUsers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveAddedUsers" />
@@ -102,14 +114,6 @@
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/SendMessage" message="tns:IChatService_SendMessage_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCountUsers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountUsers" message="tns:IChatService_GetCountUsers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountUsersResponse" message="tns:IChatService_GetCountUsers_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetCountMessages">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountMessages" message="tns:IChatService_GetCountMessages_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountMessagesResponse" message="tns:IChatService_GetCountMessages_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetMyGroups">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetMyGroups" message="tns:IChatService_GetMyGroups_InputMessage" />
     </wsdl:operation>
@@ -124,9 +128,22 @@
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetUsers" message="tns:IChatService_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetUsersResponse" message="tns:IChatService_GetUsers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetMessages">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetMessages" message="tns:IChatService_GetMessages_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountUsers" message="tns:IChatService_GetCountUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountUsersResponse" message="tns:IChatService_GetCountUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountUsersInGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountUsersInGroup" message="tns:IChatService_GetCountUsersInGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountUsersInGroupResponse" message="tns:IChatService_GetCountUsersInGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountMessages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountMessages" message="tns:IChatService_GetCountMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountMessagesResponse" message="tns:IChatService_GetCountMessages_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Error">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/Error" message="tns:IChatService_Error_OutputCallbackMessage" />
@@ -143,14 +160,17 @@
     <wsdl:operation name="ReciveLogin">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLogin" message="tns:IChatService_ReciveLogin_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveGetUsers">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveGetUsers" message="tns:IChatService_ReciveGetUsers_OutputCallbackMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ReciveNewGroup">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewGroup" message="tns:IChatService_ReciveNewGroup_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReciveLeaveGroup">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLeaveGroup" message="tns:IChatService_ReciveLeaveGroup_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReciveChangeOnline">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveChangeOnline" message="tns:IChatService_ReciveChangeOnline_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReciveNewUser">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewUser" message="tns:IChatService_ReciveNewUser_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReciveAddedUsers">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveAddedUsers" message="tns:IChatService_ReciveAddedUsers_OutputCallbackMessage" />
@@ -186,24 +206,6 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="GetCountUsers">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountUsers" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCountMessages">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountMessages" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetMyGroups">
       <soap12:operation soapAction="http://tempuri.org/IChatService/GetMyGroups" style="document" />
       <wsdl:input>
@@ -233,12 +235,42 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMessages">
       <soap12:operation soapAction="http://tempuri.org/IChatService/GetMessages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountUsers">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountUsersInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountUsersInGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountMessages">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Error">
       <soap12:operation soapAction="http://tempuri.org/IChatService/Error" style="document" />
@@ -270,12 +302,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveGetUsers">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveGetUsers" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ReciveNewGroup">
       <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveNewGroup" style="document" />
       <wsdl:output>
@@ -284,6 +310,18 @@
     </wsdl:operation>
     <wsdl:operation name="ReciveLeaveGroup">
       <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveLeaveGroup" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReciveChangeOnline">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveChangeOnline" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReciveNewUser">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveNewUser" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

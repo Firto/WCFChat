@@ -76,3 +76,7 @@ C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\LoginedPage.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Pages\Register.baml
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupCreateItem.g.cs
 C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\GroupCreateItem.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\CCheckUserItem.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\CCheckBox.g.cs
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\CCheckUserItem.baml
+C:\Users\Firto\Desktop\WCFChat\Client\obj\Debug\Controls\CCheckBox.baml

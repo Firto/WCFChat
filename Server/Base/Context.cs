@@ -5,7 +5,9 @@ namespace Server.Base
 {
     public class Context : DbContext
     {
-        public Context() : base("ChatBase") {}
+        public Context() : base("ChatBase") {
+
+        }
 
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupMessage> GroupsMessages { get; set; }

@@ -158,3 +158,4 @@ D:\WCFChat\Server\bin\Debug\tr\Microsoft.Build.resources.dll
 D:\WCFChat\Server\bin\Debug\zh-Hans\Microsoft.Build.resources.dll
 D:\WCFChat\Server\bin\Debug\zh-Hant\Microsoft.Build.resources.dll
 D:\WCFChat\Server\obj\Debug\Server.csproj.CopyComplete
+C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.Migrations.Friend.resources

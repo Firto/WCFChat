@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client
+namespace Client.Pages
 {
     /// <summary>
     /// Interaction logic for LoginedPage.xaml
@@ -23,13 +23,24 @@ namespace Client
     public partial class LoginedPage : Page
     {
         ChatClient clin;
+
+        const int countGetUsers = 50;
+
+        GroupCreateItem createGroupitem = null;
+
         public LoginedPage(ChatClient clin)
         {
             InitializeComponent();
+
             this.clin = clin;
             clin.Events.OnReciveGroups += OnReciveGroups;
             clin.Events.OnReciveLeaveGroup += OnLeaveGroup;
             clin.Events.OnReciveNewGroup += OnNewGroup;
+
+            createGroupitem = new GroupCreateItem(clin, countGetUsers);
+            createGroupitem.OnOk += OnCreateGroup;
+            createGroupitem.OnCancel += OnCancelCreateGroup;
+            
         }
 
         private void OnLeaveGroup(RGroup rgp) {
@@ -64,12 +75,7 @@ namespace Client
             }
         }
 
-        private List<UIElement> UIElementCollectionToList(UIElementCollection collection) {
-            List<UIElement> elmnts = new List<UIElement>();
-            foreach (UIElement item in collection)
-                elmnts.Add(item);
-            return elmnts;
-        }
+        
 
         private void OnReciveGroups(Dictionary<RGroup, RUserInGroup> grps) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
@@ -96,34 +102,19 @@ namespace Client
         }
 
         private void OnCreateGroup() {
-            GroupCreateItem som = (GroupCreateItem)UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem);
-            if (som != null)
-            {
-                try
-                {
-                    clin.Client.CreateGroup(som.groupName.Text);
-                }
-                catch (Exception) {
-
-                }
-            }
+            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) != null)
+                ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
         }
 
         private void OnCancelCreateGroup() {
-            GroupCreateItem som = (GroupCreateItem)UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem);
-            if (som != null) ss.Children.Remove(som);
+            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) != null)
+                ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
         }
 
         private void Create_Group(object sender, RoutedEventArgs e)
         {
-            if (UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) == null)
-            {
-                GroupCreateItem som = new GroupCreateItem();
-                som.OnOk += OnCreateGroup;
-                som.OnCancel += OnCancelCreateGroup;
-                ss.Children.Insert(0, som);
-            }
-            else OnCancelCreateGroup();
+            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) == null) ss.Children.Insert(0, createGroupitem);
+            else ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
         }
 
         public void OnChangeSelectedGroup(object obj, EventArgs e) {

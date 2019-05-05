@@ -23,8 +23,6 @@ namespace Server.Service
             BaseOnlineUser = baseOnlineUser;
             Callback = callback;
             ((ICommunicationObject)callback).Closed += Leave;
-            callback.ReciveLogin(new RUser(baseOnlineUser.BaseUser));
-            Console.WriteLine("SLogin: " + baseOnlineUser.BaseUser.Login);
         }
 
         private void Leave(object obj, EventArgs e) {
@@ -39,64 +37,88 @@ namespace Server.Service
 
         public void LeaveFromGroup(int ID)
         {
-            lock (BaseOnlineUser.MainBase)
+            UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
+            if (usrGrp != null)
             {
-                UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.UserID == BaseOnlineUser.BaseUser.ID);
-                if (usrGrp != null)
+                Group grp = usrGrp.Group;
+                if (usrGrp.RoleID == 1)
                 {
-                    Group grp = usrGrp.Group;
-                    if (usrGrp.RoleID == 1)
+                    Console.WriteLine("Remove group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
+                    foreach (var item in BaseOnlineUser.OnlineUsers)
                     {
-                        Console.WriteLine("Remove group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
-                        foreach (var item in BaseOnlineUser.OnlineUsers)
+                        usrGrp = item.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
+                        if (usrGrp != null)
                         {
-                            usrGrp = item.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
-                            if (usrGrp != null)
-                            {
-                                foreach (var ites in BaseOnlineUser.Sessions)
-                                    ites.Callback.ReciveLeaveGroup(new RGroup(grp));
-                            }
+                            foreach (var ites in BaseOnlineUser.Sessions)
+                                ites.Callback.ReciveLeaveGroup(new RGroup(grp));
                         }
-                        BaseOnlineUser.MainBase.Groups.Remove(grp);
                     }
-                    else
-                    {
-                        Console.WriteLine("Leave group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
-                        BaseOnlineUser.MainBase.UsersInGroups.Remove(usrGrp);
-                        foreach (var ites in BaseOnlineUser.Sessions)
-                            ites.Callback.ReciveLeaveGroup(new RGroup(grp));
-                    }
-                    BaseOnlineUser.MainBase.SaveChanges();
+                    BaseOnlineUser.MainBase.Groups.Remove(grp);
                 }
-                else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
+                else
+                {
+                    Console.WriteLine("Leave group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
+                    BaseOnlineUser.MainBase.UsersInGroups.Remove(usrGrp);
+                    foreach (var ites in BaseOnlineUser.Sessions)
+                        ites.Callback.ReciveLeaveGroup(new RGroup(grp));
+                }
+                BaseOnlineUser.MainBase.SaveChanges();
             }
+            else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
         }
 
-        public void CreateGroup(string Name)
+        public void CreateGroup(string Name, int[] IDs)
         {
-            lock (BaseOnlineUser.MainBase)
-            {
-                if (Name.Length < 1) { Callback.Error("Input group name!"); return; }
-                if (BaseOnlineUser.MainBase.Groups.FirstOrDefault((x) => x.Name == Name && x.Deleted == false) != null) { Callback.Error("Group with this name is already registered!");  return; }
+            if (Name.Length < 1) { Callback.Error("Input group name!"); return; }
+            if (BaseOnlineUser.MainBase.Groups.FirstOrDefault((x) => x.Name == Name && x.Deleted == false) != null) { Callback.Error("Group with this name is already registered!"); return; }
 
-                Group newGrp = BaseOnlineUser.MainBase.Groups.Add(new Group { Name = Name, Deleted = false });
-                UserInGroup usrInGrp = BaseOnlineUser.MainBase.UsersInGroups.Add(new UserInGroup { GroupID = newGrp.ID, UserID = BaseOnlineUser.BaseUser.ID, RoleID = 1, Muted = false });
-                BaseOnlineUser.MainBase.SaveChanges();
+            Group newGrp = BaseOnlineUser.MainBase.Groups.Add(new Group { Name = Name, Deleted = false });
+            UserInGroup usrInGrp = BaseOnlineUser.MainBase.UsersInGroups.Add(new UserInGroup { GroupID = newGrp.ID, UserID = BaseOnlineUser.BaseUser.ID, RoleID = 1, Muted = false });
+            BaseOnlineUser.MainBase.SaveChanges();
 
-                foreach (var item in BaseOnlineUser.Sessions)
-                    item.Callback.ReciveNewGroup(new RGroup(newGrp), new RUserInGroup(usrInGrp));
-            }
+            foreach (var item in BaseOnlineUser.Sessions)
+                item.Callback.ReciveNewGroup(new RGroup(newGrp), new RUserInGroup(usrInGrp));
+
+            if (IDs != null) AddUsersToGroup(newGrp.ID, IDs);
+
+            return;
         }
 
         public void GetMyGroups()
         {
-            lock (BaseOnlineUser.MainBase)
-            {
-                Dictionary<RGroup, RUserInGroup> usersInGroups = new Dictionary<RGroup, RUserInGroup>();
-                foreach (var item in BaseOnlineUser.BaseUser.UsersInGroups)
+            Dictionary<RGroup, RUserInGroup> usersInGroups = new Dictionary<RGroup, RUserInGroup>();
+            if (BaseOnlineUser.BaseUser.UsersInGroups != null) foreach (var item in BaseOnlineUser.BaseUser.UsersInGroups)
                     usersInGroups.Add(new RGroup(item.Group), new RUserInGroup(item));
-                Callback.ReciveMyGroups(usersInGroups);
+            Callback.ReciveMyGroups(usersInGroups);
+        }
+
+        public void AddUsersToGroup(int ID, int[] IDs)
+        {
+            UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
+            if (usrGrp != null) {
+                if (usrGrp.RoleID > 3) { Callback.Error("You are rab, you can't add new users!"); return; }
+                Dictionary<User, UserInGroup> users = new Dictionary<User, UserInGroup>();
+                User tmp;
+                foreach (var item in IDs)
+                {
+                    
+                    tmp = BaseOnlineUser.MainBase.Users.FirstOrDefault((x) => x.ID == item);
+                    if (tmp == null) { Callback.Error("Incorrect user ID!"); return; }
+                    if (null != tmp.UsersInGroups && tmp.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID) != null) { Callback.Error("User already in this group ID!"); return; }
+                    users.Add(tmp, BaseOnlineUser.MainBase.UsersInGroups.Add(new UserInGroup { GroupID = ID, UserID = item, FriendID = BaseOnlineUser.BaseUser.ID, RoleID = 4 }));
+                }
+
+                BaseOnlineUser.MainBase.SaveChanges();
+
+                KeyValuePair<User, UserInGroup> tomp;
+                foreach (var item in BaseOnlineUser.OnlineUsers) {
+                    tomp = users.FirstOrDefault((s) => s.Key.ID == item.BaseUser.ID);
+                    if (tomp.Key != null)
+                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RGroup(usrGrp.Group), new RUserInGroup(tomp.Value));
+                } 
+
             }
+            else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
         }
 
         public static USession GetSession(List<OnlineUser> usrs, IChatServiceCallBack callback)
@@ -119,12 +141,12 @@ namespace Server.Service
         public event SDo OnSessionLeave;
         public event OUDo OnUserLeave;
 
-        public OnlineUser(User baseUser, Context mainBase, List<OnlineUser> onlineUsers, IChatServiceCallBack callback) {
+        public OnlineUser(User baseUser, Context mainBase, List<OnlineUser> onlineUsers) {
             BaseUser = baseUser;
             MainBase = mainBase;
             OnlineUsers = onlineUsers;
-            AddSession(new USession(this, callback));
 
+            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.ReciveChangeOnline(new RUser(baseUser, true))));
             Console.WriteLine("FLogin: " + baseUser.Login);
         }
 
@@ -133,6 +155,8 @@ namespace Server.Service
             {
                 sess.OnLeave += SessionLeave;
                 Sessions.Add(sess);
+                sess.Callback.ReciveLogin(new RUser(BaseUser, true));
+                Console.WriteLine("SLogin: " + BaseUser.Login);
             }
         }
 

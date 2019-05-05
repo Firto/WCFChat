@@ -30,9 +30,9 @@ namespace Client
         public bool Selected {
             get => selected;
             set {
-                if (value) this.Background = new SolidColorBrush(Color.FromArgb(255, 179, 188, 243));
-                else this.Background = new SolidColorBrush(Color.FromArgb(255, 179, 211, 243));
-                OnChangeSelecte?.Invoke(selected, null);
+                if (value) mns.Background = new SolidColorBrush(Color.FromArgb(255, 179, 188, 243));
+                else mns.Background = new SolidColorBrush(Color.FromArgb(255, 179, 211, 243));
+                OnChangeSelecte?.Invoke(value, null);
                 selected = value;
             }
         }

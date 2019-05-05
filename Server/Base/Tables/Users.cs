@@ -42,25 +42,22 @@ namespace Server.Base.Tables
         public int ID { get; set; }
         [DataMember]
         public string Login { get; set; }
-        [DataMember]
         public string PasswordHash { get; set; }
-        [DataMember]
         public string Email { get; set; }
-        [DataMember]
         public DateTime DCreate { get; set; }
         [DataMember]
         public DateTime LastActivity { get; set; }
         [DataMember]
         public bool Blocked { get; set; }
+        [DataMember]
+        public bool Online { get; set; }
 
-        public RUser(User usr) {
+        public RUser(User usr, bool online) {
             ID = usr.ID;
             Login = usr.Login;
-            PasswordHash = usr.PasswordHash;
-            Email = usr.Email;
-            DCreate = usr.DCreate;
             LastActivity = usr.LastActivity;
             Blocked = usr.Blocked;
+            Online = online;
         }
     }
 }

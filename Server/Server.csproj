@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201904232139033_3-Migrtiooon.Designer.cs">
       <DependentUpon>201904232139033_3-Migrtiooon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905021657172_Friend.cs" />
+    <Compile Include="Migrations\201905021657172_Friend.Designer.cs">
+      <DependentUpon>201905021657172_Friend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904232139033_3-Migrtiooon.resx">
       <DependentUpon>201904232139033_3-Migrtiooon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021657172_Friend.resx">
+      <DependentUpon>201905021657172_Friend.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

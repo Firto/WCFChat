@@ -121,14 +121,18 @@ namespace Server.Service
 
             lock (onlineUsers)
             {
-                User usr = mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
+
+                mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
+                mainbBase.SaveChanges();
+                User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login1 && x.PasswordHash == hasedPassword);
                 OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
                 if (ussr == null)
                 {
-                    ussr = new OnlineUser(usr, mainbBase, onlineUsers, Callback);
+                    ussr = new OnlineUser(usr, mainbBase, onlineUsers);
                     ussr.OnUserLeave += LeaveOnlineUser;
                     ussr.OnSessionLeave += LeaveUserSession;
                     onlineUsers.Add(ussr);
+                    ussr.AddSession(new USession(ussr, Callback));
                 }
                 else ussr.AddSession(new USession(ussr, Callback));
             }
@@ -142,46 +146,46 @@ namespace Server.Service
 
             lock (onlineUsers)
             {
-                User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
-
-                if (usr != null)
+                lock (mainbBase)
                 {
-                    OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
-                    if (ussr == null)
+                    User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
+
+                    if (usr != null)
                     {
-                        ussr = new OnlineUser(usr, mainbBase, onlineUsers, Callback);
-                        ussr.OnUserLeave += LeaveOnlineUser;
-                        ussr.OnSessionLeave += LeaveUserSession;
-                        onlineUsers.Add(ussr);
+                        OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
+                        if (ussr == null)
+                        {
+                            ussr = new OnlineUser(usr, mainbBase, onlineUsers);
+                            ussr.OnUserLeave += LeaveOnlineUser;
+                            ussr.OnSessionLeave += LeaveUserSession;
+                            onlineUsers.Add(ussr);
+                            ussr.AddSession(new USession(ussr, Callback));
+                        }
+                        else ussr.AddSession(new USession(ussr, Callback));
+
                     }
-                    else ussr.AddSession(new USession(ussr, Callback));
-
+                    else Callback.Error("Incorrect password or login!");
                 }
-                else Callback.Error("Incorrect password or login!");
             }
         }
 
-        void LeaveOnlineUser(OnlineUser usr) {
-            lock (onlineUsers)
-            {
-                onlineUsers.Remove(usr);
-                Console.WriteLine("FLeave: " + usr.BaseUser.Login);
-            }
+        void LeaveOnlineUser(OnlineUser usr) { // Event
+            onlineUsers.Remove(usr);
+            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.ReciveChangeOnline(new RUser(usr.BaseUser, false))));
+            Console.WriteLine("FLeave: " + usr.BaseUser.Login);
         }
 
-        void LeaveUserSession(USession ussi)
+        void LeaveUserSession(USession ussi) // Event
         {
             Console.WriteLine("SLeave: " + ussi.BaseOnlineUser.BaseUser.Login);
+           
         }
 
         void IChatService.Leave()
         {
-            lock (onlineUsers)
-            {
-                USession usen = USession.GetSession(onlineUsers, Callback);
-                if (usen != null) usen.Leave();
-                else Callback.ReciveLeave();
-            }
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.Leave();
+            else Callback.ReciveLeave();
         }
 
         void IChatService.SendMessage(int groupID, string message)
@@ -191,52 +195,91 @@ namespace Server.Service
 
         int IChatService.GetCountUsers()
         {
-            throw new NotImplementedException();
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) return mainbBase.Users.Count() - 1;
+            else { Callback.ReciveLeave(); return -1; }
+        }
+
+        int IChatService.GetCountUsersInGroup(int groupID)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null)
+            {
+                Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
+                if (grp != null) return grp.UsersInGroups.Count - 1;
+                else
+                {
+                    Callback.Error("Incorrect group!");
+                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    return -1;
+                }
+            }
+            else { Callback.ReciveLeave(); return -1; }
         }
 
         int IChatService.GetCountMessages(int groupID)
         {
-            throw new NotImplementedException();
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null)
+            {
+                Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
+                if (grp != null) return grp.GroupsMessages.Count;
+                else
+                {
+                    Callback.Error("Incorrect group!");
+                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    return -1;
+                }
+            }
+            else { Callback.ReciveLeave(); return -1; }
         }
 
         void IChatService.GetMyGroups()
         {
-            lock (onlineUsers)
-            {
-                USession usen = USession.GetSession(onlineUsers, Callback);
-                if (usen != null) usen.GetMyGroups();
-                else Callback.ReciveLeave();
-            }
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.GetMyGroups();
+            else Callback.ReciveLeave();
         }
 
-        void IChatService.CreateGroup(string Name)
+        void IChatService.CreateGroup(string Name, int[] IDs)
         {
-            lock (onlineUsers)
-            {
-                USession usen = USession.GetSession(onlineUsers, Callback);
-                if (usen != null) usen.CreateGroup(Name);
-                else Callback.ReciveLeave();
-            }
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.CreateGroup(Name, IDs);
+            else Callback.ReciveLeave();
+
         }
 
         void IChatService.LeaveGroup(int ID)
         {
-            lock (onlineUsers)
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.LeaveFromGroup(ID);
+            else Callback.ReciveLeave();
+        }
+
+        void IChatService.AddUsersToGroup(int ID, int[] IDs)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.AddUsersToGroup(ID, IDs);
+            else Callback.ReciveLeave();
+        }
+
+        RUser[] IChatService.GetUsers(int offset, int count)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null)
             {
-                USession usen = USession.GetSession(onlineUsers, Callback);
-                if (usen != null) usen.LeaveFromGroup(ID);
-                else Callback.ReciveLeave();
+
+                IQueryable<User> users = mainbBase.Users.Where((x) => x.ID != usen.BaseOnlineUser.BaseUser.ID);
+                if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
+                if (offset > 0) users = users.Skip(offset);
+                if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
+                if (count > 0) users.Take(count);
+                List<RUser> rusers = new List<RUser>();
+                foreach (var item in users)
+                    rusers.Add(new RUser(item, onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == item.ID) != null));
+                return rusers.ToArray();
             }
-        }
-
-        void IChatService.AddUsersToGroup(int ID, List<int> IDs)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IChatService.GetUsers(TypeGetUsers tps, int count, int offset, int GroupID)
-        {
-            throw new NotImplementedException();
+            else { Callback.ReciveLeave(); return null; }
         }
 
         void IChatService.GetMessages(int groupID, TypeGetMessage tgm, int count, int offset)

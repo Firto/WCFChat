@@ -17,15 +17,16 @@ namespace Server.Base.Tables
         public int GroupID { get; set; }
 
         [Required]
+        public int FriendID { get; set; } = 0;
+
+        [Required]
         [ForeignKey("Role")]
         public int RoleID { get; set; }
 
         public bool Muted { get; set; }
 
         public virtual Group Group { get; set; }
-
         public virtual Role Role { get; set; }
-
         public virtual User User { get; set; }
     }
 
@@ -40,12 +41,15 @@ namespace Server.Base.Tables
         public int RoleID { get; set; }
         [DataMember]
         public bool Muted { get; set; }
+        [DataMember]
+        public int FriendID { get; set; }
 
         public RUserInGroup(UserInGroup usrInGrp) {
             UserID = usrInGrp.UserID;
             GroupID = usrInGrp.GroupID;
             RoleID = usrInGrp.RoleID;
             Muted = usrInGrp.Muted;
+            FriendID = usrInGrp.FriendID;
         }
     }
 }

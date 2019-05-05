@@ -13,18 +13,113 @@ namespace Client.ChatService {
     using System;
     
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TypeGetUsers", Namespace="http://schemas.datacontract.org/2004/07/Server.Service")]
-    public enum TypeGetUsers : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="RUser", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
+    [System.SerializableAttribute()]
+    public partial class RUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        All = 0,
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OnlyInGroup = 1,
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BlockedField;
         
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OnlyOutInGroup = 2,
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastActivityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool OnlineField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Blocked {
+            get {
+                return this.BlockedField;
+            }
+            set {
+                if ((this.BlockedField.Equals(value) != true)) {
+                    this.BlockedField = value;
+                    this.RaisePropertyChanged("Blocked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastActivity {
+            get {
+                return this.LastActivityField;
+            }
+            set {
+                if ((this.LastActivityField.Equals(value) != true)) {
+                    this.LastActivityField = value;
+                    this.RaisePropertyChanged("LastActivity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Online {
+            get {
+                return this.OnlineField;
+            }
+            set {
+                if ((this.OnlineField.Equals(value) != true)) {
+                    this.OnlineField = value;
+                    this.RaisePropertyChanged("Online");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -128,6 +223,9 @@ namespace Client.ChatService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FriendIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int GroupIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -146,6 +244,19 @@ namespace Client.ChatService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FriendID {
+            get {
+                return this.FriendIDField;
+            }
+            set {
+                if ((this.FriendIDField.Equals(value) != true)) {
+                    this.FriendIDField = value;
+                    this.RaisePropertyChanged("FriendID");
+                }
             }
         }
         
@@ -197,147 +308,6 @@ namespace Client.ChatService {
                 if ((this.UserIDField.Equals(value) != true)) {
                     this.UserIDField = value;
                     this.RaisePropertyChanged("UserID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RUser", Namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables")]
-    [System.SerializableAttribute()]
-    public partial class RUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BlockedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime DCreateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime LastActivityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LoginField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordHashField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Blocked {
-            get {
-                return this.BlockedField;
-            }
-            set {
-                if ((this.BlockedField.Equals(value) != true)) {
-                    this.BlockedField = value;
-                    this.RaisePropertyChanged("Blocked");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime DCreate {
-            get {
-                return this.DCreateField;
-            }
-            set {
-                if ((this.DCreateField.Equals(value) != true)) {
-                    this.DCreateField = value;
-                    this.RaisePropertyChanged("DCreate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime LastActivity {
-            get {
-                return this.LastActivityField;
-            }
-            set {
-                if ((this.LastActivityField.Equals(value) != true)) {
-                    this.LastActivityField = value;
-                    this.RaisePropertyChanged("LastActivity");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login {
-            get {
-                return this.LoginField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
-                    this.LoginField = value;
-                    this.RaisePropertyChanged("Login");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PasswordHash {
-            get {
-                return this.PasswordHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
-                    this.PasswordHashField = value;
-                    this.RaisePropertyChanged("PasswordHash");
                 }
             }
         }
@@ -489,18 +459,6 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(int groupID, string message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
-        int GetCountUsers();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
-        System.Threading.Tasks.Task<int> GetCountUsersAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountMessages", ReplyAction="http://tempuri.org/IChatService/GetCountMessagesResponse")]
-        int GetCountMessages(int groupID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountMessages", ReplyAction="http://tempuri.org/IChatService/GetCountMessagesResponse")]
-        System.Threading.Tasks.Task<int> GetCountMessagesAsync(int groupID);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/GetMyGroups")]
         void GetMyGroups();
         
@@ -508,10 +466,10 @@ namespace Client.ChatService {
         System.Threading.Tasks.Task GetMyGroupsAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/CreateGroup")]
-        void CreateGroup(string Name);
+        void CreateGroup(string Name, int[] IDs);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/CreateGroup")]
-        System.Threading.Tasks.Task CreateGroupAsync(string Name);
+        System.Threading.Tasks.Task CreateGroupAsync(string Name, int[] IDs);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/LeaveGroup")]
         void LeaveGroup(int ID);
@@ -525,17 +483,35 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/AddUsersToGroup")]
         System.Threading.Tasks.Task AddUsersToGroupAsync(int ID, int[] IDs);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/GetUsers")]
-        void GetUsers(Client.ChatService.TypeGetUsers tps, int count, int offset, int GroupID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsers", ReplyAction="http://tempuri.org/IChatService/GetUsersResponse")]
+        Client.ChatService.RUser[] GetUsers(int offset, int count);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/GetUsers")]
-        System.Threading.Tasks.Task GetUsersAsync(Client.ChatService.TypeGetUsers tps, int count, int offset, int GroupID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsers", ReplyAction="http://tempuri.org/IChatService/GetUsersResponse")]
+        System.Threading.Tasks.Task<Client.ChatService.RUser[]> GetUsersAsync(int offset, int count);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/GetMessages")]
         void GetMessages(int groupID, Client.ChatService.TypeGetMessage tgm, int count, int offset);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/GetMessages")]
         System.Threading.Tasks.Task GetMessagesAsync(int groupID, Client.ChatService.TypeGetMessage tgm, int count, int offset);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
+        int GetCountUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
+        System.Threading.Tasks.Task<int> GetCountUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsersInGroup", ReplyAction="http://tempuri.org/IChatService/GetCountUsersInGroupResponse")]
+        int GetCountUsersInGroup(int groupID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsersInGroup", ReplyAction="http://tempuri.org/IChatService/GetCountUsersInGroupResponse")]
+        System.Threading.Tasks.Task<int> GetCountUsersInGroupAsync(int groupID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountMessages", ReplyAction="http://tempuri.org/IChatService/GetCountMessagesResponse")]
+        int GetCountMessages(int groupID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountMessages", ReplyAction="http://tempuri.org/IChatService/GetCountMessagesResponse")]
+        System.Threading.Tasks.Task<int> GetCountMessagesAsync(int groupID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -556,14 +532,17 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLogin")]
         void ReciveLogin(Client.ChatService.RUser usr);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveGetUsers")]
-        void ReciveGetUsers(Client.ChatService.RUser[] usr);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewGroup")]
         void ReciveNewGroup(Client.ChatService.RGroup group, Client.ChatService.RUserInGroup usrInGrp);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeaveGroup")]
         void ReciveLeaveGroup(Client.ChatService.RGroup group);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveChangeOnline")]
+        void ReciveChangeOnline(Client.ChatService.RUser usr);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewUser")]
+        void ReciveNewUser(Client.ChatService.RUser usr);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveAddedUsers")]
         void ReciveAddedUsers(Client.ChatService.RGroup group, System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RUserInGroup> users);
@@ -632,22 +611,6 @@ namespace Client.ChatService {
             return base.Channel.SendMessageAsync(groupID, message);
         }
         
-        public int GetCountUsers() {
-            return base.Channel.GetCountUsers();
-        }
-        
-        public System.Threading.Tasks.Task<int> GetCountUsersAsync() {
-            return base.Channel.GetCountUsersAsync();
-        }
-        
-        public int GetCountMessages(int groupID) {
-            return base.Channel.GetCountMessages(groupID);
-        }
-        
-        public System.Threading.Tasks.Task<int> GetCountMessagesAsync(int groupID) {
-            return base.Channel.GetCountMessagesAsync(groupID);
-        }
-        
         public void GetMyGroups() {
             base.Channel.GetMyGroups();
         }
@@ -656,12 +619,12 @@ namespace Client.ChatService {
             return base.Channel.GetMyGroupsAsync();
         }
         
-        public void CreateGroup(string Name) {
-            base.Channel.CreateGroup(Name);
+        public void CreateGroup(string Name, int[] IDs) {
+            base.Channel.CreateGroup(Name, IDs);
         }
         
-        public System.Threading.Tasks.Task CreateGroupAsync(string Name) {
-            return base.Channel.CreateGroupAsync(Name);
+        public System.Threading.Tasks.Task CreateGroupAsync(string Name, int[] IDs) {
+            return base.Channel.CreateGroupAsync(Name, IDs);
         }
         
         public void LeaveGroup(int ID) {
@@ -680,12 +643,12 @@ namespace Client.ChatService {
             return base.Channel.AddUsersToGroupAsync(ID, IDs);
         }
         
-        public void GetUsers(Client.ChatService.TypeGetUsers tps, int count, int offset, int GroupID) {
-            base.Channel.GetUsers(tps, count, offset, GroupID);
+        public Client.ChatService.RUser[] GetUsers(int offset, int count) {
+            return base.Channel.GetUsers(offset, count);
         }
         
-        public System.Threading.Tasks.Task GetUsersAsync(Client.ChatService.TypeGetUsers tps, int count, int offset, int GroupID) {
-            return base.Channel.GetUsersAsync(tps, count, offset, GroupID);
+        public System.Threading.Tasks.Task<Client.ChatService.RUser[]> GetUsersAsync(int offset, int count) {
+            return base.Channel.GetUsersAsync(offset, count);
         }
         
         public void GetMessages(int groupID, Client.ChatService.TypeGetMessage tgm, int count, int offset) {
@@ -694,6 +657,30 @@ namespace Client.ChatService {
         
         public System.Threading.Tasks.Task GetMessagesAsync(int groupID, Client.ChatService.TypeGetMessage tgm, int count, int offset) {
             return base.Channel.GetMessagesAsync(groupID, tgm, count, offset);
+        }
+        
+        public int GetCountUsers() {
+            return base.Channel.GetCountUsers();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCountUsersAsync() {
+            return base.Channel.GetCountUsersAsync();
+        }
+        
+        public int GetCountUsersInGroup(int groupID) {
+            return base.Channel.GetCountUsersInGroup(groupID);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCountUsersInGroupAsync(int groupID) {
+            return base.Channel.GetCountUsersInGroupAsync(groupID);
+        }
+        
+        public int GetCountMessages(int groupID) {
+            return base.Channel.GetCountMessages(groupID);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCountMessagesAsync(int groupID) {
+            return base.Channel.GetCountMessagesAsync(groupID);
         }
     }
 }

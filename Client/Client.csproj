@@ -57,11 +57,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Clases\CCommon.cs" />
     <Compile Include="Clases\CMyCallback.cs" />
     <Compile Include="Connected Services\ChatService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CCheckUserItem.xaml.cs">
+      <DependentUpon>CCheckUserItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\GroupCreateItem.xaml.cs">
       <DependentUpon>GroupCreateItem.xaml</DependentUpon>
@@ -69,17 +73,35 @@
     <Compile Include="Controls\GroupItem.xaml.cs">
       <DependentUpon>GroupItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CCheckBox.xaml.cs">
+      <DependentUpon>CCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GroupPG.xaml.cs">
+      <DependentUpon>GroupPG.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginedPage.xaml.cs">
       <DependentUpon>LoginedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CCheckUserItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\GroupCreateItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GroupItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CCheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GroupPG.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +157,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\ChatService\ChatService.wsdl" />
+    <None Include="Connected Services\ChatService\Client.ChatService.RUser.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ChatService\item.xsd">
       <SubType>Designer</SubType>
     </None>

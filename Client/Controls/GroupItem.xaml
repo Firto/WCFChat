@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Client"
              mc:Ignorable="d" d:DesignWidth="223.064"
              MouseUp="OnClick">
-    <Border Margin="5" CornerRadius="10" Height="50" Background="#FFB3D3F3" >
-        <Border.Effect>
+    <Border Margin="5" CornerRadius="10" Height="50" Background="#FFB3D3F3" Name="mns" >
+        <Border.Effect >
             <DropShadowEffect BlurRadius="20" Direction="-45" RenderingBias="Quality" ShadowDepth="3" Opacity="0.6"/>
         </Border.Effect>
         <Grid>
@@ -20,7 +20,7 @@
                     <Label HorizontalAlignment="Left" Name="ItemWithName" Margin="5, 0, 0, 0" FontWeight="Bold"  Padding="0, -5, 0, -5" Foreground="#FF27245F" ></Label>
                     <Border HorizontalAlignment="Right" Margin="1, 1, 10, 1" Background="#FFDE6E6E" Padding="5, 0, 4, 0" CornerRadius="10" Style="{DynamicResource exitStyle}" >
                         <Button Click="ExitFromGroup" >
-                            <Label FontWeight="Bold" Padding="0, -5, 0, -5" >X</Label>
+                            <Label FontWeight="Bold" Padding="0, -5, 0, -5" Foreground="White" >X</Label>
                         </Button>
                     </Border>
                 </Grid>

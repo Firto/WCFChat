@@ -24,11 +24,13 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveLogin(RUser usr); // Підтверження про вхід
         [OperationContract(IsOneWay = true)]
-        void ReciveGetUsers(List<RUser> usr); // Відправляємо юзерів
-        [OperationContract(IsOneWay = true)]
         void ReciveNewGroup(RGroup group, RUserInGroup usrInGrp); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
         void ReciveLeaveGroup(RGroup group); // Відправляємо що група видалена
+        [OperationContract(IsOneWay = true)]
+        void ReciveChangeOnline(RUser usr);
+        [OperationContract(IsOneWay = true)]
+        void ReciveNewUser(RUser usr);
         [OperationContract(IsOneWay = true)]
         void ReciveAddedUsers(RGroup group, Dictionary<RUser, RUserInGroup> users); // Відправляємо що додано нових юзерів
         [OperationContract(IsOneWay = true)]

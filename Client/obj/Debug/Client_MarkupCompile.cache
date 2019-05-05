@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Firto\Desktop\WCFChat\Client\App.xaml
-7958592539
+9-2024699774
 
-13-1971898499
+16-1713783048
 15833945659
-Controls\GroupCreateItem.xaml;Controls\GroupItem.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
+Controls\CCheckUserItem.xaml;Controls\GroupCreateItem.xaml;Controls\GroupItem.xaml;Controls\CCheckBox.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
 
 False
 

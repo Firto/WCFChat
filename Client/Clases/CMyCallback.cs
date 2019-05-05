@@ -6,7 +6,7 @@ using Client.ChatService;
 
 namespace Client
 {
-    public delegate void LogIn(RUser usr);
+    public delegate void UsrEv(RUser usr);
     public delegate void GroupEV(RGroup grp);
     public delegate void GroupEVT(RGroup group, RUserInGroup usrInGrp);
     public delegate void Do();
@@ -14,7 +14,9 @@ namespace Client
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class MyCallback : ChatService.IChatServiceCallback
     {
-        public event LogIn OnLogin;
+        public event UsrEv OnLogin;
+        public event UsrEv OnChangeOnline;
+        public event UsrEv OnNewUser;
         public event Do OnLeave;
         public event MyGroups OnReciveGroups;
         public event GroupEV OnReciveLeaveGroup;
@@ -68,6 +70,16 @@ namespace Client
         public void ReciveLeaveGroup(RGroup group)
         {
             OnReciveLeaveGroup?.Invoke(group);
+        }
+
+        public void ReciveChangeOnline(RUser usr)
+        {
+            OnChangeOnline?.Invoke(usr);
+        }
+
+        public void ReciveNewUser(RUser usr)
+        {
+            OnNewUser?.Invoke(usr);
         }
     }
 }

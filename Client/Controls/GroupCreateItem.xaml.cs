@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ChatService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,68 @@ namespace Client.Controls
     /// </summary>
     public partial class GroupCreateItem : UserControl
     {
-        public GroupCreateItem()
-        {
-            InitializeComponent();
-        }
 
         public event Do OnOk;
         public event Do OnCancel;
+
+        ChatClient clin = null;
+        int countGetUsers;
+
+        public GroupCreateItem(ChatClient clin, int countGetUsers) {
+            InitializeComponent();
+            this.clin = clin;
+            this.countGetUsers = countGetUsers;
+            clin.Events.OnChangeOnline += OnChangeOnline;
+            clin.Events.OnNewUser += OnNewUser;
+            new Task(() =>
+               {
+                   int countUsers = clin.Client.GetCountUsers();
+                   int offcet = 0;
+                   List<RUser> userss = new List<RUser>();
+
+                   while (countUsers > offcet)
+                   {
+                       if (countUsers <= countGetUsers)
+                       {
+                           userss.AddRange(clin.Client.GetUsers(offcet, -1));
+                           countUsers = -1;
+                       }
+                       else
+                       {
+                           userss.AddRange(clin.Client.GetUsers(offcet, countGetUsers));
+                           offcet += countGetUsers;
+                           countUsers -= countGetUsers;
+                       }
+                   }
+                   Application.Current.Dispatcher.Invoke((Action)delegate
+                   {
+                       foreach (var item in userss)
+                           users.Children.Add(new CCheckUserItem(item));
+                   });
+               }).Start();
+        }
+
+        public void OnChangeOnline(RUser user)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                int i = 0; for (; i < users.Children.Count; i++)
+                    if (((CCheckUserItem)users.Children[i]).User.ID == user.ID)
+                    {
+                        ((CCheckUserItem)users.Children[i]).Online = user.Online;
+                        break;
+                    }
+
+                if (i == users.Children.Count) OnNewUser(user);
+            });
+        }
+
+        public void OnNewUser(RUser user) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                if (Common.UIElementCollectionToList(users.Children).FirstOrDefault((x) => ((CCheckUserItem)x).User.ID == user.ID) == null)
+                    users.Children.Add(new CCheckUserItem(user));
+            });
+        }
 
         private void CancelCreate(object sender, RoutedEventArgs e)
         {
@@ -35,6 +91,9 @@ namespace Client.Controls
 
         private void OkCreate(object sender, RoutedEventArgs e)
         {
+            List<int> IDs = new List<int>();
+            Common.UIElementCollectionToList(users.Children).Where((x) => ((CCheckUserItem)x).Selected).ToList().ForEach((x) => IDs.Add(((CCheckUserItem)x).User.ID));
+            clin.Client.CreateGroup(groupName.Text, IDs.ToArray());
             OnOk?.Invoke();
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using Server.Base.Tables;
 
 namespace Server.Service
 {
@@ -33,27 +34,29 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void SendMessage(int groupID, string message); // відправляємо повідомлення
 
-        // Кількість
-        [OperationContract]
-        int GetCountUsers(); // беремо кількість юзерів
-        [OperationContract]
-        int GetCountMessages(int groupID); // беремо кількість повідомлень
-
         // Групи
         [OperationContract(IsOneWay = true)]
         void GetMyGroups(); // беремо групи
         [OperationContract(IsOneWay = true)]
-        void CreateGroup(string Name); // Створюємо группу
+        void CreateGroup(string Name, int[] IDs); // Створюємо группу
         [OperationContract(IsOneWay = true)]
         void LeaveGroup(int ID); // Видаляємо группу
         [OperationContract(IsOneWay = true)]
-        void AddUsersToGroup(int ID, List<int> IDs); // Добавляємо користувачів в групу
+        void AddUsersToGroup(int ID, int[] IDs); // Добавляємо користувачів в групу
 
         // Навантажені
-        [OperationContract(IsOneWay = true)]
-        void GetUsers(TypeGetUsers tps, int count, int offset, int GroupID = 0); // беремо юзерів
+        [OperationContract]
+        RUser[] GetUsers(int offset, int count); // беремо юзерів
         [OperationContract(IsOneWay = true)]
         void GetMessages(int groupID, TypeGetMessage tgm, int count, int offset); // беремо повідомлення
+
+        // Кількість
+        [OperationContract]
+        int GetCountUsers(); // беремо кількість юзерів
+        [OperationContract]
+        int GetCountUsersInGroup(int groupID);
+        [OperationContract]
+        int GetCountMessages(int groupID); // беремо кількість повідомлень
     }
    
 
