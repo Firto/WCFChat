@@ -201,3 +201,46 @@ D:\New folder (3)\WCFChat\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 D:\New folder (3)\WCFChat\Server\obj\Debug\Server.csproj.CopyComplete
 D:\New folder (3)\WCFChat\Server\obj\Debug\Server.exe
 D:\New folder (3)\WCFChat\Server\obj\Debug\Server.pdb
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Base\BaseQuery.sql
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Server.exe.config
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Server.exe
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Server.pdb
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Dapper.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\EntityFramework.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Microsoft.Build.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Microsoft.Build.Framework.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\System.Collections.Immutable.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\System.IO.Compression.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\System.Threading.Tasks.Dataflow.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\Dapper.xml
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\EntityFramework.xml
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\cs\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\de\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\en\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\es\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\fr\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\it\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\ja\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\ko\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\pl\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\pt-BR\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\ru\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\tr\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\zh-Hans\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\bin\Debug\zh-Hant\Microsoft.Build.resources.dll
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.Migrations.FirstMigrotion.resources
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.Migrations._2Migrotion.resources
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.Migrations._3Migrtiooon.resources
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.Migrations.Friend.resources
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.csproj.GenerateResource.cache
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.csproj.CopyComplete
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.exe
+C:\Users\Firto\Desctop\WCFChat_2\Server\obj\Debug\Server.pdb

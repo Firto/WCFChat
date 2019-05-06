@@ -144,7 +144,7 @@
   <xs:element name="ReciveMyGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="group" nillable="true" type="q5:ArrayOfKeyValueOfRGroupRUserInGroupE2YmOpiZ" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="groups" nillable="true" type="q5:ArrayOfRUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,46 +163,43 @@
   <xs:element name="ReciveNewGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q7:RGroup" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q8:RUserInGroup" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q7:RUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveLeaveGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q9:RGroup" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q8:RGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveChangeOnline">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q10:RUser" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q9:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveNewUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q11:RUser" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q10:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveAddedUsers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q12:RGroup" />
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="users" nillable="true" type="q13:ArrayOfKeyValueOfRUserRUserInGroupE2YmOpiZ" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:RGroup" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="users" nillable="true" type="q12:ArrayOfRUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReciveNewMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q14:RGroup" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q15:RUser" />
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q16:RGroupMessage" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q13:RGroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

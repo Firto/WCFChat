@@ -77,7 +77,7 @@ namespace Server.Service
             BaseOnlineUser.MainBase.SaveChanges();
 
             foreach (var item in BaseOnlineUser.Sessions)
-                item.Callback.ReciveNewGroup(new RGroup(newGrp), new RUserInGroup(usrInGrp));
+                item.Callback.ReciveNewGroup(new RUserInGroup(usrInGrp));
 
             if (IDs != null) AddUsersToGroup(newGrp.ID, IDs);
 
@@ -86,10 +86,10 @@ namespace Server.Service
 
         public void GetMyGroups()
         {
-            Dictionary<RGroup, RUserInGroup> usersInGroups = new Dictionary<RGroup, RUserInGroup>();
+            List<RUserInGroup> usersInGroups = new List<RUserInGroup>();
             if (BaseOnlineUser.BaseUser.UsersInGroups != null) foreach (var item in BaseOnlineUser.BaseUser.UsersInGroups)
-                    usersInGroups.Add(new RGroup(item.Group), new RUserInGroup(item));
-            Callback.ReciveMyGroups(usersInGroups);
+                    usersInGroups.Add(new RUserInGroup(item));
+            Callback.ReciveMyGroups(usersInGroups.ToArray());
         }
 
         public void AddUsersToGroup(int ID, int[] IDs)
@@ -97,7 +97,7 @@ namespace Server.Service
             UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
             if (usrGrp != null) {
                 if (usrGrp.RoleID > 3) { Callback.Error("You are rab, you can't add new users!"); return; }
-                Dictionary<User, UserInGroup> users = new Dictionary<User, UserInGroup>();
+                List<UserInGroup> users = new List<UserInGroup>();
                 User tmp;
                 foreach (var item in IDs)
                 {
@@ -105,16 +105,16 @@ namespace Server.Service
                     tmp = BaseOnlineUser.MainBase.Users.FirstOrDefault((x) => x.ID == item);
                     if (tmp == null) { Callback.Error("Incorrect user ID!"); return; }
                     if (null != tmp.UsersInGroups && tmp.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID) != null) { Callback.Error("User already in this group ID!"); return; }
-                    users.Add(tmp, BaseOnlineUser.MainBase.UsersInGroups.Add(new UserInGroup { GroupID = ID, UserID = item, FriendID = BaseOnlineUser.BaseUser.ID, RoleID = 4 }));
+                    users.Add(BaseOnlineUser.MainBase.UsersInGroups.Add(new UserInGroup { GroupID = ID, UserID = item, FriendID = BaseOnlineUser.BaseUser.ID, RoleID = 4 }));
                 }
 
                 BaseOnlineUser.MainBase.SaveChanges();
 
-                KeyValuePair<User, UserInGroup> tomp;
+                UserInGroup tomp;
                 foreach (var item in BaseOnlineUser.OnlineUsers) {
-                    tomp = users.FirstOrDefault((s) => s.Key.ID == item.BaseUser.ID);
-                    if (tomp.Key != null)
-                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RGroup(usrGrp.Group), new RUserInGroup(tomp.Value));
+                    tomp = users.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
+                    if (tomp != null)
+                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RUserInGroup(tomp));
                 } 
 
             }

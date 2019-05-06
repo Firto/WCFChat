@@ -23,9 +23,9 @@
             <ColumnDefinition Width="0" Name="clmn"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1" Grid.Row="1">
-            <controls:GroupWrite/>
-        </Grid>
+        <Border Grid.Column="1" Grid.Row="1" Name="writeMsg">
+            
+        </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF6EA5DE" Grid.Row="1">
             <ScrollViewer.Effect>

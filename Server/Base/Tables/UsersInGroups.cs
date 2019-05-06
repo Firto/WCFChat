@@ -34,20 +34,20 @@ namespace Server.Base.Tables
     public class RUserInGroup
     {
         [DataMember]
-        public int UserID { get; set; }
+        public RUser User { get; set; }
         [DataMember]
-        public int GroupID { get; set; }
+        public RGroup Group { get; set; }
         [DataMember]
-        public int RoleID { get; set; }
+        public RRole Role { get; set; }
         [DataMember]
         public bool Muted { get; set; }
         [DataMember]
         public int FriendID { get; set; }
 
         public RUserInGroup(UserInGroup usrInGrp) {
-            UserID = usrInGrp.UserID;
-            GroupID = usrInGrp.GroupID;
-            RoleID = usrInGrp.RoleID;
+            User = new RUser(usrInGrp.User, false);
+            Group = new RGroup(usrInGrp.Group);
+            Role = new RRole(usrInGrp.Role);
             Muted = usrInGrp.Muted;
             FriendID = usrInGrp.FriendID;
         }

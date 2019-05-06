@@ -33,9 +33,9 @@ namespace Server.Base.Tables
         [DataMember]
         public int ID { get; set; }
         [DataMember]
-        public int UserID { get; set; }
+        public RUser User { get; set; }
         [DataMember]
-        public int GroupID { get; set; }
+        public RGroup Group { get; set; }
         [DataMember]
         public string MessageSource { get; set; }
         [DataMember]
@@ -43,8 +43,8 @@ namespace Server.Base.Tables
 
         public RGroupMessage(GroupMessage grpMsg) {
             ID = grpMsg.ID;
-            UserID = grpMsg.UserID;
-            GroupID = grpMsg.GroupID;
+            User = new RUser(grpMsg.User, false);
+            Group = new RGroup(grpMsg.Group);
             MessageSource = grpMsg.MessageSource;
             Deleted = grpMsg.Deleted;
         }

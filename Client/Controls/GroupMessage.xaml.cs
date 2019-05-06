@@ -20,12 +20,16 @@ namespace Client.Controls
     /// </summary>
     public partial class GroupMessage : UserControl
     {
-        public GroupMessage(ChatService.RUser user ,ChatService.RGroupMessage message)
+        ChatService.RGroupMessage baseMsg;
+
+        public GroupMessage(ChatService.RGroupMessage msg)
         {
             InitializeComponent();
 
-            UserName.Content = user.Login;
-            Teext.Content = message.MessageSource;
+            UserName.Content = msg.User.Login;
+            Teext.Content = msg.MessageSource;
+
+            baseMsg = msg;
         }
     }
 }

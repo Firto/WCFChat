@@ -18,13 +18,13 @@ namespace Server.Service
         void Message(string message); // Повідомлення
 
         [OperationContract(IsOneWay = true)]
-        void ReciveMyGroups(Dictionary<RGroup, RUserInGroup> group); // Відправляєм всі групи
+        void ReciveMyGroups(RUserInGroup[] groups); // Відправляєм всі групи
         [OperationContract(IsOneWay = true)]
         void ReciveLeave(); // Підтверджуєм що ми вийшли
         [OperationContract(IsOneWay = true)]
         void ReciveLogin(RUser usr); // Підтверження про вхід
         [OperationContract(IsOneWay = true)]
-        void ReciveNewGroup(RGroup group, RUserInGroup usrInGrp); // Відправляємо нову группу
+        void ReciveNewGroup(RUserInGroup usrInGrp); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
         void ReciveLeaveGroup(RGroup group); // Відправляємо що група видалена
         [OperationContract(IsOneWay = true)]
@@ -32,9 +32,9 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveNewUser(RUser usr);
         [OperationContract(IsOneWay = true)]
-        void ReciveAddedUsers(RGroup group, Dictionary<RUser, RUserInGroup> users); // Відправляємо що додано нових юзерів
+        void ReciveAddedUsers(RGroup group, RUserInGroup[] users); // Відправляємо що додано нових юзерів
         [OperationContract(IsOneWay = true)]
-        void ReciveNewMessage(RGroup group, RUser user, RGroupMessage msg); // Відправляємо що додано нове повідомлення
+        void ReciveNewMessage(RGroupMessage msg); // Відправляємо що додано нове повідомлення
 
     }
 }

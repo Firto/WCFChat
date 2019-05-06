@@ -48,7 +48,7 @@ namespace Client.Pages
                 
                 foreach (UIElement item in ss.Children)
                 {
-                    if (item is GroupItem && ((GroupItem)item).BaseGroup.ID == rgp.ID) {
+                    if (item is GroupItem && ((GroupItem)item).BaseUserInGroup.Group.ID == rgp.ID) {
   
                         ss.Children.Remove(item);
                         break;
@@ -57,9 +57,9 @@ namespace Client.Pages
             });
         }
 
-        public void OnNewGroup(RGroup rgp, RUserInGroup usrInGrp) {
+        public void OnNewGroup(RUserInGroup usrInGrp) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                ss.Children.Add(new GroupItem(rgp, usrInGrp, clin, OnChangeSelectedGroup));
+                ss.Children.Add(new GroupItem(usrInGrp, clin, OnChangeSelectedGroup));
                 OnCancelCreateGroup();
             });
         }
@@ -77,11 +77,11 @@ namespace Client.Pages
 
         
 
-        private void OnReciveGroups(Dictionary<RGroup, RUserInGroup> grps) {
+        private void OnReciveGroups(RUserInGroup[] grps) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 ss.Children.Clear();
                 foreach (var item in grps)
-                    ss.Children.Add(new GroupItem(item.Key, item.Value, clin, OnChangeSelectedGroup));
+                    ss.Children.Add(new GroupItem(item, clin, OnChangeSelectedGroup));
             });
         }
 
@@ -118,7 +118,8 @@ namespace Client.Pages
         }
 
         public void OnChangeSelectedGroup(object obj, EventArgs e) {
-            if (((bool)obj)) {
+            if (((GroupItem)obj).Selected) {
+                writeMsg.Child = ((GroupItem)obj).WriteMessages;
                 foreach (var item in ss.Children)
                 {
                     if (item is GroupItem) {

@@ -29,11 +29,11 @@ namespace Client.Controls
 
         private void SendMsg(object sender, RoutedEventArgs e)
         {
-            itmn.client.Client.SendMessage(itmn.baseGroup.ID, msg.Text);
+            itmn.client.Client.SendMessage(itmn.BaseUserInGroup.Group.ID, msg.Text);
         }
 
         public void ReciveMessage(ChatService.RGroupMessage msg) {
-            msges.Children.Add(new GroupMessage());
+            msges.Children.Add(new GroupMessage(msg));
         }
     }
 }
