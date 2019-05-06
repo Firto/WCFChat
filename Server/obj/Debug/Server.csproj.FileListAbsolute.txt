@@ -159,3 +159,45 @@ D:\WCFChat\Server\bin\Debug\zh-Hans\Microsoft.Build.resources.dll
 D:\WCFChat\Server\bin\Debug\zh-Hant\Microsoft.Build.resources.dll
 D:\WCFChat\Server\obj\Debug\Server.csproj.CopyComplete
 C:\Users\Firto\Desktop\WCFChat\Server\obj\Debug\Server.Migrations.Friend.resources
+D:\New folder (3)\WCFChat\Server\bin\Debug\Base\BaseQuery.sql
+D:\New folder (3)\WCFChat\Server\bin\Debug\Server.exe.config
+D:\New folder (3)\WCFChat\Server\bin\Debug\Server.exe
+D:\New folder (3)\WCFChat\Server\bin\Debug\Server.pdb
+D:\New folder (3)\WCFChat\Server\bin\Debug\Dapper.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\EntityFramework.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\EntityFramework.SqlServer.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Microsoft.Build.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Microsoft.Build.Framework.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\System.Collections.Immutable.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\System.IO.Compression.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\System.Threading.Tasks.Dataflow.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\Dapper.xml
+D:\New folder (3)\WCFChat\Server\bin\Debug\EntityFramework.xml
+D:\New folder (3)\WCFChat\Server\bin\Debug\EntityFramework.SqlServer.xml
+D:\New folder (3)\WCFChat\Server\bin\Debug\cs\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\de\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\en\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\es\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\fr\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\it\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\ja\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\ko\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\pl\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\pt-BR\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\ru\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\tr\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\zh-Hans\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\bin\Debug\zh-Hant\Microsoft.Build.resources.dll
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.Migrations.FirstMigrotion.resources
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.Migrations._2Migrotion.resources
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.Migrations._3Migrtiooon.resources
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.Migrations.Friend.resources
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.csproj.GenerateResource.cache
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.csproj.CopyComplete
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.exe
+D:\New folder (3)\WCFChat\Server\obj\Debug\Server.pdb

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Pages"
+      xmlns:controls="clr-namespace:Client.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginedPage"
@@ -21,6 +22,11 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0" Name="clmn"/>
         </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <controls:GroupWrite/>
+        </Grid>
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF6EA5DE" Grid.Row="1">
             <ScrollViewer.Effect>
                 <DropShadowEffect BlurRadius="30" Direction="0" RenderingBias="Quality" ShadowDepth="15" Opacity="0.6"/>
@@ -36,7 +42,7 @@
         <Grid Grid.ColumnSpan="3">
             <StackPanel Background="#FF234F7C" Orientation="Horizontal" >
                 <Border Margin="10, 0, 0, 0" VerticalAlignment="Center" Background="#FF6EA5DE"  CornerRadius="10" Style="{StaticResource groupStyle}">
-                    <Button Click="Create_Group" >
+                    <Button Click="Create_Group" Style="{StaticResource minBtn}" >
                         <Label Foreground="White" FontSize="14" Padding="7, 1, 7, 1" VerticalContentAlignment="Center" >Create Group</Label>
                     </Button>
                 </Border>
@@ -44,14 +50,13 @@
             </StackPanel>
 
             <Border Margin="0, 0, 10, 0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="#FFDE6E6E" CornerRadius="10" Style="{StaticResource exitStyle}">
-                <Button Click="Button_Click" >
+                <Button Click="Button_Click" Style="{StaticResource minBtn}" >
                     <Label Foreground="White" FontSize="14" Padding="7, 1, 7, 1" VerticalContentAlignment="Center">Exit</Label>
                 </Button>
             </Border>
         </Grid>
 
-        <Frame Grid.Column="1" Grid.Row="1" >
-        </Frame>
+        
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF6EA5DE" Grid.Row="1" Grid.Column="2">
             <ScrollViewer.Effect>

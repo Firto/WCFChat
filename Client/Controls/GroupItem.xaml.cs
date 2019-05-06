@@ -21,10 +21,10 @@ namespace Client
     
     public partial class GroupItem : UserControl
     {
-        ChatClient client;
-        ChatService.RGroup baseGroup;
-        ChatService.RUserInGroup baseUserInGroup;
-
+        public ChatClient client;
+        public ChatService.RGroup baseGroup;
+        public ChatService.RUserInGroup baseUserInGroup;
+        
         bool selected = false;
 
         public bool Selected {

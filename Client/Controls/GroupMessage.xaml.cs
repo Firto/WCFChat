@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.Pages
+namespace Client.Controls
 {
     /// <summary>
-    /// Interaction logic for GroupPG.xaml
+    /// Interaction logic for GroupMessage.xaml
     /// </summary>
-    public partial class GroupPG : Page
+    public partial class GroupMessage : UserControl
     {
-        public GroupPG()
+        public GroupMessage(ChatService.RUser user ,ChatService.RGroupMessage message)
         {
             InitializeComponent();
+
+            UserName.Content = user.Login;
+            Teext.Content = message.MessageSource;
         }
     }
 }

@@ -12,7 +12,7 @@ using Server.Base.Tables;
 
 namespace Server.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false, ConcurrencyMode = ConcurrencyMode.Multiple)] // Створюється один клас ChatService для усіх юзерів
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)] // Створюється один клас ChatService для усіх юзерів
     public class ChatService : IChatService
     {
         IChatServiceCallBack Callback {
@@ -119,12 +119,31 @@ namespace Server.Service
 
             string hasedPassword = Common.GetMD5(Password);
 
-            lock (onlineUsers)
+            mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
+            mainbBase.SaveChanges();
+            User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login1 && x.PasswordHash == hasedPassword);
+            OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
+            if (ussr == null)
             {
+                ussr = new OnlineUser(usr, mainbBase, onlineUsers);
+                ussr.OnUserLeave += LeaveOnlineUser;
+                ussr.OnSessionLeave += LeaveUserSession;
+                onlineUsers.Add(ussr);
+                ussr.AddSession(new USession(ussr, Callback));
+            }
+            else ussr.AddSession(new USession(ussr, Callback));
+        }
 
-                mainbBase.Users.Add(new Base.Tables.User { Login = Login1, PasswordHash = Common.GetMD5(Password), Email = Email, DCreate = DateTime.Now, LastActivity = DateTime.Now, Blocked = false });
-                mainbBase.SaveChanges();
-                User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login1 && x.PasswordHash == hasedPassword);
+        void IChatService.Login(string Login, string Password)
+        {
+            if (Login.Length < 1) { Callback.Error("Input login!"); return; }
+            if (Password.Length < 1) { Callback.Error("Input password!"); return; }
+            string hasedPassword = Common.GetMD5(Password);
+
+            User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
+
+            if (usr != null)
+            {
                 OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
                 if (ussr == null)
                 {
@@ -135,38 +154,9 @@ namespace Server.Service
                     ussr.AddSession(new USession(ussr, Callback));
                 }
                 else ussr.AddSession(new USession(ussr, Callback));
+
             }
-        }
-
-        void IChatService.Login(string Login, string Password)
-        {
-            if (Login.Length < 1) { Callback.Error("Input login!"); return; }
-            if (Password.Length < 1) { Callback.Error("Input password!"); return; }
-            string hasedPassword = Common.GetMD5(Password);
-
-            lock (onlineUsers)
-            {
-                lock (mainbBase)
-                {
-                    User usr = mainbBase.Users.FirstOrDefault((x) => x.Login == Login && x.PasswordHash == hasedPassword);
-
-                    if (usr != null)
-                    {
-                        OnlineUser ussr = onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usr.ID);
-                        if (ussr == null)
-                        {
-                            ussr = new OnlineUser(usr, mainbBase, onlineUsers);
-                            ussr.OnUserLeave += LeaveOnlineUser;
-                            ussr.OnSessionLeave += LeaveUserSession;
-                            onlineUsers.Add(ussr);
-                            ussr.AddSession(new USession(ussr, Callback));
-                        }
-                        else ussr.AddSession(new USession(ussr, Callback));
-
-                    }
-                    else Callback.Error("Incorrect password or login!");
-                }
-            }
+            else Callback.Error("Incorrect password or login!");
         }
 
         void LeaveOnlineUser(OnlineUser usr) { // Event

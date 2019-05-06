@@ -49,7 +49,7 @@ namespace Server.Service
                         usrGrp = item.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == ID);
                         if (usrGrp != null)
                         {
-                            foreach (var ites in BaseOnlineUser.Sessions)
+                            foreach (var ites in item.Sessions)
                                 ites.Callback.ReciveLeaveGroup(new RGroup(grp));
                         }
                     }

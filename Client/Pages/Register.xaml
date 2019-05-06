@@ -91,9 +91,9 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button  Grid.Column="1" Click="Button_Click" FontWeight="Bold" FontSize="25" Background="#FFFF2E00" Foreground="White" >
+                    <Button Style="{StaticResource minBtn}"  Grid.Column="1" Click="Button_Click" FontWeight="Bold" FontSize="25" Background="#FFFF2E00" Foreground="White" >
                         GO</Button>
-                    <Button Width="70" HorizontalAlignment="Left" Margin="20, 0, 0, 0" Click="Button_Back" FontWeight="Bold" FontSize="20" Background="#FF0074FF" Foreground="White">
+                    <Button Style="{StaticResource minBtn}" Width="70" HorizontalAlignment="Left" Margin="20, 0, 0, 0" Click="Button_Back" FontWeight="Bold" FontSize="20" Background="#FF0074FF" Foreground="White">
                         Back</Button>
                 </Grid>
                 

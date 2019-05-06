@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.Controls"
              mc:Ignorable="d" d:DesignWidth="265" >
+    <UserControl.Resources>
+        <ResourceDictionary Source="../MainRes.xaml" />
+    </UserControl.Resources>
     <Border Margin="5" CornerRadius="10" Background="#FFB3D3F3" Height="Auto" VerticalAlignment="Stretch" >
         <Border.Effect>
             <DropShadowEffect BlurRadius="20" Direction="-45" RenderingBias="Quality" ShadowDepth="3" Opacity="0.6"/>
         </Border.Effect>
         <StackPanel Height="Auto">
             <Border CornerRadius="10" Background="AliceBlue" Margin="10">
-                <TextBox Name="groupName" Background="#00000000" BorderThickness="0" Margin="5" ></TextBox>
+                <TextBox Name="groupName" Margin="5" FontSize="15" ></TextBox>
             </Border>
             <Border CornerRadius="5" Background="#FF7AB8F5" Margin=" 10" >
                 <StackPanel Name="users">
@@ -24,12 +27,12 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border Margin="5" Background="#FF47A4E4" CornerRadius="10" Style="{DynamicResource confirmStyle}" >
-                    <Button Click="OkCreate" >
+                    <Button Click="OkCreate" Style="{StaticResource minBtn}" >
                         <Label FontWeight="Bold" Padding="0, -5, 0, -5" Foreground="White" >O</Label>
                     </Button>
                 </Border>
                 <Border Grid.Column="1" Margin="5" Background="#FFDE6E6E" CornerRadius="10" Style="{DynamicResource exitStyle}" >
-                    <Button Click="CancelCreate" >
+                    <Button Click="CancelCreate" Style="{StaticResource minBtn}" >
                         <Label FontWeight="Bold" Padding="0, -5, 0, -5" Foreground="White" >X</Label>
                     </Button>
                 </Border>

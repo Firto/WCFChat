@@ -76,8 +76,11 @@
     <Compile Include="Controls\CCheckBox.xaml.cs">
       <DependentUpon>CCheckBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GroupPG.xaml.cs">
-      <DependentUpon>GroupPG.xaml</DependentUpon>
+    <Compile Include="Controls\GroupMessage.xaml.cs">
+      <DependentUpon>GroupMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GroupWrite.xaml.cs">
+      <DependentUpon>GroupWrite.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginedPage.xaml.cs">
       <DependentUpon>LoginedPage.xaml</DependentUpon>
@@ -101,7 +104,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\GroupPG.xaml">
+    <Page Include="Controls\GroupMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GroupWrite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

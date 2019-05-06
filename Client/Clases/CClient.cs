@@ -32,7 +32,7 @@ namespace Client
 
         private void Login(RUser usr) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                SetPage(new LoginedPage(this));
+                SetPage(new Pages.LoginedPage(this));
             });
             
         }
