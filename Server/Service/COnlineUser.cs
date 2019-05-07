@@ -124,15 +124,15 @@ namespace Server.Service
         public void SendMessage(int groupID, string message)
         {
             UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID);
-            if (usrGrp == null) Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
-            if (message.Length > 0) return;
+
+            if (usrGrp == null) { Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID })); return; }
+            if (message.Length < 1) return;
 
             GroupMessage msg = BaseOnlineUser.MainBase.GroupsMessages.Add(new GroupMessage { UserID = usrGrp.UserID, GroupID = usrGrp.GroupID, MessageSource = message });
             BaseOnlineUser.MainBase.SaveChanges();
 
-            Callback.ReciveNewMessage();
-            
-
+            foreach (var item in BaseOnlineUser.OnlineUsers.Where((x) => x.BaseUser.UsersInGroups.FirstOrDefault((z) => z.GroupID == usrGrp.GroupID) != null))
+                item.Sessions.ForEach((x) => x.Callback.ReciveNewMessage(new RUser(usrGrp.User, false ) ,new RGroupMessage(msg)));
         }
 
         public static USession GetSession(List<OnlineUser> usrs, IChatServiceCallBack callback)

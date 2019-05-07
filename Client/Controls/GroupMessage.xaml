@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.Controls"
-             mc:Ignorable="d">
-    <Grid HorizontalAlignment="Left" >
+             mc:Ignorable="d" d:DesignWidth="251" d:DesignHeight="144">
+    <Grid HorizontalAlignment="Left" Margin="30,10,0,10" Width="195"  >
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="20" Direction="-45" RenderingBias="Quality" ShadowDepth="3" Opacity="0.6"/>
+        </Grid.Effect>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -16,8 +19,12 @@
         </Grid.RowDefinitions>
         <Label Background="Beige" FontSize="14" Name="UserName"></Label>
         <Border Grid.Row="1" Background="Beige" CornerRadius="0, 0, 0, 1000" ></Border>
-        <Border Grid.Column="1" Grid.RowSpan="2" Background="Beige" CornerRadius="0 , 10, 10, 0" >
-            <Label Background="Beige" FontSize="14" Name="Teext"></Label>
+        <Border  Grid.Column="1" Background="Beige" CornerRadius="0, 1000, 0, 0 " ></Border>
+        <Border Grid.Column="1" Grid.Row="1" Background="Beige" CornerRadius="0 , 0, 10, 0" >
+            <Border  Background="#FFDEDEBF" Margin="5" >
+                <TextBlock  FontSize="14" Name="Teext" TextWrapping="WrapWithOverflow" Margin="5" ></TextBlock>
+            </Border>
+            
         </Border>
     </Grid>
 </UserControl>

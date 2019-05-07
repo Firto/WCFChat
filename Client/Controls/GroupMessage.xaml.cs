@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ChatService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,17 @@ namespace Client.Controls
     public partial class GroupMessage : UserControl
     {
         ChatService.RGroupMessage baseMsg;
+        ChatService.RUser baseUsr;
 
-        public GroupMessage(ChatService.RGroupMessage msg)
+        public GroupMessage(RUser usr, RGroupMessage grpMsg)
         {
             InitializeComponent();
 
-            UserName.Content = msg.User.Login;
-            Teext.Content = msg.MessageSource;
+            UserName.Content = usr.Login;
+            Teext.Text = grpMsg.MessageSource;
 
-            baseMsg = msg;
+            baseMsg = grpMsg;
+            baseUsr = usr;
         }
     }
 }

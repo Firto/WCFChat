@@ -70,7 +70,6 @@
     <Compile Include="Controls\CCheckUserItem.xaml.cs">
       <DependentUpon>CCheckUserItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CGifImage.cs" />
     <Compile Include="Controls\GroupCreateItem.xaml.cs">
       <DependentUpon>GroupCreateItem.xaml</DependentUpon>
     </Compile>

@@ -11,6 +11,7 @@ namespace Client
     public delegate void GroupEVT(RMUserInGroup usrInGrp);
     public delegate void Do();
     public delegate void MyGroups(RMUserInGroup[] grps);
+    public delegate void Msg(RUser usr, RGroupMessage msg);
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class MyCallback : ChatService.IChatServiceCallback
     {
@@ -21,10 +22,11 @@ namespace Client
         public event MyGroups OnReciveGroups;
         public event GroupEV OnReciveLeaveGroup;
         public event GroupEVT OnReciveNewGroup;
+        public event Msg OnReciveNewMessage;
 
         public void Error(string message)
         {
-            MessageBox.Show(message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public void Message([MessageParameter(Name = "message")] string message1)
@@ -42,30 +44,11 @@ namespace Client
             throw new System.NotImplementedException();
         }
 
-        public void ReciveLeave()
-        {
-            OnLeave?.Invoke();
-        }
-
-        public void ReciveLogin(RUser usr)
-        {
-            OnLogin?.Invoke(usr);
-        }
-
-        public void ReciveMyGroups(RMUserInGroup[] group)
-        {
-            OnReciveGroups?.Invoke(group);
-        }
-
-        public void ReciveNewGroup(RMUserInGroup usrInGrp)
-        {
-            OnReciveNewGroup?.Invoke(usrInGrp);
-        }
-
-        public void ReciveNewMessage(RGroupMessage msg)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void ReciveLeave() => OnLeave?.Invoke();
+        public void ReciveLogin(RUser usr) => OnLogin?.Invoke(usr);
+        public void ReciveMyGroups(RMUserInGroup[] group) => OnReciveGroups?.Invoke(group);
+        public void ReciveNewGroup(RMUserInGroup usrInGrp) => OnReciveNewGroup?.Invoke(usrInGrp);
+        public void ReciveNewMessage(RUser usr, RGroupMessage msg) => OnReciveNewMessage?.Invoke(usr, msg);
 
         public void ReciveLeaveGroup(RGroup group)
         {

@@ -268,13 +268,13 @@ namespace Server.Service
                 if (count > 0) users.Take(count);
                 List<RUser> rusers = new List<RUser>();
                 foreach (var item in users)
-                    rusers.Add(new RUser(item, onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == item.ID) != null));
+                    rusers.Add(new RUser(item, false));
                 return rusers.ToArray();
             }
             else { Callback.ReciveLeave(); return null; }
         }
 
-        RGroupMessage[] IChatService.GetMessages(int groupID, bool reverced, int count, int offset)
+        Dictionary<RUser, RGroupMessage> IChatService.GetMessages(int groupID, bool reverced, int count, int offset)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) {
@@ -286,11 +286,11 @@ namespace Server.Service
                     if (offset > 0) messages = messages.Skip(offset).ToList();
                     if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
                     if (count > 0) messages.Take(count);
-                    List<RGroupMessage> rmessages = new List<RGroupMessage>();
+                    Dictionary<RUser, RGroupMessage> rmessages = new Dictionary<RUser, RGroupMessage>();
                     foreach (var item in messages)
-                        rmessages.Add(new RGroupMessage(item));
+                        rmessages.Add(new RUser(item.User, false), new RGroupMessage(item));
 
-                    return rmessages.ToArray();
+                    return rmessages;
                 }
                 else
                 {

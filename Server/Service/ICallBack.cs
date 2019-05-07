@@ -34,7 +34,7 @@ namespace Server.Service
         [OperationContract(IsOneWay = true)]
         void ReciveAddedUsers(RGroup group, RMUserInGroup[] users); // Відправляємо що додано нових юзерів
         [OperationContract(IsOneWay = true)]
-        void ReciveNewMessage(RGroupMessage msg); // Відправляємо що додано нове повідомлення
+        void ReciveNewMessage(RUser user, RGroupMessage msg); // Відправляємо що додано нове повідомлення
 
     }
 }

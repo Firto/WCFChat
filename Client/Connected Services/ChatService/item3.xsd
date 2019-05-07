@@ -16,12 +16,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RUser" nillable="true" type="tns:RUser" />
-  <xs:complexType name="ArrayOfRGroupMessage">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RGroupMessage" nillable="true" type="tns:RGroupMessage" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRGroupMessage" nillable="true" type="tns:ArrayOfRGroupMessage" />
   <xs:complexType name="RGroupMessage">
     <xs:sequence>
       <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />

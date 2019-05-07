@@ -27,8 +27,10 @@ namespace Client.Controls
         {
             get => plashkaLoading.Height != 0;
             set {
-                if (value) plashkaLoading.Height = Double.NaN;
-                else plashkaLoading.Height = 0;
+                Application.Current.Dispatcher.Invoke((Action)delegate {
+                    if (value) plashkaLoading.Height = Double.NaN;
+                    else plashkaLoading.Height = 0;
+                });
             }
         }
 
@@ -40,16 +42,22 @@ namespace Client.Controls
         }
 
         public void GetMessages() {
+            int count = msges.Children.Count;
             new Task(() => {
                 IsLoading = true;
                 int countMessages = itmn.client.Client.GetCountMessages(itmn.baseUserInGroup.Group.ID);
-                if (countMessages < 1) return;
-                RGroupMessage[] messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, true, countMessages > 30 ? 30 : countMessages, msges.Children.Count);
-                if (messages == null || messages.Length < 1) return;
-
-                foreach (var item in messages)
-                    msges.Children.Add(new GroupMessage(item));
-
+                if (countMessages > 0)
+                {
+                    Dictionary<RUser, RGroupMessage> messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, false, countMessages > 30 ? 30 : countMessages, count);
+                    if (messages != null && messages.Count > 0)
+                    {
+                        Application.Current.Dispatcher.Invoke((Action)delegate {
+                            foreach (var item in messages)
+                                msges.Children.Add(new GroupMessage(item.Key, item.Value));
+                        });
+                        
+                    }
+                }
                 IsLoading = false;
             }).Start();
             
@@ -60,8 +68,13 @@ namespace Client.Controls
             itmn.client.Client.SendMessage(itmn.BaseUserInGroup.Group.ID, msg.Text);
         }
 
-        public void ReciveMessage(ChatService.RGroupMessage msg) {
-            msges.Children.Add(new GroupMessage(msg));
+        public void ReciveMessage(RUser usr, RGroupMessage grpMsg) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                bool isTo = MsgScrolls.VerticalOffset > MsgScrolls.ViewportHeight;
+                msges.Children.Add(new GroupMessage(usr, grpMsg));
+                if (isTo) MsgScrolls.ScrollToBottom();
+            });
+            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

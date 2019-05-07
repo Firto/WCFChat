@@ -537,10 +537,10 @@ namespace Client.ChatService {
         System.Threading.Tasks.Task<Client.ChatService.RUser[]> GetUsersAsync(int offset, int count);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetMessages", ReplyAction="http://tempuri.org/IChatService/GetMessagesResponse")]
-        Client.ChatService.RGroupMessage[] GetMessages(int groupID, bool reverced, int count, int offset);
+        System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage> GetMessages(int groupID, bool reverced, int count, int offset);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetMessages", ReplyAction="http://tempuri.org/IChatService/GetMessagesResponse")]
-        System.Threading.Tasks.Task<Client.ChatService.RGroupMessage[]> GetMessagesAsync(int groupID, bool reverced, int count, int offset);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage>> GetMessagesAsync(int groupID, bool reverced, int count, int offset);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
         int GetCountUsers();
@@ -595,7 +595,7 @@ namespace Client.ChatService {
         void ReciveAddedUsers(Client.ChatService.RGroup group, Client.ChatService.RMUserInGroup[] users);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewMessage")]
-        void ReciveNewMessage(Client.ChatService.RGroupMessage msg);
+        void ReciveNewMessage(Client.ChatService.RUser user, Client.ChatService.RGroupMessage msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -698,11 +698,11 @@ namespace Client.ChatService {
             return base.Channel.GetUsersAsync(offset, count);
         }
         
-        public Client.ChatService.RGroupMessage[] GetMessages(int groupID, bool reverced, int count, int offset) {
+        public System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage> GetMessages(int groupID, bool reverced, int count, int offset) {
             return base.Channel.GetMessages(groupID, reverced, count, offset);
         }
         
-        public System.Threading.Tasks.Task<Client.ChatService.RGroupMessage[]> GetMessagesAsync(int groupID, bool reverced, int count, int offset) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage>> GetMessagesAsync(int groupID, bool reverced, int count, int offset) {
             return base.Channel.GetMessagesAsync(groupID, reverced, count, offset);
         }
         

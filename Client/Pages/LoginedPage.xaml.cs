@@ -36,6 +36,7 @@ namespace Client.Pages
             clin.Events.OnReciveGroups += OnReciveGroups;
             clin.Events.OnReciveLeaveGroup += OnLeaveGroup;
             clin.Events.OnReciveNewGroup += OnNewGroup;
+            clin.Events.OnReciveNewMessage += OnReciveMessage;
 
             createGroupitem = new GroupCreateItem(clin, countGetUsers);
             createGroupitem.OnOk += OnCreateGroup;
@@ -130,5 +131,19 @@ namespace Client.Pages
                 }
             }
         }
+
+        public void OnReciveMessage(RUser usr, RGroupMessage grpMsg) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                foreach (var item in ss.Children)
+                {
+                    if (item is GroupItem)
+                    {
+                        GroupItem gss = (GroupItem)item;
+                        if (gss.baseUserInGroup.Group.ID == grpMsg.GroupID) gss.WriteMessages.ReciveMessage(usr, grpMsg);
+                    }
+                }
+            });
+        }
+
     }
 }

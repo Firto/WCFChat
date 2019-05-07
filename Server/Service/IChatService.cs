@@ -42,7 +42,7 @@ namespace Server.Service
         [OperationContract]
         RUser[] GetUsers(int offset, int count); // беремо юзерів
         [OperationContract]
-        RGroupMessage[] GetMessages(int groupID, bool reverced, int count, int offset); // беремо повідомлення
+        Dictionary<RUser, RGroupMessage> GetMessages(int groupID, bool reverced, int count, int offset); // беремо повідомлення
 
         // Кількість
         [OperationContract]
