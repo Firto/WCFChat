@@ -8,9 +8,9 @@ namespace Client
 {
     public delegate void UsrEv(RUser usr);
     public delegate void GroupEV(RGroup grp);
-    public delegate void GroupEVT(RUserInGroup usrInGrp);
+    public delegate void GroupEVT(RMUserInGroup usrInGrp);
     public delegate void Do();
-    public delegate void MyGroups(RUserInGroup[] grps);
+    public delegate void MyGroups(RMUserInGroup[] grps);
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class MyCallback : ChatService.IChatServiceCallback
     {
@@ -32,7 +32,7 @@ namespace Client
             throw new System.NotImplementedException();
         }
 
-        public void ReciveAddedUsers(RGroup group, RUserInGroup[] users)
+        public void ReciveAddedUsers(RGroup group, RMUserInGroup[] users)
         {
             throw new System.NotImplementedException();
         }
@@ -52,12 +52,12 @@ namespace Client
             OnLogin?.Invoke(usr);
         }
 
-        public void ReciveMyGroups(RUserInGroup[] group)
+        public void ReciveMyGroups(RMUserInGroup[] group)
         {
             OnReciveGroups?.Invoke(group);
         }
 
-        public void ReciveNewGroup(RUserInGroup usrInGrp)
+        public void ReciveNewGroup(RMUserInGroup usrInGrp)
         {
             OnReciveNewGroup?.Invoke(usrInGrp);
         }

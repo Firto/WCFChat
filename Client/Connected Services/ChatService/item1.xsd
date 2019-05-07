@@ -2,7 +2,6 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
-  <xs:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server.Service" />
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
@@ -81,9 +80,16 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="groupID" type="xs:int" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Service" minOccurs="0" name="tgm" type="q4:TypeGetMessage" />
+        <xs:element minOccurs="0" name="reverced" type="xs:boolean" />
         <xs:element minOccurs="0" name="count" type="xs:int" />
         <xs:element minOccurs="0" name="offset" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMessagesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="GetMessagesResult" nillable="true" type="q4:ArrayOfRGroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -144,7 +150,7 @@
   <xs:element name="ReciveMyGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="groups" nillable="true" type="q5:ArrayOfRUserInGroup" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="groups" nillable="true" type="q5:ArrayOfRMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,7 +169,7 @@
   <xs:element name="ReciveNewGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q7:RUserInGroup" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q7:RMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -192,7 +198,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:RGroup" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="users" nillable="true" type="q12:ArrayOfRUserInGroup" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="users" nillable="true" type="q12:ArrayOfRMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

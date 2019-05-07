@@ -14,12 +14,6 @@ namespace Server.Service
         OnlyOutInGroup, // тількі ті що не в групі
     }
 
-    public enum TypeGetMessage { // типи доставання повідомлень з бази
-        All = 0,
-        Last, //  З кінця
-        First // З початку
-    }
-
     [ServiceContract (CallbackContract = typeof(IChatServiceCallBack))]
     public interface IChatService
     {
@@ -47,8 +41,8 @@ namespace Server.Service
         // Навантажені
         [OperationContract]
         RUser[] GetUsers(int offset, int count); // беремо юзерів
-        [OperationContract(IsOneWay = true)]
-        void GetMessages(int groupID, TypeGetMessage tgm, int count, int offset); // беремо повідомлення
+        [OperationContract]
+        RGroupMessage[] GetMessages(int groupID, bool reverced, int count, int offset); // беремо повідомлення
 
         // Кількість
         [OperationContract]

@@ -33,6 +33,30 @@ namespace Server.Base.Tables
         [DataMember]
         public int ID { get; set; }
         [DataMember]
+        public int UserID { get; set; }
+        [DataMember]
+        public int GroupID { get; set; }
+        [DataMember]
+        public string MessageSource { get; set; }
+        [DataMember]
+        public bool Deleted { get; set; }
+
+        public RGroupMessage(GroupMessage grpMsg)
+        {
+            ID = grpMsg.ID;
+            UserID = grpMsg.UserID;
+            GroupID = grpMsg.GroupID;
+            MessageSource = grpMsg.MessageSource;
+            Deleted = grpMsg.Deleted;
+        }
+    }
+
+    [DataContract]
+    public class RMGroupMessage
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
         public RUser User { get; set; }
         [DataMember]
         public RGroup Group { get; set; }
@@ -41,7 +65,7 @@ namespace Server.Base.Tables
         [DataMember]
         public bool Deleted { get; set; }
 
-        public RGroupMessage(GroupMessage grpMsg) {
+        public RMGroupMessage(GroupMessage grpMsg) {
             ID = grpMsg.ID;
             User = new RUser(grpMsg.User, false);
             Group = new RGroup(grpMsg.Group);

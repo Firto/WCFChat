@@ -25,7 +25,6 @@
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="78837e04-af01-4ec1-8157-ea3cac63e7de" SourceId="1" SourceUrl="http://localhost:8099/?xsd=xsd1" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="fbef0fd4-a5d6-4feb-bba7-0d09d88c9edc" SourceId="1" SourceUrl="http://localhost:8099/?xsd=xsd0" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="4ccf8768-30af-4c28-b0b5-db419dc407f6" SourceId="1" SourceUrl="http://localhost:8099/?disco" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="fc09a18b-603e-4eec-9371-658229e504f8" SourceId="1" SourceUrl="http://localhost:8099/?xsd=xsd4" />
     <MetadataFile FileName="ChatService.wsdl" MetadataType="Wsdl" ID="744cb0c7-7d29-4771-9cc5-fdc101fb1d87" SourceId="1" SourceUrl="http://localhost:8099/?wsdl" />
     <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="f7f79aab-e71e-4924-826a-68cfe3e61339" SourceId="1" SourceUrl="http://localhost:8099/?xsd=xsd3" />
     <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="42cab53e-d051-46c3-85f0-eef3554fb127" SourceId="1" SourceUrl="http://localhost:8099/?xsd=xsd2" />

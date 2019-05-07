@@ -57,7 +57,7 @@ namespace Client.Pages
             });
         }
 
-        public void OnNewGroup(RUserInGroup usrInGrp) {
+        public void OnNewGroup(RMUserInGroup usrInGrp) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 ss.Children.Add(new GroupItem(usrInGrp, clin, OnChangeSelectedGroup));
                 OnCancelCreateGroup();
@@ -77,7 +77,7 @@ namespace Client.Pages
 
         
 
-        private void OnReciveGroups(RUserInGroup[] grps) {
+        private void OnReciveGroups(RMUserInGroup[] grps) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 ss.Children.Clear();
                 foreach (var item in grps)
@@ -124,11 +124,8 @@ namespace Client.Pages
                 {
                     if (item is GroupItem) {
                         GroupItem gss = (GroupItem)item;
-                        if (gss.Selected)
-                        {
+                        if (gss.BaseUserInGroup.Group.ID != ((GroupItem)obj).BaseUserInGroup.Group.ID)
                             gss.Selected = false;
-                            break;
-                        }
                     }
                 }
             }

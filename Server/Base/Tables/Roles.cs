@@ -24,7 +24,8 @@ namespace Server.Base.Tables
         [DataMember]
         public string Name { get; set; }
 
-        public RRole(Role rl) {
+        public RRole(Role rl)
+        {
             ID = rl.ID;
             Name = rl.Name;
         }

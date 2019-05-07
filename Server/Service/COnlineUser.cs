@@ -77,7 +77,7 @@ namespace Server.Service
             BaseOnlineUser.MainBase.SaveChanges();
 
             foreach (var item in BaseOnlineUser.Sessions)
-                item.Callback.ReciveNewGroup(new RUserInGroup(usrInGrp));
+                item.Callback.ReciveNewGroup(new RMUserInGroup(usrInGrp));
 
             if (IDs != null) AddUsersToGroup(newGrp.ID, IDs);
 
@@ -86,9 +86,9 @@ namespace Server.Service
 
         public void GetMyGroups()
         {
-            List<RUserInGroup> usersInGroups = new List<RUserInGroup>();
+            List<RMUserInGroup> usersInGroups = new List<RMUserInGroup>();
             if (BaseOnlineUser.BaseUser.UsersInGroups != null) foreach (var item in BaseOnlineUser.BaseUser.UsersInGroups)
-                    usersInGroups.Add(new RUserInGroup(item));
+                    usersInGroups.Add(new RMUserInGroup(item));
             Callback.ReciveMyGroups(usersInGroups.ToArray());
         }
 
@@ -114,11 +114,25 @@ namespace Server.Service
                 foreach (var item in BaseOnlineUser.OnlineUsers) {
                     tomp = users.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
                     if (tomp != null)
-                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RUserInGroup(tomp));
+                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RMUserInGroup(tomp));
                 } 
 
             }
             else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
+        }
+
+        public void SendMessage(int groupID, string message)
+        {
+            UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID);
+            if (usrGrp == null) Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+            if (message.Length > 0) return;
+
+            GroupMessage msg = BaseOnlineUser.MainBase.GroupsMessages.Add(new GroupMessage { UserID = usrGrp.UserID, GroupID = usrGrp.GroupID, MessageSource = message });
+            BaseOnlineUser.MainBase.SaveChanges();
+
+            Callback.ReciveNewMessage();
+            
+
         }
 
         public static USession GetSession(List<OnlineUser> usrs, IChatServiceCallBack callback)

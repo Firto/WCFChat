@@ -23,7 +23,7 @@ namespace Client
     public partial class GroupItem : UserControl
     {
         public ChatClient client;
-        public ChatService.RUserInGroup baseUserInGroup;
+        public ChatService.RMUserInGroup baseUserInGroup;
         public GroupWrite WriteMessages { get; private set; }
         bool selected = false;
 
@@ -32,19 +32,19 @@ namespace Client
             set {
                 if (value) mns.Background = new SolidColorBrush(Color.FromArgb(255, 179, 188, 243));
                 else mns.Background = new SolidColorBrush(Color.FromArgb(255, 179, 211, 243));
-                OnChangeSelecte?.Invoke(this, null);
                 selected = value;
+                OnChangeSelecte?.Invoke(this, null);
             }
         }
 
         public event EventHandler OnChangeSelecte;
 
-        public ChatService.RUserInGroup BaseUserInGroup { get => baseUserInGroup; set {
+        public ChatService.RMUserInGroup BaseUserInGroup { get => baseUserInGroup; set {
                 ItemWithName.Content = value.Group.Name;
                 baseUserInGroup = value;
             } }
 
-        public GroupItem(ChatService.RUserInGroup usr, ChatClient cl, EventHandler evnt)
+        public GroupItem(ChatService.RMUserInGroup usr, ChatClient cl, EventHandler evnt)
         {
             InitializeComponent();
             client = cl;

@@ -16,13 +16,29 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RUser" nillable="true" type="tns:RUser" />
-  <xs:complexType name="ArrayOfRUserInGroup">
+  <xs:complexType name="ArrayOfRGroupMessage">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RUserInGroup" nillable="true" type="tns:RUserInGroup" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RGroupMessage" nillable="true" type="tns:RGroupMessage" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfRUserInGroup" nillable="true" type="tns:ArrayOfRUserInGroup" />
-  <xs:complexType name="RUserInGroup">
+  <xs:element name="ArrayOfRGroupMessage" nillable="true" type="tns:ArrayOfRGroupMessage" />
+  <xs:complexType name="RGroupMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="MessageSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RGroupMessage" nillable="true" type="tns:RGroupMessage" />
+  <xs:complexType name="ArrayOfRMUserInGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RMUserInGroup" nillable="true" type="tns:RMUserInGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRMUserInGroup" nillable="true" type="tns:ArrayOfRMUserInGroup" />
+  <xs:complexType name="RMUserInGroup">
     <xs:sequence>
       <xs:element minOccurs="0" name="FriendID" type="xs:int" />
       <xs:element minOccurs="0" name="Group" nillable="true" type="tns:RGroup" />
@@ -31,7 +47,7 @@
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:RUser" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="RUserInGroup" nillable="true" type="tns:RUserInGroup" />
+  <xs:element name="RMUserInGroup" nillable="true" type="tns:RMUserInGroup" />
   <xs:complexType name="RGroup">
     <xs:sequence>
       <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
@@ -47,14 +63,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RRole" nillable="true" type="tns:RRole" />
-  <xs:complexType name="RGroupMessage">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:RGroup" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="MessageSource" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User" nillable="true" type="tns:RUser" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="RGroupMessage" nillable="true" type="tns:RGroupMessage" />
 </xs:schema>

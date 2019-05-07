@@ -180,7 +180,9 @@ namespace Server.Service
 
         void IChatService.SendMessage(int groupID, string message)
         {
-            throw new NotImplementedException();
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.SendMessage(groupID, message);
+            else Callback.ReciveLeave();
         }
 
         int IChatService.GetCountUsers()
@@ -272,9 +274,32 @@ namespace Server.Service
             else { Callback.ReciveLeave(); return null; }
         }
 
-        void IChatService.GetMessages(int groupID, TypeGetMessage tgm, int count, int offset)
+        RGroupMessage[] IChatService.GetMessages(int groupID, bool reverced, int count, int offset)
         {
-            throw new NotImplementedException();
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) {
+                Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
+                if (grp != null) {
+                    List<GroupMessage> messages = grp.GroupsMessages.ToList();
+                    if (reverced) messages.Reverse();
+                    if (offset > messages.Count()) { Callback.Error("Incorrect offcet!"); return null; }
+                    if (offset > 0) messages = messages.Skip(offset).ToList();
+                    if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
+                    if (count > 0) messages.Take(count);
+                    List<RGroupMessage> rmessages = new List<RGroupMessage>();
+                    foreach (var item in messages)
+                        rmessages.Add(new RGroupMessage(item));
+
+                    return rmessages.ToArray();
+                }
+                else
+                {
+                    Callback.Error("Incorrect group!");
+                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    return null;
+                }
+            }
+            else { Callback.ReciveLeave(); return null; }
         }
     }
 }

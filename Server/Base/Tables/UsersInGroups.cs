@@ -34,6 +34,30 @@ namespace Server.Base.Tables
     public class RUserInGroup
     {
         [DataMember]
+        public int UserID { get; set; }
+        [DataMember]
+        public int GroupID { get; set; }
+        [DataMember]
+        public int RoleID { get; set; }
+        [DataMember]
+        public bool Muted { get; set; }
+        [DataMember]
+        public int FriendID { get; set; }
+
+        public RUserInGroup(UserInGroup usrInGrp)
+        {
+            UserID = usrInGrp.UserID;
+            GroupID = usrInGrp.GroupID;
+            RoleID = usrInGrp.RoleID;
+            Muted = usrInGrp.Muted;
+            FriendID = usrInGrp.FriendID;
+        }
+    }
+
+    [DataContract]
+    public class RMUserInGroup
+    {
+        [DataMember]
         public RUser User { get; set; }
         [DataMember]
         public RGroup Group { get; set; }
@@ -44,7 +68,7 @@ namespace Server.Base.Tables
         [DataMember]
         public int FriendID { get; set; }
 
-        public RUserInGroup(UserInGroup usrInGrp) {
+        public RMUserInGroup(UserInGroup usrInGrp) {
             User = new RUser(usrInGrp.User, false);
             Group = new RGroup(usrInGrp.Group);
             Role = new RRole(usrInGrp.Role);

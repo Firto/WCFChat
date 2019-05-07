@@ -14,7 +14,6 @@
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server.Service" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IChatService_Register_InputMessage">
@@ -49,6 +48,9 @@
   </wsdl:message>
   <wsdl:message name="IChatService_GetMessages_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
   </wsdl:message>
   <wsdl:message name="IChatService_GetCountUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCountUsers" />
@@ -132,6 +134,7 @@
     </wsdl:operation>
     <wsdl:operation name="GetMessages">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetMessages" message="tns:IChatService_GetMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetMessagesResponse" message="tns:IChatService_GetMessages_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCountUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountUsers" message="tns:IChatService_GetCountUsers_InputMessage" />
@@ -244,6 +247,9 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCountUsers">
       <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountUsers" style="document" />
