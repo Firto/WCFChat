@@ -42,23 +42,24 @@ namespace Client.Controls
         }
 
         public void GetMessages() {
-            int count = msges.Children.Count;
+            int count = msges.Children.Count-1;
             new Task(() => {
                 IsLoading = true;
                 int countMessages = itmn.client.Client.GetCountMessages(itmn.baseUserInGroup.Group.ID);
                 if (countMessages > 0)
                 {
-                    Dictionary<RUser, RGroupMessage> messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, false, countMessages > 30 ? 30 : countMessages, count);
+                    Dictionary<RUser, RGroupMessage> messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, true, countMessages > 30 ? 30 : countMessages, count);
                     if (messages != null && messages.Count > 0)
                     {
                         Application.Current.Dispatcher.Invoke((Action)delegate {
                             foreach (var item in messages)
-                                msges.Children.Add(new GroupMessage(item.Key, item.Value));
+                                msges.Children.Insert(msges.Children.Count - 1, new GroupMessage(item.Key, item.Value));
+                            MsgScrolls.ScrollToBottom();
                         });
                         
                     }
                 }
-                IsLoading = false;
+                //IsLoading = false;
             }).Start();
             
         }
@@ -66,12 +67,13 @@ namespace Client.Controls
         private void SendMsg(object sender, RoutedEventArgs e)
         {
             itmn.client.Client.SendMessage(itmn.BaseUserInGroup.Group.ID, msg.Text);
+            msg.Text = String.Empty;
         }
 
         public void ReciveMessage(RUser usr, RGroupMessage grpMsg) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                bool isTo = MsgScrolls.VerticalOffset > MsgScrolls.ViewportHeight;
-                msges.Children.Add(new GroupMessage(usr, grpMsg));
+                bool isTo = MsgScrolls.VerticalOffset + 5 > MsgScrolls.ViewportHeight;
+                msges.Children.Insert(msges.Children.Count - 1, new GroupMessage(usr, grpMsg));
                 if (isTo) MsgScrolls.ScrollToBottom();
             });
             
@@ -80,6 +82,11 @@ namespace Client.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Msg_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) SendMsg(null, null);
         }
     }
 }

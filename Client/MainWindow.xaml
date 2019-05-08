@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Closing="OnClising">
-        
-    <Grid>
+
+    <Grid UseLayoutRounding="True">
         <Frame Name="mainFrm" NavigationUIVisibility="Hidden">
 
         </Frame>

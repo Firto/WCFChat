@@ -50,7 +50,8 @@ namespace Client.Pages
                 foreach (UIElement item in ss.Children)
                 {
                     if (item is GroupItem && ((GroupItem)item).BaseUserInGroup.Group.ID == rgp.ID) {
-  
+
+                        if (((GroupItem)item).Selected) writeMsg.Child = null;
                         ss.Children.Remove(item);
                         break;
                     }
@@ -139,7 +140,7 @@ namespace Client.Pages
                     if (item is GroupItem)
                     {
                         GroupItem gss = (GroupItem)item;
-                        if (gss.baseUserInGroup.Group.ID == grpMsg.GroupID) gss.WriteMessages.ReciveMessage(usr, grpMsg);
+                        if (gss.baseUserInGroup.Group.ID == grpMsg.GroupID) gss.ReciveMessage(usr, grpMsg);
                     }
                 }
             });

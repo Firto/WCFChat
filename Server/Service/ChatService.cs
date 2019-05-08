@@ -285,11 +285,11 @@ namespace Server.Service
                     if (offset > messages.Count()) { Callback.Error("Incorrect offcet!"); return null; }
                     if (offset > 0) messages = messages.Skip(offset).ToList();
                     if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
-                    if (count > 0) messages.Take(count);
+                    if (count > 0) messages = messages.Take(count).ToList();
                     Dictionary<RUser, RGroupMessage> rmessages = new Dictionary<RUser, RGroupMessage>();
                     foreach (var item in messages)
                         rmessages.Add(new RUser(item.User, false), new RGroupMessage(item));
-
+                    if (reverced) messages.Reverse();
                     return rmessages;
                 }
                 else

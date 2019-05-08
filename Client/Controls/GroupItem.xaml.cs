@@ -1,4 +1,5 @@
-﻿using Client.Controls;
+﻿using Client.ChatService;
+using Client.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,10 @@ namespace Client
         private void OnClick(object sender, MouseButtonEventArgs e)
         {
             if (!Selected) Selected = true;
+        }
+
+        public void ReciveMessage(RUser usr, RGroupMessage grp) {
+            WriteMessages.ReciveMessage(usr, grp);
         }
     }
 }
