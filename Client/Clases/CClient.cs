@@ -30,14 +30,15 @@ namespace Client
             Client = new ChatService.ChatServiceClient(new InstanceContext(Events));
         }
 
-        private void Login(RUser usr) {
+        private void Login(object obj, EventArgs e) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
+                RUser usr = (RUser)obj;
                 SetPage(new Pages.LoginedPage(this));
             });
             
         }
 
-        private void Leave()
+        private void Leave(object obj, EventArgs e)
         {
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 SetPage(new Login(this));

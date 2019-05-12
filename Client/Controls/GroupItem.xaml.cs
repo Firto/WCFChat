@@ -26,6 +26,7 @@ namespace Client
         public ChatClient client;
         public ChatService.RMUserInGroup baseUserInGroup;
         public GroupWrite WriteMessages { get; private set; }
+        public List<RMUserInGroup> users = new List<RMUserInGroup>();
         bool selected = false;
 
         public bool Selected {
@@ -52,6 +53,14 @@ namespace Client
             BaseUserInGroup = usr;
             OnChangeSelecte += evnt;
             WriteMessages = new GroupWrite(this);
+
+            GetUsers();
+        }
+
+        private void GetUsers() {
+            new Task(() => {
+                users.AddRange(client.Client.GetUsersInGroup(baseUserInGroup.Group.ID, -1, -1));
+            }).Start();
         }
 
         private void ExitFromGroup(object sender, RoutedEventArgs e)
@@ -80,6 +89,29 @@ namespace Client
 
         public void ReciveMessage(RUser usr, RGroupMessage grp) {
             WriteMessages.ReciveMessage(usr, grp);
+        }
+
+        public void SetExample(UIElement control) {
+            status.Child = control;
+        }
+
+        public void OnChangeOnline(RUser user)
+        {
+            int i = 0; for (; i < users.Count; i++)
+                if (users[i].User.ID == user.ID)
+                {
+                    users[i].User.Online = user.Online;
+                    break;
+                }
+        }
+
+        public void OnNewUsers(RMUserInGroup[] userss)
+        {
+            foreach (var user in userss)
+            {
+                if (users.FirstOrDefault((x) => x.User.ID == user.User.ID) == null)
+                    users.Add(user);
+            }
         }
     }
 }

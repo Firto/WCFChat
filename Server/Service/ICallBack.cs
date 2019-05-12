@@ -11,6 +11,7 @@ namespace Server.Service
 {
     public interface IChatServiceCallBack 
     {
+
         // Головні
         [OperationContract(IsOneWay = true)]
         void Error(string message); // Помилка
@@ -18,23 +19,28 @@ namespace Server.Service
         void Message(string message); // Повідомлення
 
         [OperationContract(IsOneWay = true)]
-        void ReciveMyGroups(RMUserInGroup[] groups); // Відправляєм всі групи
+        void RLogin(RUser usr); // Підтверження про вхід
         [OperationContract(IsOneWay = true)]
-        void ReciveLeave(); // Підтверджуєм що ми вийшли
+        void RLeave(); // Підтверджуєм що ми вийшли
+
         [OperationContract(IsOneWay = true)]
-        void ReciveLogin(RUser usr); // Підтверження про вхід
+        void RChangeOnline(RUser usr);
         [OperationContract(IsOneWay = true)]
-        void ReciveNewGroup(RMUserInGroup usrInGrp); // Відправляємо нову группу
+        void RNewUser(RUser usr);
+
         [OperationContract(IsOneWay = true)]
-        void ReciveLeaveGroup(RGroup group); // Відправляємо що група видалена
+        void RGroups(RMUserInGroup[] groups); // Відправляєм всі групи
         [OperationContract(IsOneWay = true)]
-        void ReciveChangeOnline(RUser usr);
+        void RLeaveGroup(RGroup group); // Відправляємо що група видалена
         [OperationContract(IsOneWay = true)]
-        void ReciveNewUser(RUser usr);
+        void RNewGroup(RMUserInGroup usrInGrp); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
-        void ReciveAddedUsers(RGroup group, RMUserInGroup[] users); // Відправляємо що додано нових юзерів
+        void RNewUsersInGroup(RMUserInGroup[] users); // Відправляємо що додано нових юзерів
+
         [OperationContract(IsOneWay = true)]
-        void ReciveNewMessage(RUser user, RGroupMessage msg); // Відправляємо що додано нове повідомлення
+        void RNewMessage(RUser user, RGroupMessage msg); // Відправляємо що додано нове повідомлення
+        //[OperationContract(IsOneWay = true)]
+        //void WritingMessage(RUser usr, RUserInGroup usrInGrp, int miliseconds);
 
     }
 }

@@ -115,7 +115,6 @@ D:\New folder (3)\WCFChat\Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\New folder (3)\WCFChat\Client\obj\Debug\Controls\GroupWrite.baml
 D:\New folder (3)\WCFChat\Client\obj\Debug\Controls\GroupMessage.g.cs
 D:\New folder (3)\WCFChat\Client\obj\Debug\Controls\GroupMessage.baml
-C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\CCheckUserItem.g.cs
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupCreateItem.g.cs
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupItem.g.cs
@@ -191,3 +190,6 @@ C:\Users\Firto\Desctop\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.dll
 C:\Users\Firto\Desctop\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.xml
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csproj.CopyComplete
 D:\New folder (3)\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.g.cs
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.baml

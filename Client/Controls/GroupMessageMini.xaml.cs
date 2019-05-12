@@ -19,17 +19,17 @@ namespace Client.Controls
     /// <summary>
     /// Interaction logic for GroupMessage.xaml
     /// </summary>
-    public partial class GroupMessage : UserControl
+    public partial class GroupMessageMini : UserControl
     {
         public ChatService.RGroupMessage baseMsg;
         public ChatService.RUser baseUsr;
 
-        public GroupMessage(RUser usr, RGroupMessage grpMsg)
+        public GroupMessageMini(RUser usr, RGroupMessage grpMsg)
         {
             InitializeComponent();
 
             UserName.Content = usr.Login;
-            Teext.Text = grpMsg.MessageSource;
+            Teext.Content = grpMsg.MessageSource;
 
             baseMsg = grpMsg;
             baseUsr = usr;

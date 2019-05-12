@@ -10,10 +10,10 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:8099/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
+      <xsd:import schemaLocation="http://localhost:8100/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8100/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8100/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8100/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.Base.Tables" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IChatService_Register_InputMessage">
@@ -52,6 +52,12 @@
   <wsdl:message name="IChatService_GetMessages_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
   </wsdl:message>
+  <wsdl:message name="IChatService_GetUsersInGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersInGroup" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetUsersInGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersInGroupResponse" />
+  </wsdl:message>
   <wsdl:message name="IChatService_GetCountUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCountUsers" />
   </wsdl:message>
@@ -76,32 +82,32 @@
   <wsdl:message name="IChatService_Message_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Message" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveMyGroups_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveMyGroups" />
+  <wsdl:message name="IChatService_RLogin_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RLogin" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveLeave_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveLeave" />
+  <wsdl:message name="IChatService_RLeave_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RLeave" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveLogin_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveLogin" />
+  <wsdl:message name="IChatService_RChangeOnline_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RChangeOnline" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveNewGroup_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveNewGroup" />
+  <wsdl:message name="IChatService_RNewUser_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RNewUser" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveLeaveGroup_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveLeaveGroup" />
+  <wsdl:message name="IChatService_RGroups_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RGroups" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveChangeOnline_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveChangeOnline" />
+  <wsdl:message name="IChatService_RLeaveGroup_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RLeaveGroup" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveNewUser_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveNewUser" />
+  <wsdl:message name="IChatService_RNewGroup_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RNewGroup" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveAddedUsers_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveAddedUsers" />
+  <wsdl:message name="IChatService_RNewUsersInGroup_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RNewUsersInGroup" />
   </wsdl:message>
-  <wsdl:message name="IChatService_ReciveNewMessage_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveNewMessage" />
+  <wsdl:message name="IChatService_RNewMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RNewMessage" />
   </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Register">
@@ -136,6 +142,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetMessages" message="tns:IChatService_GetMessages_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetMessagesResponse" message="tns:IChatService_GetMessages_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUsersInGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetUsersInGroup" message="tns:IChatService_GetUsersInGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetUsersInGroupResponse" message="tns:IChatService_GetUsersInGroup_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCountUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetCountUsers" message="tns:IChatService_GetCountUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/GetCountUsersResponse" message="tns:IChatService_GetCountUsers_OutputMessage" />
@@ -154,32 +164,32 @@
     <wsdl:operation name="Message">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/Message" message="tns:IChatService_Message_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveMyGroups">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveMyGroups" message="tns:IChatService_ReciveMyGroups_OutputCallbackMessage" />
+    <wsdl:operation name="RLogin">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RLogin" message="tns:IChatService_RLogin_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveLeave">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLeave" message="tns:IChatService_ReciveLeave_OutputCallbackMessage" />
+    <wsdl:operation name="RLeave">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RLeave" message="tns:IChatService_RLeave_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveLogin">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLogin" message="tns:IChatService_ReciveLogin_OutputCallbackMessage" />
+    <wsdl:operation name="RChangeOnline">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RChangeOnline" message="tns:IChatService_RChangeOnline_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewGroup">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewGroup" message="tns:IChatService_ReciveNewGroup_OutputCallbackMessage" />
+    <wsdl:operation name="RNewUser">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewUser" message="tns:IChatService_RNewUser_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveLeaveGroup">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveLeaveGroup" message="tns:IChatService_ReciveLeaveGroup_OutputCallbackMessage" />
+    <wsdl:operation name="RGroups">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RGroups" message="tns:IChatService_RGroups_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveChangeOnline">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveChangeOnline" message="tns:IChatService_ReciveChangeOnline_OutputCallbackMessage" />
+    <wsdl:operation name="RLeaveGroup">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RLeaveGroup" message="tns:IChatService_RLeaveGroup_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewUser">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewUser" message="tns:IChatService_ReciveNewUser_OutputCallbackMessage" />
+    <wsdl:operation name="RNewGroup">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewGroup" message="tns:IChatService_RNewGroup_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveAddedUsers">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveAddedUsers" message="tns:IChatService_ReciveAddedUsers_OutputCallbackMessage" />
+    <wsdl:operation name="RNewUsersInGroup">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewUsersInGroup" message="tns:IChatService_RNewUsersInGroup_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewMessage">
-      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/ReciveNewMessage" message="tns:IChatService_ReciveNewMessage_OutputCallbackMessage" />
+    <wsdl:operation name="RNewMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewMessage" message="tns:IChatService_RNewMessage_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -251,6 +261,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUsersInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/GetUsersInGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCountUsers">
       <soap12:operation soapAction="http://tempuri.org/IChatService/GetCountUsers" style="document" />
       <wsdl:input>
@@ -290,56 +309,56 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveMyGroups">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveMyGroups" style="document" />
+    <wsdl:operation name="RLogin">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RLogin" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveLeave">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveLeave" style="document" />
+    <wsdl:operation name="RLeave">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RLeave" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveLogin">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveLogin" style="document" />
+    <wsdl:operation name="RChangeOnline">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RChangeOnline" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewGroup">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveNewGroup" style="document" />
+    <wsdl:operation name="RNewUser">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RNewUser" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveLeaveGroup">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveLeaveGroup" style="document" />
+    <wsdl:operation name="RGroups">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RGroups" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveChangeOnline">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveChangeOnline" style="document" />
+    <wsdl:operation name="RLeaveGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RLeaveGroup" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewUser">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveNewUser" style="document" />
+    <wsdl:operation name="RNewGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RNewGroup" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveAddedUsers">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveAddedUsers" style="document" />
+    <wsdl:operation name="RNewUsersInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RNewUsersInGroup" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReciveNewMessage">
-      <soap12:operation soapAction="http://tempuri.org/IChatService/ReciveNewMessage" style="document" />
+    <wsdl:operation name="RNewMessage">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RNewMessage" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -347,9 +366,9 @@
   </wsdl:binding>
   <wsdl:service name="ChatService">
     <wsdl:port name="NetTcpBinding_IChatService" binding="tns:NetTcpBinding_IChatService">
-      <soap12:address location="net.tcp://localhost:8098/bind" />
+      <soap12:address location="net.tcp://localhost:8101/bind" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8098/bind</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8101/bind</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

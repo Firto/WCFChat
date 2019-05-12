@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="1H145PQZl/84x1OYP3dZUaBRBEw=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="RJ2DQOyOBr3BZvL2npwBH9RCl1I=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IChatService">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IChatService" contract="ChatService.IChatService" bindingType="netTcpBinding" address="net.tcp://localhost:8098/bind" bindingConfiguration="NetTcpBinding_IChatService">
+    <endpoint name="NetTcpBinding_IChatService" contract="ChatService.IChatService" bindingType="netTcpBinding" address="net.tcp://localhost:8101/bind" bindingConfiguration="NetTcpBinding_IChatService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8098/bind</serializedValue>
+          <serializedValue>net.tcp://localhost:8101/bind</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

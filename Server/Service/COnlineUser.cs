@@ -31,7 +31,7 @@ namespace Server.Service
         }
 
         public void Leave() {
-            Callback.ReciveLeave();
+            Callback.RLeave();
             Leave(null, null);
         }
 
@@ -50,7 +50,7 @@ namespace Server.Service
                         if (usrGrp != null)
                         {
                             foreach (var ites in item.Sessions)
-                                ites.Callback.ReciveLeaveGroup(new RGroup(grp));
+                                ites.Callback.RLeaveGroup(new RGroup(grp));
                         }
                     }
                     BaseOnlineUser.MainBase.Groups.Remove(grp);
@@ -60,11 +60,11 @@ namespace Server.Service
                     Console.WriteLine("Leave group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
                     BaseOnlineUser.MainBase.UsersInGroups.Remove(usrGrp);
                     foreach (var ites in BaseOnlineUser.Sessions)
-                        ites.Callback.ReciveLeaveGroup(new RGroup(grp));
+                        ites.Callback.RLeaveGroup(new RGroup(grp));
                 }
                 BaseOnlineUser.MainBase.SaveChanges();
             }
-            else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
+            else Callback.RLeaveGroup(new RGroup(new Group { ID = ID }));
         }
 
         public void CreateGroup(string Name, int[] IDs)
@@ -77,7 +77,7 @@ namespace Server.Service
             BaseOnlineUser.MainBase.SaveChanges();
 
             foreach (var item in BaseOnlineUser.Sessions)
-                item.Callback.ReciveNewGroup(new RMUserInGroup(usrInGrp));
+                item.Callback.RNewGroup(new RMUserInGroup(usrInGrp));
 
             if (IDs != null) AddUsersToGroup(newGrp.ID, IDs);
 
@@ -89,7 +89,7 @@ namespace Server.Service
             List<RMUserInGroup> usersInGroups = new List<RMUserInGroup>();
             if (BaseOnlineUser.BaseUser.UsersInGroups != null) foreach (var item in BaseOnlineUser.BaseUser.UsersInGroups)
                     usersInGroups.Add(new RMUserInGroup(item));
-            Callback.ReciveMyGroups(usersInGroups.ToArray());
+            Callback.RGroups(usersInGroups.ToArray());
         }
 
         public void AddUsersToGroup(int ID, int[] IDs)
@@ -114,25 +114,25 @@ namespace Server.Service
                 foreach (var item in BaseOnlineUser.OnlineUsers) {
                     tomp = users.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
                     if (tomp != null)
-                        foreach (var res in item.Sessions) res.Callback.ReciveNewGroup(new RMUserInGroup(tomp));
+                        foreach (var res in item.Sessions) res.Callback.RNewGroup(new RMUserInGroup(tomp));
                 } 
 
             }
-            else Callback.ReciveLeaveGroup(new RGroup(new Group { ID = ID }));
+            else Callback.RLeaveGroup(new RGroup(new Group { ID = ID }));
         }
 
         public void SendMessage(int groupID, string message)
         {
             UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID);
 
-            if (usrGrp == null) { Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID })); return; }
+            if (usrGrp == null) { Callback.RLeaveGroup(new RGroup(new Group { ID = groupID })); return; }
             if (message.Length < 1) return;
 
             GroupMessage msg = BaseOnlineUser.MainBase.GroupsMessages.Add(new GroupMessage { UserID = usrGrp.UserID, GroupID = usrGrp.GroupID, MessageSource = message });
             BaseOnlineUser.MainBase.SaveChanges();
 
             foreach (var item in BaseOnlineUser.OnlineUsers.Where((x) => x.BaseUser.UsersInGroups.FirstOrDefault((z) => z.GroupID == usrGrp.GroupID) != null))
-                item.Sessions.ForEach((x) => x.Callback.ReciveNewMessage(new RUser(usrGrp.User, false ) ,new RGroupMessage(msg)));
+                item.Sessions.ForEach((x) => x.Callback.RNewMessage(new RUser(usrGrp.User, false ) ,new RGroupMessage(msg)));
         }
 
         public static USession GetSession(List<OnlineUser> usrs, IChatServiceCallBack callback)
@@ -160,7 +160,7 @@ namespace Server.Service
             MainBase = mainBase;
             OnlineUsers = onlineUsers;
 
-            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.ReciveChangeOnline(new RUser(baseUser, true))));
+            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.RChangeOnline(new RUser(baseUser, true))));
             Console.WriteLine("FLogin: " + baseUser.Login);
         }
 
@@ -169,7 +169,7 @@ namespace Server.Service
             {
                 sess.OnLeave += SessionLeave;
                 Sessions.Add(sess);
-                sess.Callback.ReciveLogin(new RUser(BaseUser, true));
+                sess.Callback.RLogin(new RUser(BaseUser, true));
                 Console.WriteLine("SLogin: " + BaseUser.Login);
             }
         }

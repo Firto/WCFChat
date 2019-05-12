@@ -79,6 +79,9 @@
     <Compile Include="Controls\CCheckBox.xaml.cs">
       <DependentUpon>CCheckBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupMessageMini.xaml.cs">
+      <DependentUpon>GroupMessageMini.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GroupMessage.xaml.cs">
       <DependentUpon>GroupMessage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
     <Page Include="Controls\CCheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GroupMessageMini.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GroupMessage.xaml">
       <SubType>Designer</SubType>
@@ -166,23 +173,26 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ChatService\ChatService.wsdl" />
+    <None Include="Connected Services\ChatService\ChatService1.wsdl" />
     <None Include="Connected Services\ChatService\Client.ChatService.RGroupMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ChatService\Client.ChatService.RMUserInGroup.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ChatService\Client.ChatService.RUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ChatService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ChatService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ChatService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ChatService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\item41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\item42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatService\item43.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -198,10 +208,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ChatService\" />
+    <Resource Include="Resoures\Images\Loading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ChatService\item.disco" />
+    <WCFMetadataStorage Include="Connected Services\ChatService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatService\configuration91.svcinfo" />
@@ -216,7 +226,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resoures\Images\Loading.gif" />
+    <None Include="Connected Services\ChatService\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

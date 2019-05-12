@@ -19,6 +19,9 @@ namespace Client.Controls
     /// <summary>
     /// Interaction logic for GroupCreateItem.xaml
     /// </summary>
+
+    public delegate void Do();
+
     public partial class GroupCreateItem : UserControl
     {
 
@@ -32,8 +35,6 @@ namespace Client.Controls
             InitializeComponent();
             this.clin = clin;
             this.countGetUsers = countGetUsers;
-            clin.Events.OnChangeOnline += OnChangeOnline;
-            clin.Events.OnNewUser += OnNewUser;
             new Task(() =>
                {
                    int countUsers = clin.Client.GetCountUsers();
@@ -64,24 +65,20 @@ namespace Client.Controls
 
         public void OnChangeOnline(RUser user)
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate
-            {
-                int i = 0; for (; i < users.Children.Count; i++)
-                    if (((CCheckUserItem)users.Children[i]).User.ID == user.ID)
-                    {
-                        ((CCheckUserItem)users.Children[i]).Online = user.Online;
-                        break;
-                    }
+            int i = 0; for (; i < users.Children.Count; i++)
+                if (((CCheckUserItem)users.Children[i]).User.ID == user.ID)
+                {
+                    ((CCheckUserItem)users.Children[i]).Online = user.Online;
+                    break;
+                }
 
-                if (i == users.Children.Count) OnNewUser(user);
-            });
+            if (i == users.Children.Count) OnNewUser(user);
         }
 
-        public void OnNewUser(RUser user) {
-            Application.Current.Dispatcher.Invoke((Action)delegate {
-                if (Common.UIElementCollectionToList(users.Children).FirstOrDefault((x) => ((CCheckUserItem)x).User.ID == user.ID) == null)
-                    users.Children.Add(new CCheckUserItem(user));
-            });
+        public void OnNewUser(RUser user)
+        {
+            if (Common.UIElementCollectionToList(users.Children).FirstOrDefault((x) => ((CCheckUserItem)x).User.ID == user.ID) == null)
+                users.Children.Add(new CCheckUserItem(user));
         }
 
         private void CancelCreate(object sender, RoutedEventArgs e)
@@ -96,5 +93,6 @@ namespace Client.Controls
             clin.Client.CreateGroup(groupName.Text, IDs.ToArray());
             OnOk?.Invoke();
         }
+
     }
 }

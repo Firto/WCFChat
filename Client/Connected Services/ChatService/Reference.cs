@@ -542,6 +542,12 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetMessages", ReplyAction="http://tempuri.org/IChatService/GetMessagesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage>> GetMessagesAsync(int groupID, bool reverced, int count, int offset);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersInGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersInGroupResponse")]
+        Client.ChatService.RMUserInGroup[] GetUsersInGroup(int groupID, int offset, int count);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersInGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersInGroupResponse")]
+        System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersInGroupAsync(int groupID, int offset, int count);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
         int GetCountUsers();
         
@@ -570,32 +576,32 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Message")]
         void Message([System.ServiceModel.MessageParameterAttribute(Name="message")] string message1);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveMyGroups")]
-        void ReciveMyGroups(Client.ChatService.RMUserInGroup[] groups);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RLogin")]
+        void RLogin(Client.ChatService.RUser usr);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeave")]
-        void ReciveLeave();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RLeave")]
+        void RLeave();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLogin")]
-        void ReciveLogin(Client.ChatService.RUser usr);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RChangeOnline")]
+        void RChangeOnline(Client.ChatService.RUser usr);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewGroup")]
-        void ReciveNewGroup(Client.ChatService.RMUserInGroup usrInGrp);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewUser")]
+        void RNewUser(Client.ChatService.RUser usr);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveLeaveGroup")]
-        void ReciveLeaveGroup(Client.ChatService.RGroup group);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RGroups")]
+        void RGroups(Client.ChatService.RMUserInGroup[] groups);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveChangeOnline")]
-        void ReciveChangeOnline(Client.ChatService.RUser usr);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RLeaveGroup")]
+        void RLeaveGroup(Client.ChatService.RGroup group);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewUser")]
-        void ReciveNewUser(Client.ChatService.RUser usr);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewGroup")]
+        void RNewGroup(Client.ChatService.RMUserInGroup usrInGrp);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveAddedUsers")]
-        void ReciveAddedUsers(Client.ChatService.RGroup group, Client.ChatService.RMUserInGroup[] users);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewUsersInGroup")]
+        void RNewUsersInGroup(Client.ChatService.RMUserInGroup[] users);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/ReciveNewMessage")]
-        void ReciveNewMessage(Client.ChatService.RUser user, Client.ChatService.RGroupMessage msg);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewMessage")]
+        void RNewMessage(Client.ChatService.RUser user, Client.ChatService.RGroupMessage msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -704,6 +710,14 @@ namespace Client.ChatService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<Client.ChatService.RUser, Client.ChatService.RGroupMessage>> GetMessagesAsync(int groupID, bool reverced, int count, int offset) {
             return base.Channel.GetMessagesAsync(groupID, reverced, count, offset);
+        }
+        
+        public Client.ChatService.RMUserInGroup[] GetUsersInGroup(int groupID, int offset, int count) {
+            return base.Channel.GetUsersInGroup(groupID, offset, count);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersInGroupAsync(int groupID, int offset, int count) {
+            return base.Channel.GetUsersInGroupAsync(groupID, offset, count);
         }
         
         public int GetCountUsers() {

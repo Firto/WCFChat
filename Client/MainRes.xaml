@@ -55,7 +55,7 @@
     </Style>
     
     <Style x:Key="groupStyle" TargetType="{x:Type Border}">
-        <Style.Triggers>
+        <Style.Triggers  >
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
@@ -73,6 +73,13 @@
                                             Storyboard.TargetProperty="Background.Color"
                                             To="#FF6EA5DE">
                         </ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="CadetBlue"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

@@ -33,34 +33,49 @@ namespace Client.Pages
             InitializeComponent();
 
             this.clin = clin;
-            clin.Events.OnReciveGroups += OnReciveGroups;
-            clin.Events.OnReciveLeaveGroup += OnLeaveGroup;
-            clin.Events.OnReciveNewGroup += OnNewGroup;
-            clin.Events.OnReciveNewMessage += OnReciveMessage;
+            clin.Events.OnGroups += OnReciveGroups;
+            clin.Events.OnLeaveGroup += OnLeaveGroup;
+            clin.Events.OnNewGroup += OnNewGroup;
+            clin.Events.OnNewMessage += OnReciveMessage;
+            clin.Events.OnNewUsersInGroups += OnNewUsersInGroups;
+            clin.Events.OnChangeOnline += OnChangeOnline;
 
             createGroupitem = new GroupCreateItem(clin, countGetUsers);
             createGroupitem.OnOk += OnCreateGroup;
             createGroupitem.OnCancel += OnCancelCreateGroup;
-            
+
+            CreateGroup.Child = createGroupitem;
+
+            //clin.Events.OnChangeOnline += OnChangeOnline;
+            //clin.Events.OnNewUser += OnNewUser;
         }
 
-        private void OnLeaveGroup(RGroup rgp) {
+        private void OnLeaveGroup(object obj, EventArgs e) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                
-                foreach (UIElement item in ss.Children)
-                {
-                    if (item is GroupItem && ((GroupItem)item).BaseUserInGroup.Group.ID == rgp.ID) {
 
-                        if (((GroupItem)item).Selected) writeMsg.Child = null;
+                RGroup rgp = (RGroup)obj;
+
+                foreach (GroupItem item in ss.Children)
+                    if (item.BaseUserInGroup.Group.ID == rgp.ID) {
+
+                        if (item.Selected) writeMsg.Child = null;
                         ss.Children.Remove(item);
                         break;
                     }
-                }
             });
         }
 
-        public void OnNewGroup(RMUserInGroup usrInGrp) {
+        private void OnNewUsersInGroups(object obj, EventArgs e) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
+                RMUserInGroup[] rsm = (RMUserInGroup[])obj; 
+                foreach (GroupItem item in ss.Children)
+                    if (item.baseUserInGroup.User.ID == rsm[0].Group.ID) item.OnNewUsers(rsm);
+            });
+        }
+
+        public void OnNewGroup(object obj, EventArgs e) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                RMUserInGroup usrInGrp = (RMUserInGroup)obj;
                 ss.Children.Add(new GroupItem(usrInGrp, clin, OnChangeSelectedGroup));
                 OnCancelCreateGroup();
             });
@@ -70,6 +85,7 @@ namespace Client.Pages
         {
             try
             {
+                writeMsg.Child = null;
                 clin.Client.GetMyGroups();
             }
             catch (Exception)
@@ -79,10 +95,11 @@ namespace Client.Pages
 
         
 
-        private void OnReciveGroups(RMUserInGroup[] grps) {
+        private void OnReciveGroups(object obj, EventArgs e) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
+                RMUserInGroup[] gprs = (RMUserInGroup[])obj;
                 ss.Children.Clear();
-                foreach (var item in grps)
+                foreach (var item in gprs)
                     ss.Children.Add(new GroupItem(item, clin, OnChangeSelectedGroup));
             });
         }
@@ -104,45 +121,60 @@ namespace Client.Pages
         }
 
         private void OnCreateGroup() {
-            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) != null)
-                ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
+            GroupsItems.Visibility = Visibility.Visible;
+            CreateGroup.Visibility = Visibility.Hidden;
         }
 
         private void OnCancelCreateGroup() {
-            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) != null)
-                ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
+            GroupsItems.Visibility = Visibility.Visible;
+            CreateGroup.Visibility = Visibility.Hidden;
         }
 
         private void Create_Group(object sender, RoutedEventArgs e)
         {
-            if (Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem) == null) ss.Children.Insert(0, createGroupitem);
-            else ss.Children.Remove(Common.UIElementCollectionToList(ss.Children).FirstOrDefault((x) => x is GroupCreateItem));
+            if (GroupsItems.Visibility != Visibility.Hidden) {
+                GroupsItems.Visibility = Visibility.Hidden;
+                CreateGroup.Visibility = Visibility.Visible;
+            }
+            else {
+                GroupsItems.Visibility = Visibility.Visible;
+                CreateGroup.Visibility = Visibility.Hidden;
+            }
         }
 
         public void OnChangeSelectedGroup(object obj, EventArgs e) {
             if (((GroupItem)obj).Selected) {
                 writeMsg.Child = ((GroupItem)obj).WriteMessages;
-                foreach (var item in ss.Children)
-                {
-                    if (item is GroupItem) {
-                        GroupItem gss = (GroupItem)item;
-                        if (gss.BaseUserInGroup.Group.ID != ((GroupItem)obj).BaseUserInGroup.Group.ID)
-                            gss.Selected = false;
-                    }
-                }
+                foreach (GroupItem item in ss.Children)
+                    if (item.BaseUserInGroup.Group.ID != ((GroupItem)obj).BaseUserInGroup.Group.ID)
+                        item.Selected = false;
             }
         }
 
-        public void OnReciveMessage(RUser usr, RGroupMessage grpMsg) {
+        public void OnReciveMessage(object obj, EventArgs e) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                foreach (var item in ss.Children)
-                {
-                    if (item is GroupItem)
-                    {
-                        GroupItem gss = (GroupItem)item;
-                        if (gss.baseUserInGroup.Group.ID == grpMsg.GroupID) gss.ReciveMessage(usr, grpMsg);
-                    }
-                }
+                KeyValuePair<RUser, RGroupMessage> msg = (KeyValuePair<RUser, RGroupMessage>)obj;
+                foreach (GroupItem item in ss.Children)
+                    if (item.baseUserInGroup.Group.ID == msg.Value.GroupID) item.ReciveMessage(msg.Key, msg.Value);
+            });
+        }
+
+        public void OnChangeOnline(object obj, EventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                RUser user = (RUser)obj;
+                createGroupitem.OnChangeOnline(user);
+                foreach (GroupItem item in ss.Children)
+                    if (item.baseUserInGroup.User.ID == user.ID) item.OnChangeOnline(user);
+            });
+        }
+
+        public void OnNewUser(RUser user)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                createGroupitem.OnNewUser(user);
             });
         }
 

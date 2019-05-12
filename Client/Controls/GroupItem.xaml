@@ -9,14 +9,14 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../MainRes.xaml" />
     </UserControl.Resources>
-    <Border Margin="5" CornerRadius="10" Height="50" Background="#FFB3D3F3" Name="mns" >
+    <Border Margin="5" CornerRadius="10" Background="#FFB3D3F3" Name="mns" >
         <Border.Effect >
             <DropShadowEffect BlurRadius="20" Direction="-45" RenderingBias="Quality" ShadowDepth="3" Opacity="0.6"/>
         </Border.Effect>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Border CornerRadius="10" Background="AliceBlue">
                 <Grid>
@@ -30,6 +30,9 @@
                 
             </Border>
             <Label Grid.Row="1"  Name="ItemWithLastDo" FontSize="15" Margin="5, 0, 0, 0" VerticalAlignment="Center" FontWeight="Bold"  Padding="0, -5, 0, -5" Foreground="#FF27245F" ></Label>
+            <Border Margin="0, 5, 5, 5" Grid.Row="1" Name="status" >
+                
+            </Border>
         </Grid>
     </Border>
 </UserControl>

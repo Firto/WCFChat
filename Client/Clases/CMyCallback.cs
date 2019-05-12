@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
@@ -6,23 +7,34 @@ using Client.ChatService;
 
 namespace Client
 {
-    public delegate void UsrEv(RUser usr);
-    public delegate void GroupEV(RGroup grp);
-    public delegate void GroupEVT(RMUserInGroup usrInGrp);
-    public delegate void Do();
-    public delegate void MyGroups(RMUserInGroup[] grps);
-    public delegate void Msg(RUser usr, RGroupMessage msg);
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class MyCallback : ChatService.IChatServiceCallback
     {
-        public event UsrEv OnLogin;
-        public event UsrEv OnChangeOnline;
-        public event UsrEv OnNewUser;
-        public event Do OnLeave;
-        public event MyGroups OnReciveGroups;
-        public event GroupEV OnReciveLeaveGroup;
-        public event GroupEVT OnReciveNewGroup;
-        public event Msg OnReciveNewMessage;
+        public event EventHandler OnLogin;
+        public event EventHandler OnLeave;
+
+        public event EventHandler OnChangeOnline;
+        public event EventHandler OnNewUser;
+        
+        public event EventHandler OnGroups;
+        public event EventHandler OnLeaveGroup;
+        public event EventHandler OnNewGroup;
+        public event EventHandler OnNewUsersInGroups;
+
+        public event EventHandler OnNewMessage;
+
+        public void RLogin(RUser usr) => OnLogin?.Invoke(usr, null);
+        public void RLeave() => OnLeave?.Invoke(null, null);
+
+        public void RChangeOnline(RUser usr) => OnChangeOnline?.Invoke(usr, null);
+        public void RNewUser(RUser usr) => OnNewUser?.Invoke(usr, null);
+
+        public void RGroups(RMUserInGroup[] group) => OnGroups?.Invoke(group, null);
+        public void RLeaveGroup(RGroup group) => OnLeaveGroup?.Invoke(group, null);
+        public void RNewGroup(RMUserInGroup usrInGrp) => OnNewGroup?.Invoke(usrInGrp, null);
+        public void RNewUsersInGroup(RMUserInGroup[] users) => OnNewUsersInGroups(users, null);
+
+        public void RNewMessage(RUser usr, RGroupMessage msg) => OnNewMessage?.Invoke(new KeyValuePair<RUser, RGroupMessage>(usr, msg), null);
 
         public void Error(string message)
         {
@@ -34,35 +46,7 @@ namespace Client
             throw new System.NotImplementedException();
         }
 
-        public void ReciveAddedUsers(RGroup group, RMUserInGroup[] users)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
-        public void ReciveGetUsers(RUser[] usr)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ReciveLeave() => OnLeave?.Invoke();
-        public void ReciveLogin(RUser usr) => OnLogin?.Invoke(usr);
-        public void ReciveMyGroups(RMUserInGroup[] group) => OnReciveGroups?.Invoke(group);
-        public void ReciveNewGroup(RMUserInGroup usrInGrp) => OnReciveNewGroup?.Invoke(usrInGrp);
-        public void ReciveNewMessage(RUser usr, RGroupMessage msg) => OnReciveNewMessage?.Invoke(usr, msg);
-
-        public void ReciveLeaveGroup(RGroup group)
-        {
-            OnReciveLeaveGroup?.Invoke(group);
-        }
-
-        public void ReciveChangeOnline(RUser usr)
-        {
-            OnChangeOnline?.Invoke(usr);
-        }
-
-        public void ReciveNewUser(RUser usr)
-        {
-            OnNewUser?.Invoke(usr);
-        }
     }
 }

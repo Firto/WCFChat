@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,6 +23,8 @@ namespace Client.Controls
     public partial class GroupWrite : UserControl
     {
         GroupItem itmn;
+
+        public EventHandler OnLoading;
 
         public bool IsLoading
         {
@@ -54,12 +57,13 @@ namespace Client.Controls
                         Application.Current.Dispatcher.Invoke((Action)delegate {
                             foreach (var item in messages)
                                 msges.Children.Insert(msges.Children.Count - 1, new GroupMessage(item.Key, item.Value));
+                            itmn.SetExample(new GroupMessageMini(((GroupMessage)msges.Children[msges.Children.Count - 2]).baseUsr, ((GroupMessage)msges.Children[msges.Children.Count - 2]).baseMsg));
                             MsgScrolls.ScrollToBottom();
                         });
                         
                     }
                 }
-                //IsLoading = false;
+                IsLoading = false;
             }).Start();
             
         }
@@ -72,11 +76,11 @@ namespace Client.Controls
 
         public void ReciveMessage(RUser usr, RGroupMessage grpMsg) {
             Application.Current.Dispatcher.Invoke((Action)delegate {
-                bool isTo = MsgScrolls.VerticalOffset + 5 > MsgScrolls.ViewportHeight;
+                bool isTo = MsgScrolls.VerticalOffset + 20 >= MsgScrolls.ViewportHeight;
+                itmn.SetExample(new GroupMessageMini(usr, grpMsg));
                 msges.Children.Insert(msges.Children.Count - 1, new GroupMessage(usr, grpMsg));
                 if (isTo) MsgScrolls.ScrollToBottom();
             });
-            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -87,6 +91,11 @@ namespace Client.Controls
         private void Msg_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter) SendMsg(null, null);
+        }
+
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            anim.Begin();
         }
     }
 }

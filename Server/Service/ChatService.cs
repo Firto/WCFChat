@@ -161,7 +161,7 @@ namespace Server.Service
 
         void LeaveOnlineUser(OnlineUser usr) { // Event
             onlineUsers.Remove(usr);
-            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.ReciveChangeOnline(new RUser(usr.BaseUser, false))));
+            onlineUsers.ForEach((x) => x.Sessions.ForEach((s) => s.Callback.RChangeOnline(new RUser(usr.BaseUser, false))));
             Console.WriteLine("FLeave: " + usr.BaseUser.Login);
         }
 
@@ -175,21 +175,21 @@ namespace Server.Service
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.Leave();
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
         }
 
         void IChatService.SendMessage(int groupID, string message)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.SendMessage(groupID, message);
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
         }
 
         int IChatService.GetCountUsers()
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) return mainbBase.Users.Count() - 1;
-            else { Callback.ReciveLeave(); return -1; }
+            else { Callback.RLeave(); return -1; }
         }
 
         int IChatService.GetCountUsersInGroup(int groupID)
@@ -202,11 +202,11 @@ namespace Server.Service
                 else
                 {
                     Callback.Error("Incorrect group!");
-                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    Callback.RLeaveGroup(new RGroup(new Group { ID = groupID }));
                     return -1;
                 }
             }
-            else { Callback.ReciveLeave(); return -1; }
+            else { Callback.RLeave(); return -1; }
         }
 
         int IChatService.GetCountMessages(int groupID)
@@ -219,25 +219,25 @@ namespace Server.Service
                 else
                 {
                     Callback.Error("Incorrect group!");
-                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    Callback.RLeaveGroup(new RGroup(new Group { ID = groupID }));
                     return -1;
                 }
             }
-            else { Callback.ReciveLeave(); return -1; }
+            else { Callback.RLeave(); return -1; }
         }
 
         void IChatService.GetMyGroups()
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.GetMyGroups();
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
         }
 
         void IChatService.CreateGroup(string Name, int[] IDs)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.CreateGroup(Name, IDs);
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
 
         }
 
@@ -245,14 +245,14 @@ namespace Server.Service
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.LeaveFromGroup(ID);
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
         }
 
         void IChatService.AddUsersToGroup(int ID, int[] IDs)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) usen.AddUsersToGroup(ID, IDs);
-            else Callback.ReciveLeave();
+            else Callback.RLeave();
         }
 
         RUser[] IChatService.GetUsers(int offset, int count)
@@ -265,13 +265,39 @@ namespace Server.Service
                 if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
                 if (offset > 0) users = users.Skip(offset);
                 if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
-                if (count > 0) users.Take(count);
+                if (count > 0) users = users.Take(count);
                 List<RUser> rusers = new List<RUser>();
                 foreach (var item in users)
                     rusers.Add(new RUser(item, false));
                 return rusers.ToArray();
             }
-            else { Callback.ReciveLeave(); return null; }
+            else { Callback.RLeave(); return null; }
+        }
+
+        public RMUserInGroup[] GetUsersInGroup(int groupID, int offset, int count)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null)
+            {
+                Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
+                if (grp == null)
+                {
+                    Callback.Error("Incorrect group!");
+                    Callback.RLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    return null;
+                }
+
+                List<UserInGroup> users = grp.UsersInGroups.Where((x) => x.UserID != usen.BaseOnlineUser.BaseUser.ID).ToList();
+                if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
+                if (offset > 0) users = users.Skip(offset).ToList();
+                if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
+                if (count > 0) users = users.Take(count).ToList();
+                List<RMUserInGroup> rusers = new List<RMUserInGroup>();
+                foreach (var item in users)
+                    rusers.Add(new RMUserInGroup(item));
+                return rusers.ToArray();
+            }
+            else { Callback.RLeave(); return null; }
         }
 
         Dictionary<RUser, RGroupMessage> IChatService.GetMessages(int groupID, bool reverced, int count, int offset)
@@ -279,27 +305,26 @@ namespace Server.Service
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null) {
                 Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
-                if (grp != null) {
-                    List<GroupMessage> messages = grp.GroupsMessages.ToList();
-                    if (reverced) messages.Reverse();
-                    if (offset > messages.Count()) { Callback.Error("Incorrect offcet!"); return null; }
-                    if (offset > 0) messages = messages.Skip(offset).ToList();
-                    if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
-                    if (count > 0) messages = messages.Take(count).ToList();
-                    Dictionary<RUser, RGroupMessage> rmessages = new Dictionary<RUser, RGroupMessage>();
-                    foreach (var item in messages)
-                        rmessages.Add(new RUser(item.User, false), new RGroupMessage(item));
-                    if (reverced) messages.Reverse();
-                    return rmessages;
-                }
-                else
-                {
+                if (grp == null) {
                     Callback.Error("Incorrect group!");
-                    Callback.ReciveLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    Callback.RLeaveGroup(new RGroup(new Group { ID = groupID }));
                     return null;
                 }
+                List<GroupMessage> messages = grp.GroupsMessages.ToList();
+                if (reverced) messages.Reverse();
+                if (offset > messages.Count()) { Callback.Error("Incorrect offcet!"); return null; }
+                if (offset > 0) messages = messages.Skip(offset).ToList();
+                if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
+                if (count > 0) messages = messages.Take(count).ToList();
+                if (reverced) messages.Reverse();
+                Dictionary<RUser, RGroupMessage> rmessages = new Dictionary<RUser, RGroupMessage>();
+                foreach (var item in messages)
+                    rmessages.Add(new RUser(item.User, false), new RGroupMessage(item));
+                return rmessages;
             }
-            else { Callback.ReciveLeave(); return null; }
+            else { Callback.RLeave(); return null; }
         }
+
+       
     }
 }
