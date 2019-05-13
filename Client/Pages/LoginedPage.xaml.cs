@@ -166,7 +166,7 @@ namespace Client.Pages
                 RUser user = (RUser)obj;
                 createGroupitem.OnChangeOnline(user);
                 foreach (GroupItem item in ss.Children)
-                    if (item.baseUserInGroup.User.ID == user.ID) item.OnChangeOnline(user);
+                    item.OnChangeOnline(user);
             });
         }
 

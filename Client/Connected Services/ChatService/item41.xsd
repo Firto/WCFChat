@@ -121,7 +121,7 @@
   <xs:element name="GetUsersOutGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="GetUsersOutGroupResult" nillable="true" type="q6:ArrayOfRMUserInGroup" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="GetUsersOutGroupResult" nillable="true" type="q6:ArrayOfRUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\New folder (3)\WCFChat_2\Client\obj\Debug\
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-D:\New folder (3)\WCFChat_2\Client\App.xaml
+C:\Users\Firto\Desctop\WCFChat_2\Client\App.xaml
 12294859065
 
-23-1490685010
-16-1010436498
+231158483377
+161094966855
 Controls\CCheckUserItem.xaml;Controls\GroupCreateItem.xaml;Controls\GroupItem.xaml;Controls\CCheckBox.xaml;Controls\GroupMessageMini.xaml;Controls\GroupMessage.xaml;Controls\GroupWrite.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
 
 False

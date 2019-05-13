@@ -268,7 +268,7 @@ namespace Server.Service
                 if (count > 0) users = users.Take(count);
                 List<RUser> rusers = new List<RUser>();
                 foreach (var item in users)
-                    rusers.Add(new RUser(item, false));
+                    rusers.Add(new RUser(item, onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == item.ID) != null));
                 return rusers.ToArray();
             }
             else { Callback.RLeave(); return null; }
@@ -287,7 +287,7 @@ namespace Server.Service
                     return null;
                 }
 
-                List<UserInGroup> users = grp.UsersInGroups.Where((x) => x.UserID != usen.BaseOnlineUser.BaseUser.ID).ToList();
+                List<UserInGroup> users = grp.UsersInGroups != null ? grp.UsersInGroups.Where((x) => x.UserID != usen.BaseOnlineUser.BaseUser.ID).ToList() : new List<UserInGroup>(); 
                 if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
                 if (offset > 0) users = users.Skip(offset).ToList();
                 if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
@@ -300,7 +300,7 @@ namespace Server.Service
             else { Callback.RLeave(); return null; }
         }
 
-        public RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count)
+        public RUser[] GetUsersOutGroup(int groupID, int offset, int count)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
             if (usen != null)
@@ -313,14 +313,15 @@ namespace Server.Service
                     return null;
                 }
 
-                List<UserInGroup> users = mainbBase.UsersInGroups.Where((x) => x.UserID != usen.BaseOnlineUser.BaseUser.ID && grp.UsersInGroups.FirstOrDefault((z) => z.UserID == x.UserID) == null).ToList();
+                List<User> users = mainbBase.Users.Where((x) => x.ID != usen.BaseOnlineUser.BaseUser.ID).ToList();
+                if (grp.UsersInGroups != null) users = users.Where((x) => grp.UsersInGroups.FirstOrDefault((z) => z.UserID == x.ID) == null).ToList();
                 if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
                 if (offset > 0) users = users.Skip(offset).ToList();
                 if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
                 if (count > 0) users = users.Take(count).ToList();
-                List<RMUserInGroup> rusers = new List<RMUserInGroup>();
+                List<RUser> rusers = new List<RUser>();
                 foreach (var item in users)
-                    rusers.Add(new RMUserInGroup(item));
+                    rusers.Add(new RUser(item, onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == item.ID) != null));
                 return rusers.ToArray();
             }
             else { Callback.RLeave(); return null; }

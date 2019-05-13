@@ -549,10 +549,10 @@ namespace Client.ChatService {
         System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersInGroupAsync(int groupID, int offset, int count);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersOutGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersOutGroupResponse")]
-        Client.ChatService.RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count);
+        Client.ChatService.RUser[] GetUsersOutGroup(int groupID, int offset, int count);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersOutGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersOutGroupResponse")]
-        System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersOutGroupAsync(int groupID, int offset, int count);
+        System.Threading.Tasks.Task<Client.ChatService.RUser[]> GetUsersOutGroupAsync(int groupID, int offset, int count);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
         int GetCountUsers();
@@ -726,11 +726,11 @@ namespace Client.ChatService {
             return base.Channel.GetUsersInGroupAsync(groupID, offset, count);
         }
         
-        public Client.ChatService.RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count) {
+        public Client.ChatService.RUser[] GetUsersOutGroup(int groupID, int offset, int count) {
             return base.Channel.GetUsersOutGroup(groupID, offset, count);
         }
         
-        public System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersOutGroupAsync(int groupID, int offset, int count) {
+        public System.Threading.Tasks.Task<Client.ChatService.RUser[]> GetUsersOutGroupAsync(int groupID, int offset, int count) {
             return base.Channel.GetUsersOutGroupAsync(groupID, offset, count);
         }
         

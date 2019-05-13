@@ -46,7 +46,7 @@ namespace Server.Service
         [OperationContract]
         RMUserInGroup[] GetUsersInGroup(int groupID, int offset, int count); // беремо юзерів
         [OperationContract]
-        RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count); // беремо юзерів
+        RUser[] GetUsersOutGroup(int groupID, int offset, int count); // беремо юзерів
 
         // Кількість
         [OperationContract]

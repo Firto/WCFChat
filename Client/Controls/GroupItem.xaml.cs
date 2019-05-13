@@ -97,26 +97,33 @@ namespace Client
 
         public void OnChangeOnline(RUser user)
         {
-            int i = 0; for (; i < users.Count; i++)
-                if (users[i].User.ID == user.ID)
+            foreach (var item in users)
+                if (item.User.ID == user.ID)
                 {
-                    users[i].User.Online = user.Online;
+                    item.User.Online = user.Online;
                     break;
                 }
+
+            foreach (CCheckUserItem item in Common.UIElementCollectionToList(WriteMessages.canAddUsers.Children).Where((x) => x is CCheckUserItem ))
+                if (item.User.ID == user.ID)
+                {
+                    item.Online = user.Online;
+                    break;
+                }
+
         }
 
         public void OnNewUsers(RMUserInGroup[] userss)
         {
+            CCheckUserItem coms;
             foreach (var user in userss)
             {
-                if (users.FirstOrDefault((x) => x.User.ID == user.User.ID) == null)
+                if (users.FirstOrDefault((x) => x.User.ID == user.User.ID) == null) {
                     users.Add(user);
+                    coms =(CCheckUserItem) Common.UIElementCollectionToList(WriteMessages.canAddUsers.Children).FirstOrDefault((x) => x is CCheckUserItem && ((CCheckUserItem)x).User.ID == user.User.ID);
+                    if (coms != null) WriteMessages.canAddUsers.Children.Remove(coms);
+                }
             }
-        }
-
-        private void GetUsersOutGroup()
-        {
-           
         }
     }
 }

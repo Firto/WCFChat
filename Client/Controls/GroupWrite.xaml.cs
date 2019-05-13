@@ -23,7 +23,7 @@ namespace Client.Controls
     public partial class GroupWrite : UserControl
     {
         GroupItem itmn;
-
+        //List<RUser> outsiders = new List<RUser>(); 
         public EventHandler OnLoading;
 
         public bool IsLoading
@@ -42,8 +42,10 @@ namespace Client.Controls
             InitializeComponent();
             this.itmn = itmn;
             GetMessages();
+            
             MsgScrolls.ScrollToBottom();
-            canAddUsers.Children.Add(new CCheckUserItem(new RUser { Login = "Hello" }));
+            GetOutsiders();
+           
         }
 
         public void GetMessages() {
@@ -68,6 +70,19 @@ namespace Client.Controls
                 IsLoading = false;
             }).Start();
             
+        }
+
+        private void GetOutsiders()
+        {
+            new Task(() => {
+                RUser[] users = itmn.client.Client.GetUsersOutGroup(itmn.baseUserInGroup.Group.ID, -1, -1);
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    foreach (var item in users)
+                        canAddUsers.Children.Add(new CCheckUserItem(item));
+                });
+            }).Start();
+
         }
 
         private void SendMsg(object sender, RoutedEventArgs e)
@@ -103,6 +118,33 @@ namespace Client.Controls
         private void MsgScrolls_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (MsgScrolls.VerticalOffset == 0 && IsLoading == false) GetMessages();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (hidenBox.Visibility != Visibility.Visible)
+            {
+                hidenBox.Visibility = Visibility.Visible;
+                mainItems.Children.Remove(AddUsersItem);
+                mainItems.Visibility = Visibility.Collapsed;
+                mainMain.Children.Add(AddUsersItem);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitFromAddUsers(object sender, RoutedEventArgs e)
+        {
+            if (hidenBox.Visibility != Visibility.Collapsed)
+            {
+                hidenBox.Visibility = Visibility.Collapsed;
+                mainMain.Children.Remove(AddUsersItem);
+                mainItems.Visibility = Visibility.Visible;
+                mainItems.Children.Add(AddUsersItem);
+            }
         }
     }
 }
