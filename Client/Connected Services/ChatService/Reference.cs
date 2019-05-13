@@ -548,6 +548,12 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersInGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersInGroupResponse")]
         System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersInGroupAsync(int groupID, int offset, int count);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersOutGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersOutGroupResponse")]
+        Client.ChatService.RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsersOutGroup", ReplyAction="http://tempuri.org/IChatService/GetUsersOutGroupResponse")]
+        System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersOutGroupAsync(int groupID, int offset, int count);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetCountUsers", ReplyAction="http://tempuri.org/IChatService/GetCountUsersResponse")]
         int GetCountUsers();
         
@@ -718,6 +724,14 @@ namespace Client.ChatService {
         
         public System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersInGroupAsync(int groupID, int offset, int count) {
             return base.Channel.GetUsersInGroupAsync(groupID, offset, count);
+        }
+        
+        public Client.ChatService.RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count) {
+            return base.Channel.GetUsersOutGroup(groupID, offset, count);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ChatService.RMUserInGroup[]> GetUsersOutGroupAsync(int groupID, int offset, int count) {
+            return base.Channel.GetUsersOutGroupAsync(groupID, offset, count);
         }
         
         public int GetCountUsers() {

@@ -15,10 +15,30 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto" Name="ComminShtorka"/>
+            <ColumnDefinition Width="0.4*" MaxWidth="300" Name="ComminShtorka"/>
         </Grid.ColumnDefinitions>
+
+        <Border Background="#FF234F7C" Grid.Column="1" >
+            <StackPanel>
+                <Border Background="#FF6EA5DE" Margin="5, 10 ,5 ,5" Style="{StaticResource groupStyle}" CornerRadius="5" >
+                   
+                    <StackPanel >
+                        <Button Style="{StaticResource minBtn}" HorizontalContentAlignment="Stretch" >
+                            <Label FontSize="15" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center">Add users</Label>
+                        </Button>
+                        <Border Height="4" Margin="7, 2, 7,2" CornerRadius="2" Background="#FF3C8ADA" ></Border>
+                        <!-- #FF3C8ADA-->
+                        <!-- #FF5A4AF1-->
+                        <StackPanel Name="canAddUsers" HorizontalAlignment="Stretch">
+                            
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
         
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Name="MsgScrolls" >
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Name="MsgScrolls" ScrollChanged="MsgScrolls_ScrollChanged" >
             <StackPanel  Name="msges">
                 <Border Height="60"></Border>
             </StackPanel>

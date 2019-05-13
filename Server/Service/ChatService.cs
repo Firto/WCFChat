@@ -215,7 +215,7 @@ namespace Server.Service
             if (usen != null)
             {
                 Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
-                if (grp != null) return grp.GroupsMessages.Count;
+                if (grp != null) return grp.GroupsMessages != null ? grp.GroupsMessages.Count : 0;
                 else
                 {
                     Callback.Error("Incorrect group!");
@@ -300,6 +300,32 @@ namespace Server.Service
             else { Callback.RLeave(); return null; }
         }
 
+        public RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null)
+            {
+                Group grp = usen.BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID)?.Group;
+                if (grp == null)
+                {
+                    Callback.Error("Incorrect group!");
+                    Callback.RLeaveGroup(new RGroup(new Group { ID = groupID }));
+                    return null;
+                }
+
+                List<UserInGroup> users = mainbBase.UsersInGroups.Where((x) => x.UserID != usen.BaseOnlineUser.BaseUser.ID && grp.UsersInGroups.FirstOrDefault((z) => z.UserID == x.UserID) == null).ToList();
+                if (offset > users.Count()) { Callback.Error("Incorrect offcet!"); return null; }
+                if (offset > 0) users = users.Skip(offset).ToList();
+                if (count > users.Count()) { Callback.Error("Incorrect count!"); return null; }
+                if (count > 0) users = users.Take(count).ToList();
+                List<RMUserInGroup> rusers = new List<RMUserInGroup>();
+                foreach (var item in users)
+                    rusers.Add(new RMUserInGroup(item));
+                return rusers.ToArray();
+            }
+            else { Callback.RLeave(); return null; }
+        }
+
         Dictionary<RUser, RGroupMessage> IChatService.GetMessages(int groupID, bool reverced, int count, int offset)
         {
             USession usen = USession.GetSession(onlineUsers, Callback);
@@ -316,7 +342,7 @@ namespace Server.Service
                 if (offset > 0) messages = messages.Skip(offset).ToList();
                 if (count > messages.Count()) { Callback.Error("Incorrect count!"); return null; }
                 if (count > 0) messages = messages.Take(count).ToList();
-                if (reverced) messages.Reverse();
+                //if (reverced) messages.Reverse();
                 Dictionary<RUser, RGroupMessage> rmessages = new Dictionary<RUser, RGroupMessage>();
                 foreach (var item in messages)
                     rmessages.Add(new RUser(item.User, false), new RGroupMessage(item));

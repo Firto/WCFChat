@@ -109,6 +109,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUsersOutGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
+        <xs:element minOccurs="0" name="offset" type="xs:int" />
+        <xs:element minOccurs="0" name="count" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsersOutGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="GetUsersOutGroupResult" nillable="true" type="q6:ArrayOfRMUserInGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCountUsers">
     <xs:complexType>
       <xs:sequence />
@@ -166,7 +182,7 @@
   <xs:element name="RLogin">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q6:RUser" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q7:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -178,50 +194,50 @@
   <xs:element name="RChangeOnline">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q7:RUser" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q8:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RNewUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q8:RUser" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q9:RUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="groups" nillable="true" type="q9:ArrayOfRMUserInGroup" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="groups" nillable="true" type="q10:ArrayOfRMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RLeaveGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q10:RGroup" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q11:RGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RNewGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q11:RMUserInGroup" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usrInGrp" nillable="true" type="q12:RMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RNewUsersInGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="users" nillable="true" type="q12:ArrayOfRMUserInGroup" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="users" nillable="true" type="q13:ArrayOfRMUserInGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RNewMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q13:RUser" />
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q14:RGroupMessage" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q14:RUser" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q15:RGroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

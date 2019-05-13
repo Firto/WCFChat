@@ -193,3 +193,5 @@ D:\New folder (3)\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cach
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.g.cs
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.baml
+D:\New folder (3)\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.g.cs
+D:\New folder (3)\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.baml

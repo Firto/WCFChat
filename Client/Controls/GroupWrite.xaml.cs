@@ -42,6 +42,8 @@ namespace Client.Controls
             InitializeComponent();
             this.itmn = itmn;
             GetMessages();
+            MsgScrolls.ScrollToBottom();
+            canAddUsers.Children.Add(new CCheckUserItem(new RUser { Login = "Hello" }));
         }
 
         public void GetMessages() {
@@ -49,16 +51,16 @@ namespace Client.Controls
             new Task(() => {
                 IsLoading = true;
                 int countMessages = itmn.client.Client.GetCountMessages(itmn.baseUserInGroup.Group.ID);
-                if (countMessages > 0)
+                if (countMessages - count > 0)
                 {
-                    Dictionary<RUser, RGroupMessage> messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, true, countMessages > 30 ? 30 : countMessages, count);
+                    Dictionary<RUser, RGroupMessage> messages = itmn.client.Client.GetMessages(itmn.baseUserInGroup.Group.ID, true, countMessages - count > 30 ? 30 : countMessages - count, count);
                     if (messages != null && messages.Count > 0)
                     {
                         Application.Current.Dispatcher.Invoke((Action)delegate {
                             foreach (var item in messages)
-                                msges.Children.Insert(msges.Children.Count - 1, new GroupMessage(item.Key, item.Value));
+                                msges.Children.Insert(0, new GroupMessage(item.Key, item.Value));
                             itmn.SetExample(new GroupMessageMini(((GroupMessage)msges.Children[msges.Children.Count - 2]).baseUsr, ((GroupMessage)msges.Children[msges.Children.Count - 2]).baseMsg));
-                            MsgScrolls.ScrollToBottom();
+                            
                         });
                         
                     }
@@ -96,6 +98,11 @@ namespace Client.Controls
         private void Storyboard_Completed(object sender, EventArgs e)
         {
             anim.Begin();
+        }
+
+        private void MsgScrolls_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (MsgScrolls.VerticalOffset == 0 && IsLoading == false) GetMessages();
         }
     }
 }

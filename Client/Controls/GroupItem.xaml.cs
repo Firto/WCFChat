@@ -113,5 +113,10 @@ namespace Client
                     users.Add(user);
             }
         }
+
+        private void GetUsersOutGroup()
+        {
+           
+        }
     }
 }

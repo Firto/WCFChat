@@ -45,6 +45,8 @@ namespace Server.Service
         Dictionary<RUser, RGroupMessage> GetMessages(int groupID, bool reverced, int count, int offset); // беремо повідомлення
         [OperationContract]
         RMUserInGroup[] GetUsersInGroup(int groupID, int offset, int count); // беремо юзерів
+        [OperationContract]
+        RMUserInGroup[] GetUsersOutGroup(int groupID, int offset, int count); // беремо юзерів
 
         // Кількість
         [OperationContract]
