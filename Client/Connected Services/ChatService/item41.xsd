@@ -61,6 +61,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RemoveUserFromGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditRoleUserInGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
+        <xs:element minOccurs="0" name="roleID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MuteUserInGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="groupID" type="xs:int" />
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetUsers">
     <xs:complexType>
       <xs:sequence>
@@ -233,11 +258,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RLeaveUserInGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="group" nillable="true" type="q14:RGroup" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="usr" nillable="true" type="q15:RUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RNewMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q14:RUser" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q15:RGroupMessage" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="user" nillable="true" type="q16:RUser" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Server.Base.Tables" minOccurs="0" name="msg" nillable="true" type="q17:RGroupMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

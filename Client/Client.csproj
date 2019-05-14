@@ -51,9 +51,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WpfAnimatedGif, Version=1.4.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WpfAnimatedGif.1.4.18\lib\net\WpfAnimatedGif.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -88,6 +85,12 @@
     <Compile Include="Controls\GroupWrite.xaml.cs">
       <DependentUpon>GroupWrite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\HiddenItem.xaml.cs">
+      <DependentUpon>HiddenItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserEdit.xaml.cs">
+      <DependentUpon>UserEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginedPage.xaml.cs">
       <DependentUpon>LoginedPage.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GroupWrite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HiddenItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,7 +206,6 @@
     <None Include="Connected Services\ChatService\item43.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

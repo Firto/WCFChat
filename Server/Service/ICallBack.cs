@@ -36,6 +36,8 @@ namespace Server.Service
         void RNewGroup(RMUserInGroup usrInGrp); // Відправляємо нову группу
         [OperationContract(IsOneWay = true)]
         void RNewUsersInGroup(RMUserInGroup[] users); // Відправляємо що додано нових юзерів
+        [OperationContract(IsOneWay = true)]
+        void RLeaveUserInGroup(RGroup group, RUser usr);
 
         [OperationContract(IsOneWay = true)]
         void RNewMessage(RUser user, RGroupMessage msg); // Відправляємо що додано нове повідомлення

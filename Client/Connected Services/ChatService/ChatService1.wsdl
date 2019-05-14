@@ -40,6 +40,15 @@
   <wsdl:message name="IChatService_AddUsersToGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUsersToGroup" />
   </wsdl:message>
+  <wsdl:message name="IChatService_RemoveUserFromGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromGroup" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_EditRoleUserInGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditRoleUserInGroup" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_MuteUserInGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:MuteUserInGroup" />
+  </wsdl:message>
   <wsdl:message name="IChatService_GetUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUsers" />
   </wsdl:message>
@@ -112,6 +121,9 @@
   <wsdl:message name="IChatService_RNewUsersInGroup_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RNewUsersInGroup" />
   </wsdl:message>
+  <wsdl:message name="IChatService_RLeaveUserInGroup_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RLeaveUserInGroup" />
+  </wsdl:message>
   <wsdl:message name="IChatService_RNewMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RNewMessage" />
   </wsdl:message>
@@ -139,6 +151,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUsersToGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/AddUsersToGroup" message="tns:IChatService_AddUsersToGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/RemoveUserFromGroup" message="tns:IChatService_RemoveUserFromGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditRoleUserInGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/EditRoleUserInGroup" message="tns:IChatService_EditRoleUserInGroup_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MuteUserInGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/MuteUserInGroup" message="tns:IChatService_MuteUserInGroup_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/GetUsers" message="tns:IChatService_GetUsers_InputMessage" />
@@ -198,6 +219,9 @@
     <wsdl:operation name="RNewUsersInGroup">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewUsersInGroup" message="tns:IChatService_RNewUsersInGroup_OutputCallbackMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RLeaveUserInGroup">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RLeaveUserInGroup" message="tns:IChatService_RLeaveUserInGroup_OutputCallbackMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RNewMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatService/RNewMessage" message="tns:IChatService_RNewMessage_OutputCallbackMessage" />
     </wsdl:operation>
@@ -249,6 +273,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddUsersToGroup">
       <soap12:operation soapAction="http://tempuri.org/IChatService/AddUsersToGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RemoveUserFromGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EditRoleUserInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/EditRoleUserInGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="MuteUserInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/MuteUserInGroup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -372,6 +414,12 @@
     </wsdl:operation>
     <wsdl:operation name="RNewUsersInGroup">
       <soap12:operation soapAction="http://tempuri.org/IChatService/RNewUsersInGroup" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RLeaveUserInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/RLeaveUserInGroup" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

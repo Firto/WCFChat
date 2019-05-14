@@ -530,6 +530,24 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/AddUsersToGroup")]
         System.Threading.Tasks.Task AddUsersToGroupAsync(int ID, int[] IDs);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RemoveUserFromGroup")]
+        void RemoveUserFromGroup(int groupID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RemoveUserFromGroup")]
+        System.Threading.Tasks.Task RemoveUserFromGroupAsync(int groupID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/EditRoleUserInGroup")]
+        void EditRoleUserInGroup(int groupID, int userID, int roleID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/EditRoleUserInGroup")]
+        System.Threading.Tasks.Task EditRoleUserInGroupAsync(int groupID, int userID, int roleID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/MuteUserInGroup")]
+        void MuteUserInGroup(int groupID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/MuteUserInGroup")]
+        System.Threading.Tasks.Task MuteUserInGroupAsync(int groupID, int userID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetUsers", ReplyAction="http://tempuri.org/IChatService/GetUsersResponse")]
         Client.ChatService.RUser[] GetUsers(int offset, int count);
         
@@ -605,6 +623,9 @@ namespace Client.ChatService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewUsersInGroup")]
         void RNewUsersInGroup(Client.ChatService.RMUserInGroup[] users);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RLeaveUserInGroup")]
+        void RLeaveUserInGroup(Client.ChatService.RGroup group, Client.ChatService.RUser usr);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/RNewMessage")]
         void RNewMessage(Client.ChatService.RUser user, Client.ChatService.RGroupMessage msg);
@@ -700,6 +721,30 @@ namespace Client.ChatService {
         
         public System.Threading.Tasks.Task AddUsersToGroupAsync(int ID, int[] IDs) {
             return base.Channel.AddUsersToGroupAsync(ID, IDs);
+        }
+        
+        public void RemoveUserFromGroup(int groupID, int userID) {
+            base.Channel.RemoveUserFromGroup(groupID, userID);
+        }
+        
+        public System.Threading.Tasks.Task RemoveUserFromGroupAsync(int groupID, int userID) {
+            return base.Channel.RemoveUserFromGroupAsync(groupID, userID);
+        }
+        
+        public void EditRoleUserInGroup(int groupID, int userID, int roleID) {
+            base.Channel.EditRoleUserInGroup(groupID, userID, roleID);
+        }
+        
+        public System.Threading.Tasks.Task EditRoleUserInGroupAsync(int groupID, int userID, int roleID) {
+            return base.Channel.EditRoleUserInGroupAsync(groupID, userID, roleID);
+        }
+        
+        public void MuteUserInGroup(int groupID, int userID) {
+            base.Channel.MuteUserInGroup(groupID, userID);
+        }
+        
+        public System.Threading.Tasks.Task MuteUserInGroupAsync(int groupID, int userID) {
+            return base.Channel.MuteUserInGroupAsync(groupID, userID);
         }
         
         public Client.ChatService.RUser[] GetUsers(int offset, int count) {

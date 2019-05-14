@@ -26,7 +26,6 @@ namespace Client
         public ChatClient client;
         public ChatService.RMUserInGroup baseUserInGroup;
         public GroupWrite WriteMessages { get; private set; }
-        public List<RMUserInGroup> users = new List<RMUserInGroup>();
         bool selected = false;
 
         public bool Selected {
@@ -53,14 +52,6 @@ namespace Client
             BaseUserInGroup = usr;
             OnChangeSelecte += evnt;
             WriteMessages = new GroupWrite(this);
-
-            GetUsers();
-        }
-
-        private void GetUsers() {
-            new Task(() => {
-                users.AddRange(client.Client.GetUsersInGroup(baseUserInGroup.Group.ID, -1, -1));
-            }).Start();
         }
 
         private void ExitFromGroup(object sender, RoutedEventArgs e)
@@ -93,37 +84,6 @@ namespace Client
 
         public void SetExample(UIElement control) {
             status.Child = control;
-        }
-
-        public void OnChangeOnline(RUser user)
-        {
-            foreach (var item in users)
-                if (item.User.ID == user.ID)
-                {
-                    item.User.Online = user.Online;
-                    break;
-                }
-
-            foreach (CCheckUserItem item in Common.UIElementCollectionToList(WriteMessages.canAddUsers.Children).Where((x) => x is CCheckUserItem ))
-                if (item.User.ID == user.ID)
-                {
-                    item.Online = user.Online;
-                    break;
-                }
-
-        }
-
-        public void OnNewUsers(RMUserInGroup[] userss)
-        {
-            CCheckUserItem coms;
-            foreach (var user in userss)
-            {
-                if (users.FirstOrDefault((x) => x.User.ID == user.User.ID) == null) {
-                    users.Add(user);
-                    coms =(CCheckUserItem) Common.UIElementCollectionToList(WriteMessages.canAddUsers.Children).FirstOrDefault((x) => x is CCheckUserItem && ((CCheckUserItem)x).User.ID == user.User.ID);
-                    if (coms != null) WriteMessages.canAddUsers.Children.Remove(coms);
-                }
-            }
         }
     }
 }

@@ -294,7 +294,7 @@ namespace Server.Service
                 if (count > 0) users = users.Take(count).ToList();
                 List<RMUserInGroup> rusers = new List<RMUserInGroup>();
                 foreach (var item in users)
-                    rusers.Add(new RMUserInGroup(item));
+                    rusers.Add(new RMUserInGroup { FriendID = item.FriendID, Group = new RGroup(item.Group), Muted = item.Muted, Role = new RRole(item.Role), User = new RUser(item.User, onlineUsers.FirstOrDefault((x) => x.BaseUser.ID == item.UserID) != null) });
                 return rusers.ToArray();
             }
             else { Callback.RLeave(); return null; }
@@ -352,6 +352,21 @@ namespace Server.Service
             else { Callback.RLeave(); return null; }
         }
 
-       
+        public void RemoveUserFromGroup(int groupID, int userID)
+        {
+            USession usen = USession.GetSession(onlineUsers, Callback);
+            if (usen != null) usen.RemoveUserFromGroup(groupID, userID);
+            else Callback.RLeave();
+        }
+
+        public void EditRoleUserInGroup(int groupID, int userID, int roleID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MuteUserInGroup(int groupID, int userID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

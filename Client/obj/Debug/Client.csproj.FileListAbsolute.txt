@@ -186,12 +186,13 @@ D:\New folder (3)\WCFChat_2\Client\obj\Debug\Client.pdb
 D:\New folder (3)\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.dll
 D:\New folder (3)\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.xml
 D:\New folder (3)\WCFChat_2\Client\obj\Debug\Client.csproj.CopyComplete
-C:\Users\Firto\Desctop\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.dll
-C:\Users\Firto\Desctop\WCFChat_2\Client\bin\Debug\WpfAnimatedGif.xml
-C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csproj.CopyComplete
 D:\New folder (3)\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.g.cs
 C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.baml
 D:\New folder (3)\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.g.cs
 D:\New folder (3)\WCFChat_2\Client\obj\Debug\Controls\GroupMessageMini.baml
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\HiddenItem.g.cs
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\HiddenItem.baml
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\UserEdit.g.cs
+C:\Users\Firto\Desctop\WCFChat_2\Client\obj\Debug\Controls\UserEdit.baml

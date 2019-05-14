@@ -37,6 +37,13 @@ namespace Server.Service
         void LeaveGroup(int ID); // Видаляємо группу
         [OperationContract(IsOneWay = true)]
         void AddUsersToGroup(int ID, int[] IDs); // Добавляємо користувачів в групу
+        [OperationContract(IsOneWay = true)]
+        void RemoveUserFromGroup(int groupID, int userID);
+        [OperationContract(IsOneWay = true)]
+        void EditRoleUserInGroup(int groupID, int userID, int roleID);
+        [OperationContract(IsOneWay = true)]
+        void MuteUserInGroup(int groupID, int userID);
+
 
         // Навантажені
         [OperationContract]

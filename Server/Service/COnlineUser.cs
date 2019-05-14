@@ -41,6 +41,7 @@ namespace Server.Service
             if (usrGrp != null)
             {
                 Group grp = usrGrp.Group;
+                User usr = usrGrp.User;
                 if (usrGrp.RoleID == 1)
                 {
                     Console.WriteLine("Remove group " + grp.Name + " by " + BaseOnlineUser.BaseUser.Login);
@@ -61,6 +62,13 @@ namespace Server.Service
                     BaseOnlineUser.MainBase.UsersInGroups.Remove(usrGrp);
                     foreach (var ites in BaseOnlineUser.Sessions)
                         ites.Callback.RLeaveGroup(new RGroup(grp));
+                    UserInGroup tomp;
+                    foreach (var item in BaseOnlineUser.OnlineUsers)
+                    {
+                        tomp = grp.UsersInGroups.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
+                        if (tomp != null)
+                            foreach (var res in item.Sessions) res.Callback.RLeaveUserInGroup(new RGroup(grp), new RUser(usr, true));
+                    }
                 }
                 BaseOnlineUser.MainBase.SaveChanges();
             }
@@ -110,11 +118,20 @@ namespace Server.Service
 
                 BaseOnlineUser.MainBase.SaveChanges();
 
+                List<RMUserInGroup> usersr = new List<RMUserInGroup>();
+                foreach (var item in users)
+                    usersr.Add(new RMUserInGroup(item));
+
                 UserInGroup tomp;
                 foreach (var item in BaseOnlineUser.OnlineUsers) {
                     tomp = users.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
                     if (tomp != null)
                         foreach (var res in item.Sessions) res.Callback.RNewGroup(new RMUserInGroup(tomp));
+                    else {
+                        tomp = usrGrp.Group.UsersInGroups.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
+                        if (tomp != null)
+                            foreach (var res in item.Sessions) res.Callback.RNewUsersInGroup(usersr.ToArray());
+                    }
                 } 
 
             }
@@ -133,6 +150,36 @@ namespace Server.Service
 
             foreach (var item in BaseOnlineUser.OnlineUsers.Where((x) => x.BaseUser.UsersInGroups.FirstOrDefault((z) => z.GroupID == usrGrp.GroupID) != null))
                 item.Sessions.ForEach((x) => x.Callback.RNewMessage(new RUser(usrGrp.User, false ) ,new RGroupMessage(msg)));
+        }
+
+        public void RemoveUserFromGroup(int groupID, int userID)
+        {
+            if (BaseOnlineUser.BaseUser.UsersInGroups == null) { Callback.RLeaveGroup(new RGroup(new Group { ID = groupID })); return; }
+            UserInGroup usrGrp = BaseOnlineUser.BaseUser.UsersInGroups.FirstOrDefault((x) => x.GroupID == groupID);
+
+            if (usrGrp == null) { Callback.RLeaveGroup(new RGroup(new Group { ID = groupID })); return; }
+            UserInGroup usrGrpEdt = usrGrp.Group.UsersInGroups.FirstOrDefault((x) => x.UserID == userID);
+            if (usrGrpEdt == null) return;
+            User usrLeave = usrGrpEdt.User;
+
+            if (usrGrp.RoleID >= usrGrpEdt.RoleID) { Callback.Error("You can't remove this user!"); return; }
+
+            Console.WriteLine(usrGrpEdt.User.Login + " leave from group " + usrGrpEdt.Group.Name + " by " + BaseOnlineUser.BaseUser.Login);
+            BaseOnlineUser.MainBase.UsersInGroups.Remove(usrGrpEdt);
+            BaseOnlineUser.MainBase.SaveChanges();
+
+            if (BaseOnlineUser.OnlineUsers.FirstOrDefault((x) => x.BaseUser.ID == userID) != null)
+                foreach (var item in BaseOnlineUser.OnlineUsers.FirstOrDefault((x) => x.BaseUser.ID == userID).Sessions)
+                    item.Callback.RLeaveGroup(new RGroup(usrGrp.Group));
+            
+            UserInGroup tomp;
+            foreach (var item in BaseOnlineUser.OnlineUsers)
+            {
+                tomp = usrGrp.Group.UsersInGroups.FirstOrDefault((s) => s.User.ID == item.BaseUser.ID);
+                if (tomp != null)
+                    foreach (var res in item.Sessions) res.Callback.RLeaveUserInGroup(new RGroup(usrGrp.Group), new RUser(usrLeave, BaseOnlineUser.OnlineUsers.FirstOrDefault((x) => x.BaseUser.ID == usrLeave.ID) != null));
+            }
+           
         }
 
         public static USession GetSession(List<OnlineUser> usrs, IChatServiceCallBack callback)

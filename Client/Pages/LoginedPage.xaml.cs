@@ -39,6 +39,7 @@ namespace Client.Pages
             clin.Events.OnNewMessage += OnReciveMessage;
             clin.Events.OnNewUsersInGroups += OnNewUsersInGroups;
             clin.Events.OnChangeOnline += OnChangeOnline;
+            clin.Events.OnLeaveUserInGroup += OnLeaveUserFromGroup;
 
             createGroupitem = new GroupCreateItem(clin, countGetUsers);
             createGroupitem.OnOk += OnCreateGroup;
@@ -69,7 +70,15 @@ namespace Client.Pages
             Application.Current.Dispatcher.Invoke((Action)delegate {
                 RMUserInGroup[] rsm = (RMUserInGroup[])obj; 
                 foreach (GroupItem item in ss.Children)
-                    if (item.baseUserInGroup.User.ID == rsm[0].Group.ID) item.OnNewUsers(rsm);
+                    if (item.baseUserInGroup.Group.ID == rsm[0].Group.ID) item.WriteMessages.OnNewUsers(rsm);
+            });
+        }
+
+        private void OnLeaveUserFromGroup(object obj, EventArgs e) {
+            Application.Current.Dispatcher.Invoke((Action)delegate {
+                KeyValuePair<RGroup, RUser> user = (KeyValuePair<RGroup, RUser>)obj;
+                foreach (GroupItem item in ss.Children)
+                    if (item.baseUserInGroup.Group.ID == user.Key.ID) item.WriteMessages.OnLeaveUserFromGroup(user.Key, user.Value);
             });
         }
 
@@ -166,7 +175,7 @@ namespace Client.Pages
                 RUser user = (RUser)obj;
                 createGroupitem.OnChangeOnline(user);
                 foreach (GroupItem item in ss.Children)
-                    item.OnChangeOnline(user);
+                    item.WriteMessages.OnChangeOnline(user);
             });
         }
 
@@ -175,6 +184,8 @@ namespace Client.Pages
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
                 createGroupitem.OnNewUser(user);
+                foreach (GroupItem item in ss.Children)
+                    item.WriteMessages.OnNewOutsider(user);
             });
         }
 

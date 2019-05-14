@@ -68,6 +68,8 @@ namespace Server.Base.Tables
         [DataMember]
         public int FriendID { get; set; }
 
+        public RMUserInGroup() { }
+
         public RMUserInGroup(UserInGroup usrInGrp) {
             User = new RUser(usrInGrp.User, false);
             Group = new RGroup(usrInGrp.Group);

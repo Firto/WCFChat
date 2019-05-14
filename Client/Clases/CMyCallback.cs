@@ -22,6 +22,7 @@ namespace Client
         public event EventHandler OnNewUsersInGroups;
 
         public event EventHandler OnNewMessage;
+        public event EventHandler OnLeaveUserInGroup;
 
         public void RLogin(RUser usr) => OnLogin?.Invoke(usr, null);
         public void RLeave() => OnLeave?.Invoke(null, null);
@@ -32,7 +33,8 @@ namespace Client
         public void RGroups(RMUserInGroup[] group) => OnGroups?.Invoke(group, null);
         public void RLeaveGroup(RGroup group) => OnLeaveGroup?.Invoke(group, null);
         public void RNewGroup(RMUserInGroup usrInGrp) => OnNewGroup?.Invoke(usrInGrp, null);
-        public void RNewUsersInGroup(RMUserInGroup[] users) => OnNewUsersInGroups(users, null);
+        public void RNewUsersInGroup(RMUserInGroup[] users) => OnNewUsersInGroups?.Invoke(users, null);
+        public void RLeaveUserInGroup(RGroup group, RUser usr) => OnLeaveUserInGroup?.Invoke(new KeyValuePair<RGroup, RUser>(group, usr), null);
 
         public void RNewMessage(RUser usr, RGroupMessage msg) => OnNewMessage?.Invoke(new KeyValuePair<RUser, RGroupMessage>(usr, msg), null);
 
@@ -45,8 +47,5 @@ namespace Client
         {
             throw new System.NotImplementedException();
         }
-
-        
-
     }
 }

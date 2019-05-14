@@ -21,60 +21,8 @@
         <Border Background="#FF234F7C" Grid.Column="1" >
             <Grid Name="mainMain">
                 <StackPanel Name="mainItems">
-                    <Border Margin="5, 10 ,5 ,5" Name="AddUsersItem" Background="#FF6EA5DE" CornerRadius="5" >
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Border Background="#FF6EA5DE" CornerRadius="5" Style="{StaticResource groupStyle}">
-                                <Button Style="{StaticResource minBtn}" HorizontalContentAlignment="Stretch" Click="Button_Click" >
-                                    <StackPanel >
-                                        <Label FontSize="15" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center">Add users</Label>
-                                        <!-- #FF3C8ADA-->
-                                        <!-- #FF5A4AF1-->
-                                        <Border Height="4" Margin="7, 2, 7,2" CornerRadius="2" Background="#FF3C8ADA" ></Border>
-                                    </StackPanel>
-                                </Button>
-                            </Border>
-                            <Grid Grid.Row="1"  Visibility="Collapsed"  Name="hidenBox">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <Border CornerRadius="10" Background="AliceBlue" Margin="10">
-                                    <TextBox Name="groupName" Margin="5" FontSize="15" ></TextBox>
-                                </Border>
-                                
-                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                    <StackPanel Name="canAddUsers" HorizontalAlignment="Stretch">
-
-
-
-                                    </StackPanel>
-                                </ScrollViewer>
-
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Margin="5" Background="#FF47A4E4" CornerRadius="10" Style="{DynamicResource confirmStyle}" >
-                                        <Button Style="{StaticResource minBtn}" Click="Button_Click_1" >
-                                            <Label FontWeight="Bold" Padding="0, -5, 0, -5" Foreground="White" >O</Label>
-                                        </Button>
-                                    </Border>
-                                    <Border Grid.Column="1" Margin="5" Background="#FFDE6E6E" CornerRadius="10" Style="{DynamicResource exitStyle}" >
-                                        <Button Style="{StaticResource minBtn}" Click="ExitFromAddUsers" >
-                                            <Label FontWeight="Bold" Padding="0, -5, 0, -5" Foreground="White" >X</Label>
-                                        </Button>
-                                    </Border>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Border>
+                    
+                    
                 </StackPanel>
             </Grid>
         </Border>

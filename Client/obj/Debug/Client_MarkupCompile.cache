@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Firto\Desctop\WCFChat_2\Client\App.xaml
-12294859065
+141525755064
 
-19959981596
-161094966855
-Controls\CCheckUserItem.xaml;Controls\GroupCreateItem.xaml;Controls\GroupItem.xaml;Controls\CCheckBox.xaml;Controls\GroupMessageMini.xaml;Controls\GroupMessage.xaml;Controls\GroupWrite.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
+211097431949
+15833945659
+Controls\CCheckUserItem.xaml;Controls\GroupCreateItem.xaml;Controls\GroupItem.xaml;Controls\CCheckBox.xaml;Controls\GroupMessageMini.xaml;Controls\GroupMessage.xaml;Controls\GroupWrite.xaml;Controls\HiddenItem.xaml;Controls\UserEdit.xaml;Pages\Login.xaml;Pages\LoginedPage.xaml;MainRes.xaml;MainWindow.xaml;Pages\Register.xaml;
 
 False
 
